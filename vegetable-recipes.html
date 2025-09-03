@@ -199,11 +199,37 @@
     .close-btn:hover {
       background: #1b5e20;
     }
-    @media (max-width: 900px) {
-      .meal-previews { flex-direction: column; gap: 10px; }
-      .meal-preview { max-width: 100%; min-width: 0; }
-      .modal-img { max-width: 98vw; max-height: 60vh; }
-    }
+    @media (max-width: 700px) {
+  body { font-size: 1.22em; }
+  h1 { font-size: 2.1em; }
+  h2 { font-size: 1.5em; }
+  h3 { font-size: 1.18em; }
+  .about-text,
+  .info-note,
+  .feature-card,
+  .category-box,
+  .recipe-card {
+    font-size: 1.15em;
+    padding: 20px 4vw;
+  }
+  .feature-title,
+  .category-title,
+  .added-heading {
+    font-size: 1.18em;
+  }
+  .back-btn,
+  button,
+  .top-x-btn {
+    font-size: 1.15em;
+    padding: 16px 8vw;
+  }
+  input,
+  textarea,
+  #searchBox {
+    font-size: 1.12em;
+    padding: 14px 4vw;
+  }
+}
   </style>
 </head>
 <body>
