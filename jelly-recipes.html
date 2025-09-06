@@ -3,83 +3,160 @@
 <head>
   <meta charset="UTF-8">
   <title>Jelly Recipes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
-      margin: 0;
+      min-height: 100vh;
+      min-width: 100vw;
+      background: linear-gradient(135deg, #ede7f6 0%, #8e24aa 60%, #43a047 100%);
       color: #222;
-      background: url('https://thumbs.dreamstime.com/b/colorful-jelly-cubes-fruit-pieces-create-glossy-vibrant-texture-high-quality-photo-389443540.jpg') no-repeat center center fixed;
-      background-size: cover;
+      transition: background 0.3s, color 0.3s;
     }
     .container {
-      max-width: 800px;
-      margin: 40px auto;
-      background: rgba(219, 174, 174, 0.95);
-      border-radius: 18px;
-      box-shadow: 0 4px 24px #ffb34744;
-      padding: 32px 24px;
+      min-height: 100vh;
+      min-width: 100vw;
+      width: 100vw;
+      max-width: none;
+      margin: 0;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
       text-align: center;
       position: relative;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
     }
     .top-x-btn {
-      position: absolute;
+      position: fixed;
       top: 18px;
       right: 24px;
-      background: #ff6f61;
-      color: #fff;
+      background: #8e24aa;
+      color: #ede7f6;
       border: none;
       border-radius: 50%;
-      width: 38px;
-      height: 38px;
-      font-size: 1.8em;
+      width: 44px;
+      height: 44px;
+      font-size: 2em;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 2px 8px #0005;
+      box-shadow: 0 2px 8px #8e24aa44;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: background 0.2s;
-      z-index: 10;
+      z-index: 100;
     }
     .top-x-btn:hover {
-      background: #d84315;
+      background: #43a047;
+      color: #8e24aa;
     }
     h1 {
-      color: #ff6f61;
-      margin-bottom: 24px;
-      font-size: 2.5em;
+      color: #8e24aa;
+      margin-bottom: 10px;
+      font-size: 2.3em;
+      font-family: 'Georgia', serif;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 12px #8e24aa44;
+      margin-top: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      animation: fadeIn 1s;
+    }
+    .divider {
+      width: 80px;
+      height: 6px;
+      background: linear-gradient(90deg,#ede7f6,#8e24aa,#43a047);
+      border-radius: 3px;
+      margin: 18px auto 32px auto;
+      opacity: 0.8;
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 1.2s;
+    }
+    .subtitle {
+      font-size: 1.15em;
+      color: #43a047;
+      margin-bottom: 18px;
+      font-style: italic;
+      background: #ede7f6;
+      border-radius: 12px;
+      padding: 10px 24px;
+      box-shadow: 0 2px 8px #8e24aa44;
+      display: inline-block;
+      animation: fadeIn 1.3s;
     }
     .recipes-list {
       display: flex;
       flex-direction: column;
       gap: 32px;
       margin-bottom: 24px;
+      width: 100%;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .recipe-card {
-      background: #f1d6f1;
-      border-radius: 12px;
-      box-shadow: 0 1px 8px #ffb34722;
-      padding: 18px;
-      margin-bottom: 0;
+      background: linear-gradient(90deg,#ede7f6 80%, #c8e6c9 100%);
+      border-radius: 18px;
+      box-shadow: 0 2px 12px #8e24aa44;
+      padding: 32px 24px;
       text-align: left;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      position: relative;
+      margin: 0 auto;
+      display: block;
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+      animation: fadeInCard 0.7s;
+      border: 2px solid #c8e6c9;
+    }
+    .recipe-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInCard {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .recipe-card:hover {
+      box-shadow: 0 8px 32px #8e24aa44;
+      transform: scale(1.03);
+      background: linear-gradient(90deg,#c8e6c9 80%, #ede7f6 100%);
+      border-color: #8e24aa;
     }
     .recipe-title {
-      font-size: 1.8em;
-      color: #ba68c8;
+      font-size: x-large;
+      color: #8e24aa;
       margin-bottom: 8px;
       font-weight: bold;
       text-align: center;
       width: 100%;
+      letter-spacing: 1px;
     }
     .recipe-ingredients, .recipe-instructions {
       margin-bottom: 8px;
       width: 100%;
+      color: #43a047;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
       font-size: large;
-      color: #ff6f61;
     }
     .meal-previews {
       display: flex;
@@ -100,42 +177,50 @@
       width: 100%;
       max-width: 180px;
       border-radius: 10px;
-      box-shadow: 0 2px 12px #ffb34733;
+      box-shadow: 0 2px 12px #8e24aa44;
       margin-bottom: 4px;
       height: 120px;
       object-fit: cover;
       cursor: pointer;
       transition: box-shadow 0.2s;
+      background: #fff;
+      padding: 2px;
     }
     .meal-preview img:hover {
-      box-shadow: 0 4px 24px #ffb34766;
+      box-shadow: 0 4px 24px #8e24aa66;
     }
     .meal-caption {
-      font-size: 1.1em;
-      color: #79b9c2;
+      font-size: 0.98em;
+      color: #43a047;
       font-style: italic;
       margin-bottom: 4px;
     }
     .back-btn {
-      display: block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       margin: 32px auto 0 auto;
-      background: #ffe082;
-      color: #ff6f61;
+      background: linear-gradient(90deg, #c8e6c9 10%, #8e24aa 90%);
+      color: #ede7f6;
       border: none;
-      border-radius: 8px;
-      padding: 10px 22px;
+      border-radius: 18px;
+      padding: 12px 28px;
       font-weight: bold;
-      cursor: pointer;
-      font-size: 1em;
-      box-shadow: 0 2px 8px #ffb34733;
-      transition: background 0.2s;
+      font-size: 1.08em;
+      box-shadow: 0 2px 8px #8e24aa44;
+      transition: background 0.2s, transform 0.2s;
       text-decoration: none;
-      text-align: center;
-      width: fit-content;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
     }
-    .back-btn:hover {
-      background: #ffb347;
+    .back-btn:hover, .back-btn:focus {
+      background: linear-gradient(90deg, #8e24aa 10%, #c8e6c9 90%);
       color: #fff;
+      transform: scale(1.04);
+      box-shadow: 0 8px 32px #8e24aa44;
+      text-decoration: none;
     }
     /* Modal styles */
     .modal {
@@ -170,7 +255,7 @@
       padding: 8px;
     }
     .modal-caption {
-      color: #fffde7;
+      color: #ede7f6;
       font-size: 1.1em;
       font-style: italic;
       text-align: center;
@@ -180,8 +265,8 @@
       position: absolute;
       top: 12px;
       right: 18px;
-      background: #ff6f61;
-      color: #fff;
+      background: #8e24aa;
+      color: #ede7f6;
       border: none;
       border-radius: 50%;
       width: 38px;
@@ -189,7 +274,7 @@
       font-size: 1.8em;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 2px 8px #0005;
+      box-shadow: 0 2px 8px #8e24aa44;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -197,129 +282,394 @@
       z-index: 2;
     }
     .close-btn:hover {
-      background: #d84315;
+      background: #43a047;
+      color: #8e24aa;
     }
-  @media (max-width: 700px) {
-  body { font-size: 1.22em; }
-  h1 { font-size: 2.1em; }
-  h2 { font-size: 1.5em; }
-  h3 { font-size: 1.18em; }
-  .about-text,
-  .info-note,
-  .feature-card,
-  .category-box,
-  .recipe-card {
-    font-size: 1.15em;
-    padding: 20px 4vw;
-  }
-  .feature-title,
-  .category-title,
-  .added-heading {
-    font-size: 1.18em;
-  }
-  .back-btn,
-  button,
-  .top-x-btn {
-    font-size: 1.15em;
-    padding: 16px 8vw;
-  }
-  input,
-  textarea,
-  #searchBox {
-    font-size: 1.12em;
-    padding: 14px 4vw;
-  }
-}
+    /* Mobile menu styles */
+    .menu-toggle {
+      display: block;
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 1001;
+      background: #c8e6c9;
+      color: #8e24aa;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 2em;
+      box-shadow: 0 2px 12px #8e24aa44;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .menu-toggle:active,
+    .menu-toggle:focus {
+      background: #8e24aa;
+      color: #fff;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 80vw;
+      max-width: 320px;
+      height: 100vh;
+      background: #ede7f6;
+      box-shadow: -2px 0 16px #8e24aa44;
+      z-index: 1000;
+      padding: 48px 24px 24px 24px;
+      flex-direction: column;
+      gap: 18px;
+      border-radius: 0 0 0 32px;
+      animation: slideIn 0.3s;
+    }
+    .mobile-menu a {
+      display: block;
+      color: #8e24aa;
+      font-size: 1.18em;
+      text-decoration: none;
+      margin-bottom: 18px;
+      font-family: 'Georgia', serif;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover {
+      color: #fff;
+      background: #8e24aa;
+      border-radius: 8px;
+      padding: 4px 8px;
+    }
+    .menu-link.active {
+      background: #8e24aa !important;
+      color: #ede7f6 !important;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    @keyframes slideIn {
+      from { right: -100vw; opacity: 0; }
+      to { right: 0; opacity: 1; }
+    }
+    /* Desktop sidebar styles */
+    .desktop-sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 180px;
+      height: 100vh;
+      background: #ede7f6;
+      box-shadow: 2px 0 16px #8e24aa44;
+      z-index: 100;
+      padding: 48px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .sidebar-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+    .sidebar-link {
+      display: block;
+      color: #8e24aa;
+      font-size: 1.12em;
+      text-decoration: none;
+      padding: 12px 24px;
+      font-family: 'Georgia', serif;
+      font-weight: bold;
+      transition: color 0.2s, background 0.2s;
+      border-radius: 8px;
+      margin-bottom: 4px;
+    }
+    .sidebar-link:hover, .sidebar-link:focus {
+      background: #8e24aa;
+      color: #ede7f6;
+    }
+    .sidebar-link.active {
+      background: #8e24aa;
+      color: #ede7f6;
+      font-weight: bold;
+    }
+    @media (max-width: 900px) {
+      .desktop-sidebar {
+        display: none;
+      }
+      .container {
+        margin-left: 0 !important;
+      }
+    }
+    .container {
+      margin-left: 180px;
+    }
+    /* Dark mode styles */
+    body.dark-mode {
+      background: linear-gradient(135deg, #263238 0%, #8e24aa 100%);
+      color: #ede7f6;
+    }
+    body.dark-mode .container,
+    body.dark-mode .recipe-card,
+    body.dark-mode .subtitle,
+    body.dark-mode .divider,
+    body.dark-mode .progress-bar,
+    body.dark-mode .mobile-menu,
+    body.dark-mode .desktop-sidebar {
+      background: #263238 !important;
+      color: #ede7f6 !important;
+      border-color: #8e24aa !important;
+    }
+    body.dark-mode h1,
+    body.dark-mode .recipe-title,
+    body.dark-mode .recipe-ingredients,
+    body.dark-mode .recipe-instructions,
+    body.dark-mode .meal-caption,
+    body.dark-mode .back-btn,
+    body.dark-mode .sidebar-link {
+      color: #c8e6c9 !important;
+    }
+    body.dark-mode .recipe-card:hover {
+      background: #8e24aa !important;
+      color: #ede7f6 !important;
+      border-color: #c8e6c9 !important;
+    }
+    body.dark-mode .back-btn {
+      background: linear-gradient(90deg, #8e24aa 10%, #c8e6c9 90%) !important;
+      color: #ede7f6 !important;
+    }
+    body.dark-mode .back-btn:hover, body.dark-mode .back-btn:focus {
+      background: linear-gradient(90deg, #c8e6c9 10%, #8e24aa 90%) !important;
+      color: #263238 !important;
+    }
+    body.dark-mode .meal-preview img {
+      background: #263238 !important;
+    }
+    body.dark-mode .modal-content {
+      background: #263238 !important;
+    }
+    body.dark-mode .close-btn {
+      background: #8e24aa !important;
+      color: #ede7f6 !important;
+    }
+    body.dark-mode .close-btn:hover {
+      background: #43a047 !important;
+      color: #8e24aa !important;
+    }
+    body.dark-mode .sidebar-link.active,
+    body.dark-mode .sidebar-link:hover,
+    body.dark-mode .sidebar-link:focus {
+      background: #8e24aa !important;
+      color: #ede7f6 !important;
+    }
+    .dark-mode-toggle {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #c8e6c9;
+      color: #8e24aa;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 1.5em;
+      box-shadow: 0 2px 12px #8e24aa44;
+      cursor: pointer;
+      z-index: 1001;
+      transition: background 0.2s;
+      display: block !important;
+    }
+    .dark-mode-toggle.active {
+      background: #8e24aa;
+      color: #fff;
+    }
+    @media (max-width: 700px) {
+      body { font-size: 1.22em; }
+      h1 { font-size: 2.1em; }
+      .recipe-card { font-size: 1.15em; padding: 20px 4vw; }
+      .recipe-title { font-size: 1.18em; }
+      .back-btn, .top-x-btn { font-size: 1.15em; padding: 16px 8vw; }
+    }
   </style>
 </head>
 <body>
+  <!-- Desktop sidebar for categories -->
+  <nav class="desktop-sidebar" aria-label="Recipe Categories">
+    <ul class="sidebar-list">
+      <li><a href="food-recipes.html" class="sidebar-link" data-page="food-recipes.html">Food Sections</a></li>
+      <li><a href="seafood-recipes.html" class="sidebar-link" data-page="seafood-recipes.html">Seafood</a></li>
+      <li><a href="vegetable-recipes.html" class="sidebar-link" data-page="vegetable-recipes.html">Vegetables</a></li>
+      <li><a href="snack-recipes.html" class="sidebar-link" data-page="snack-recipes.html">Snacks</a></li>
+      <li><a href="poultry-recipes.html" class="sidebar-link" data-page="poultry-recipes.html">Poultry</a></li>
+      <li><a href="steak-recipes.html" class="sidebar-link" data-page="steak-recipes.html">Beef</a></li>
+      <li><a href="plant-based-recipes.html" class="sidebar-link" data-page="plant-based-recipes.html">Plant-Based</a></li>
+      <li><a href="cake-recipes.html" class="sidebar-link" data-page="cake-recipes.html">Cakes</a></li>
+      <li><a href="jelly-recipes.html" class="sidebar-link" data-page="jelly-recipes.html">Jelly</a></li>
+      <li><a href="fruit-recipes.html" class="sidebar-link" data-page="fruit-recipes.html">Fruits</a></li>
+      <li><a href="sweet-recipes.html" class="sidebar-link" data-page="sweet-recipes.html">Sweet-food</a></li>
+    </ul>
+  </nav>
+  <!-- Mobile menu toggle -->
+  <nav class="mobile-nav" aria-label="Mobile Navigation">
+    <button id="menuToggle" aria-label="Open menu" class="menu-toggle">&#9776;</button>
+    <div id="mobileMenu" class="mobile-menu">
+      <a href="food-recipes.html" class="menu-link" data-page="food-recipes.html">Food Sections</a>
+      <a href="seafood-recipes.html" class="menu-link" data-page="seafood-recipes.html">Seafood</a>
+      <a href="vegetable-recipes.html" class="menu-link" data-page="vegetable-recipes.html">Vegetables</a>
+      <a href="snack-recipes.html" class="menu-link" data-page="snack-recipes.html">Snacks</a>
+      <a href="poultry-recipes.html" class="menu-link" data-page="poultry-recipes.html">Poultry</a>
+      <a href="steak-recipes.html" class="menu-link" data-page="steak-recipes.html">Beef</a>
+      <a href="plant-based-recipes.html" class="menu-link" data-page="plant-based-recipes.html">Plant-Based</a>
+      <a href="cake-recipes.html" class="menu-link" data-page="cake-recipes.html">Cakes</a>
+      <a href="jelly-recipes.html" class="menu-link" data-page="jelly-recipes.html">Jelly</a>
+      <a href="fruit-recipes.html" class="menu-link" data-page="fruit-recipes.html">Fruits</a>
+      <a href="sweet-recipes.html" class="menu-link" data-page="sweet-recipes.html">Sweet-food</a>
+    </div>
+  </nav>
   <div class="container">
-    <button class="top-x-btn" onclick="window.location.href='food-recipes.html'">&times;</button>
+    <button class="top-x-btn" onclick="window.location.href='food-recipes.html'" aria-label="Close Jelly Recipes">&times;</button>
     <h1>Jelly Recipes</h1>
-        <div><em>Click on the images for a bigger view</em></div>
-    <div class="recipes-list">
-      <div class="recipe-card">
-        <div class="recipe-title">Classic Strawberry Jelly</div>
-        <div class="recipe-ingredients"><b>Ingredients:</b> Strawberries, sugar, lemon juice, gelatin, water</div>
-        <div class="recipe-instructions"><b>Instructions:</b> Blend strawberries, heat with sugar and lemon juice. Dissolve gelatin in water, mix with strawberry blend. Pour into molds and chill until set.</div>
-        <div class="meal-previews">
-          <div class="meal-preview">
-            <img src="https://media.istockphoto.com/id/1250676045/photo/strawberry-jelly-on-white-plate-summer-dessert-with-fruit-jelly-and-fresh-strawberry.jpg?s=612x612&w=0&k=20&c=05IfTAhLarSLt-Dp4E8Kt2i1JEmclABRLovtk8q0Trw=" alt="Strawberry Jelly" onclick="showModal(this)">
-            <div class="meal-caption">Fresh strawberry jelly</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://i0.wp.com/whattheredheadsaid.com/wp-content/uploads/2016/07/Strawberry-Jelly-Pot-e1435518882486.jpg?resize=720%2C479&ssl=1" alt="Strawberry Jelly 2" onclick="showModal(this)">
-            <div class="meal-caption">Strawberry jelly in custard pots</div>
-        </div>
-        <div class="meal-preview">
-          <img src="https://img.freepik.com/premium-photo/strawberry-jelly-with-mint-berries-plate-kitchen-towel-background-light-wooden-boards_423299-637.jpg" alt="Strawberry Jelly 3" onclick="showModal(this)">
-          <div class="meal-caption">Strawberry jelly with mint and berries in it</div>
-        </div>
-      </div>
-      </div>
-      <div class="recipe-card">
-        <div class="recipe-title">Orange Jelly Cups</div>
-        <div class="recipe-ingredients"><b>Ingredients:</b> Orange juice, sugar, gelatin, orange zest, water</div>
-        <div class="recipe-instructions"><b>Instructions:</b> Heat orange juice, sugar, and zest. Dissolve gelatin in water, mix with juice. Pour into cups and chill until firm.</div>
-        <div class="meal-previews">
-          <div class="meal-preview">
-            <img src="https://daysofjay.com/wp-content/uploads/2025/07/aperol-spritz-jellies-web-1-5-scaled.jpg" alt="Orange Jelly" onclick="showModal(this)">
-            <div class="meal-caption">Zesty orange jelly cups</div>
-          </div>
-            <div class="meal-preview">
-                <img src="https://www.yummytummyaarthi.com/wp-content/uploads/2015/07/1-57.jpg" alt="Orange Jelly 2" onclick="showModal(this)">
-                <div class="meal-caption">Orange jelly with fresh orange orange juice</div>
-                </div>
-        </div>
-      </div>
-      <div class="recipe-card">
-        <div class="recipe-title">Grape Jelly</div>
-        <div class="recipe-ingredients"><b>Ingredients:</b> Grape juice, sugar, lemon juice, gelatin, water</div>
-        <div class="recipe-instructions"><b>Instructions:</b> Heat grape juice, sugar, and lemon juice. Dissolve gelatin in water, mix with juice. Pour into jars and chill until set.</div>
-        <div class="meal-previews">
-          <div class="meal-preview">
-            <img src="https://azurestandard.imgix.net/cms/GrapeJelly.jpg?auto=format,compress&crop=faces,edges&w=1200&ar=16:9&fit=crop" alt="Grape Jelly" onclick="showModal(this)">
-            <div class="meal-caption">Sweet grape jelly</div>
-          </div>
-            <div class="meal-preview">
-                <img src="https://www.almanac.com/sites/default/files/users/The%20Editors/spiced-grape-jelly-shutterstock_1540574156_full_width.jpg" alt="Grape Jelly 2" onclick="showModal(this)">
-                <div class="meal-caption">Grape jelly with bread</div>
-                </div>
-        </div>
-      </div>
-      <div class="recipe-card">
-        <div class="recipe-title">Mixed Fruit Jelly</div>
-        <div class="recipe-ingredients"><b>Ingredients:</b> Mixed fruit juice, sugar, gelatin, lemon juice, fruit pieces</div>
-        <div class="recipe-instructions"><b>Instructions:</b> Heat juice, sugar, and lemon juice. Dissolve gelatin in water, mix with juice. Add fruit pieces, pour into molds, and chill.</div>
-        <div class="meal-previews">
-          <div class="meal-preview">
-            <img src="https://i.ytimg.com/vi/DEESnVx8Qmo/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAHv_onqk3eiUjwPaGLHLaTEnmf5Q" alt="Mixed Fruit Jelly" onclick="showModal(this)">
-            <div class="meal-caption">Colorful mixed fruit jelly</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://i.ytimg.com/vi/qpnXlizWpSw/maxresdefault.jpg" alt="Mixed Fruit Jelly 2" onclick="showModal(this)">
-            <div class="meal-caption">Mixed fruit jelly cake</div>
-          </div>
-            <div class="meal-preview">
-                <img src="https://joyfoodsunshine.com/wp-content/uploads/2017/08/homemade-fruit-snacks-recipe-1x1-2.jpg" alt="Mixed Fruit Jelly 3" onclick="showModal(this)">
-                <div class="meal-caption">Fruit jelly snacks</div>
-        </div>
-      </div>
+    <div class="divider"></div>
+    <div class="subtitle">
+      Click on the images for a bigger view. Enjoy animated entries, dark mode, and mobile navigation!
+    </div>
+    <div class="recipes-list" id="recipesList">
+      <!-- Recipe cards will be rendered by JS -->
     </div>
     <div>
-        <em>Have a favorite jelly recipe? Share it in the <a href="recipe-book.html">Recipe Book</a></em>
+      <em>Have a favorite jelly recipe? Share it in the <a href="recipe-book.html">Recipe Book</a>!</em>
     </div>
-    <a href="food-recipes.html" class="back-btn">← Back</a>
+    <a href="food-recipes.html" class="back-btn" aria-label="Back to Food Recipes">← Back</a>
+    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">&#9790;</button>
   </div>
   <!-- Modal for full image -->
   <div id="imgModal" class="modal" onclick="closeModal(event)">
     <div class="modal-content">
-      <button class="close-btn" onclick="closeModal(event)">&times;</button>
+      <button class="close-btn" onclick="closeModal(event)" aria-label="Close image">&times;</button>
       <img id="modalImg" class="modal-img" src="" alt="Full Jelly">
       <div id="modalCaption" class="modal-caption"></div>
     </div>
   </div>
   <script>
+    // Desktop sidebar highlight
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+      if (window.location.pathname.endsWith(link.getAttribute('data-page'))) {
+        link.classList.add('active');
+      }
+    });
+    // Mobile menu highlight
+    document.querySelectorAll('.menu-link').forEach(link => {
+      if (window.location.pathname.endsWith(link.getAttribute('data-page'))) {
+        link.classList.add('active');
+      }
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let menuOpen = false;
+    menuToggle.addEventListener('click', function() {
+      menuOpen = !menuOpen;
+      mobileMenu.style.display = menuOpen ? 'flex' : 'none';
+      menuToggle.setAttribute('aria-label', menuOpen ? 'Close menu' : 'Open menu');
+      document.body.style.overflow = menuOpen ? 'hidden' : '';
+    });
+    mobileMenu.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') {
+        mobileMenu.style.display = 'none';
+        menuOpen = false;
+        document.body.style.overflow = '';
+      }
+    });
+    window.addEventListener('click', function(e) {
+      if (menuOpen && !mobileMenu.contains(e.target) && e.target !== menuToggle) {
+        mobileMenu.style.display = 'none';
+        menuOpen = false;
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    darkModeToggle.addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+      darkModeToggle.classList.toggle('active');
+      localStorage.setItem('darkModeJelly', document.body.classList.contains('dark-mode'));
+    });
+    if (localStorage.getItem('darkModeJelly') === 'true') {
+      document.body.classList.add('dark-mode');
+      darkModeToggle.classList.add('active');
+    }
+
+    // Recipes data
+    const recipes = [
+      {
+        title: "Classic Strawberry Jelly",
+        ingredients: "Strawberries, sugar, lemon juice, gelatin, water",
+        instructions: "Blend strawberries, heat with sugar and lemon juice. Dissolve gelatin in water, mix with strawberry blend. Pour into molds and chill until set.",
+        images: [
+          {src:"https://media.istockphoto.com/id/1250676045/photo/strawberry-jelly-on-white-plate-summer-dessert-with-fruit-jelly-and-fresh-strawberry.jpg?s=612x612&w=0&k=20&c=05IfTAhLarSLt-Dp4E8Kt2i1JEmclABRLovtk8q0Trw=",caption:"Fresh strawberry jelly"},
+          {src:"https://i0.wp.com/whattheredheadsaid.com/wp-content/uploads/2016/07/Strawberry-Jelly-Pot-e1435518882486.jpg?resize=720%2C479&ssl=1",caption:"Strawberry jelly in custard pots"},
+          {src:"https://img.freepik.com/premium-photo/strawberry-jelly-with-mint-berries-plate-kitchen-towel-background-light-wooden-boards_423299-637.jpg",caption:"Strawberry jelly with mint and berries"}
+        ]
+      },
+      {
+        title: "Orange Jelly Cups",
+        ingredients: "Orange juice, sugar, gelatin, orange zest, water",
+        instructions: "Heat orange juice, sugar, and zest. Dissolve gelatin in water, mix with juice. Pour into cups and chill until firm.",
+        images: [
+          {src:"https://daysofjay.com/wp-content/uploads/2025/07/aperol-spritz-jellies-web-1-5-scaled.jpg",caption:"Zesty orange jelly cups"},
+          {src:"https://www.yummytummyaarthi.com/wp-content/uploads/2015/07/1-57.jpg",caption:"Orange jelly with fresh orange juice"}
+        ]
+      },
+      {
+        title: "Grape Jelly",
+        ingredients: "Grape juice, sugar, lemon juice, gelatin, water",
+        instructions: "Heat grape juice, sugar, and lemon juice. Dissolve gelatin in water, mix with juice. Pour into jars and chill until set.",
+        images: [
+          {src:"https://azurestandard.imgix.net/cms/GrapeJelly.jpg?auto=format,compress&crop=faces,edges&w=1200&ar=16:9&fit=crop",caption:"Sweet grape jelly"},
+          {src:"https://www.almanac.com/sites/default/files/users/The%20Editors/spiced-grape-jelly-shutterstock_1540574156_full_width.jpg",caption:"Grape jelly with bread"}
+        ]
+      },
+      {
+        title: "Mixed Fruit Jelly",
+        ingredients: "Mixed fruit juice, sugar, gelatin, lemon juice, fruit pieces",
+        instructions: "Heat juice, sugar, and lemon juice. Dissolve gelatin in water, mix with juice. Add fruit pieces, pour into molds, and chill.",
+        images: [
+          {src:"https://i.ytimg.com/vi/DEESnVx8Qmo/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAHv_onqk3eiUjwPaGLHLaTEnmf5Q",caption:"Colorful mixed fruit jelly"},
+          {src:"https://i.ytimg.com/vi/qpnXlizWpSw/maxresdefault.jpg",caption:"Mixed fruit jelly cake"},
+          {src:"https://joyfoodsunshine.com/wp-content/uploads/2017/08/homemade-fruit-snacks-recipe-1x1-2.jpg",caption:"Fruit jelly snacks"}
+        ]
+      }
+    ];
+
+    // Render recipes with animated entry
+    function renderRecipes() {
+      const recipesList = document.getElementById('recipesList');
+      recipesList.innerHTML = recipes.map(recipe => `
+        <div class="recipe-card">
+          <div class="recipe-title">${recipe.title}</div>
+          <div class="recipe-ingredients"><b>Ingredients:</b> ${recipe.ingredients}</div>
+          <div class="recipe-instructions"><b>Instructions:</b> ${recipe.instructions}</div>
+          <div class="meal-previews">
+            ${recipe.images.map(img => `
+              <div class="meal-preview">
+                <img src="${img.src}" alt="${recipe.title}" onclick="showModal(this)">
+                <div class="meal-caption">${img.caption}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+      setTimeout(() => {
+        document.querySelectorAll('.recipe-card').forEach((card, i) => {
+          setTimeout(() => card.classList.add('visible'), 100 * i);
+        });
+      }, 100);
+    }
+    renderRecipes();
+
+    // Modal logic
     function showModal(img) {
       var modal = document.getElementById('imgModal');
       var modalImg = document.getElementById('modalImg');

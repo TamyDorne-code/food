@@ -3,88 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <title>Recipe Book</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
     body {
+      min-height: 100vh;
+      min-width: 100vw;
+      width: 100vw;
+      height: 100vh;
+      box-sizing: border-box;
       font-family: 'Segoe UI', Arial, sans-serif;
       background: linear-gradient(135deg, #e8f5e9 0%, #bbecbd 100%);
-      margin: 0;
       color: #222;
+      overflow-x: hidden;
     }
     .container {
-      max-width: 700px;
-      margin: 40px auto;
-      border: 3px solid #a5d6a7;
-      background: linear-gradient(135deg, #e8f5e9 0%, #fffde7 100%);
-      border-radius: 32px;
-      box-shadow: 0 12px 40px #a5d6a7aa, 0 1.5px 0 #fffde7 inset;
-      padding: 60px 32px 40px 32px;
+      min-height: 100vh;
+      min-width: 100vw;
+      width: 100vw;
+      max-width: none;
+      margin: 0;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
       text-align: center;
       position: relative;
-      overflow: hidden;
-    }
-    .container::before {
-      content: "";
-      position: absolute;
-      top: -60px; left: -60px;
-      width: 180px; height: 180px;
-      background: radial-gradient(circle, #ffe082 60%, #ffb347 100%);
-      opacity: 0.25;
-      border-radius: 50%;
-      z-index: 0;
-    }
-    .container::after {
-      content: "";
-      position: absolute;
-      bottom: -60px; right: -60px;
-      width: 180px; height: 180px;
-      background: radial-gradient(circle, #ffb347 60%, #ff6f61 100%);
-      opacity: 0.18;
-      border-radius: 50%;
-      z-index: 0;
-    }
-
-    .search-bar {
-      margin-bottom: 22px;
-      color: #388e3c;
-      font-size: 1.08em;
-      background: linear-gradient(90deg, #e8f5e9 70%, #ffe082 100%);
-      border-radius: 12px;
-      padding: 14px 0;
-      box-shadow: 0 1px 8px #a5d6a744;
+      overflow: visible;
       display: flex;
       flex-direction: column;
       align-items: center;
-      position: relative;
-      z-index: 1;
-   }
-
-    .search-bar b {
-     color: #388e3c;
-     margin-bottom: 8px;
-     font-size: 1.08em;
-     letter-spacing: 0.5px;
-   }
-
-    #searchBox {
-     width: 70%;
-     max-width: 340px;
-     padding: 10px 14px;
-     border-radius: 8px;
-     border: 2px solid #a5d6a7;
-     font-size: 1.08em;
-     background: #fff;
-     color: #388e3c;
-     box-shadow: 0 1px 6px #a5d6a744;
-     transition: border 0.2s, box-shadow 0.2s;
-     margin-top: 4px;
-   }
-
-    #searchBox:focus {
-     border: 2px solid #388e3c;
-     box-shadow: 0 2px 12px #a5d6a744;
-     outline: none;
-     background: #e8f5e9;
-   }
+      justify-content: flex-start;
+    }
     .top-x-btn {
       position: fixed;
       top: 18px;
@@ -93,9 +50,9 @@
       color: #fff;
       border: 2px solid #d84315;
       border-radius: 50%;
-      width: 38px;
-      height: 38px;
-      font-size: 1.8em;
+      width: 44px;
+      height: 44px;
+      font-size: 2em;
       font-weight: bold;
       cursor: pointer;
       box-shadow: 0 2px 8px #0005;
@@ -107,6 +64,7 @@
     }
     .top-x-btn:hover {
       background: #d84315;
+      color: #fffde7;
     }
     h1 {
       color: #47420c;
@@ -118,6 +76,17 @@
       text-shadow: 0 2px 12px #ffb34733;
       position: relative;
       z-index: 1;
+      margin-top: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+    .book-emoji {
+      font-size: 1.3em;
+      margin-right: 6px;
+      vertical-align: middle;
+      filter: drop-shadow(0 2px 8px #ffb34744);
     }
     .subtitle {
       font-size: 1.18em;
@@ -126,9 +95,26 @@
       font-style: italic;
       position: relative;
       z-index: 1;
+      background: #fffbe6;
+      border-radius: 12px;
+      padding: 12px 24px;
+      box-shadow: 0 2px 8px #bbecbd44;
+      display: inline-block;
     }
-    form {
-      margin-bottom: 32px;
+    .divider {
+      width: 80px;
+      height: 6px;
+      background: linear-gradient(90deg,#a5d6a7,#388e3c);
+      border-radius: 3px;
+      margin: 24px auto 32px auto;
+      opacity: 0.8;
+      position: relative;
+      z-index: 1;
+    }
+    .form-wrap {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto 32px auto;
       background: linear-gradient(120deg,#fffbe6 70%, #e8f5e9 100%);
       padding: 28px 18px 18px 18px;
       border-radius: 22px;
@@ -138,7 +124,7 @@
       z-index: 1;
       animation: fadeIn 0.8s;
     }
-    form::before {
+    .form-wrap::before {
       content: "Add a New Recipe";
       position: absolute;
       top: -18px;
@@ -169,22 +155,22 @@
       outline: none;
       background: #e8f5e9;
     }
-button[type="submit"] {
-  background: linear-gradient(90deg,#a5d6a7,#388e3c);
-  color: #fff;
-  box-shadow: 0 2px 8px #a5d6a744;
-  border: none;
-  border-radius: 10px;
-  padding: 12px 28px;
-  font-weight: bold;
-  font-size: 1.08em;
-  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
-}
-button[type="submit"]:hover {
-  background: linear-gradient(90deg,#388e3c,#a5d6a7);
-  box-shadow: 0 4px 16px #388e3c44;
-  transform: scale(1.05);
-}
+    button[type="submit"] {
+      background: linear-gradient(90deg,#a5d6a7,#388e3c);
+      color: #fff;
+      box-shadow: 0 2px 8px #a5d6a744;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 28px;
+      font-weight: bold;
+      font-size: 1.08em;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    button[type="submit"]:hover {
+      background: linear-gradient(90deg,#388e3c,#a5d6a7);
+      box-shadow: 0 4px 16px #388e3c44;
+      transform: scale(1.05);
+    }
     .tip {
       margin-bottom: 18px;
       color: #d84315;
@@ -195,6 +181,57 @@ button[type="submit"]:hover {
       box-shadow: 0 1px 6px #ffb34711;
       z-index: 1;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .tip-emoji {
+      font-size: 1.2em;
+      margin-right: 6px;
+      vertical-align: middle;
+      filter: drop-shadow(0 2px 8px #d8431544);
+    }
+    .search-bar {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto 22px auto;
+      color: #388e3c;
+      font-size: 1.08em;
+      background: linear-gradient(90deg, #e8f5e9 70%, #ffe082 100%);
+      border-radius: 12px;
+      padding: 14px 0;
+      box-shadow: 0 1px 8px #a5d6a744;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .search-bar b {
+      color: #388e3c;
+      margin-bottom: 8px;
+      font-size: 1.08em;
+      letter-spacing: 0.5px;
+    }
+    #searchBox {
+      width: 80%;
+      max-width: 340px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 2px solid #a5d6a7;
+      font-size: 1.08em;
+      background: #fff;
+      color: #388e3c;
+      box-shadow: 0 1px 6px #a5d6a744;
+      transition: border 0.2s, box-shadow 0.2s;
+      margin-top: 4px;
+    }
+    #searchBox:focus {
+      border: 2px solid #388e3c;
+      box-shadow: 0 2px 12px #a5d6a744;
+      outline: none;
+      background: #e8f5e9;
     }
     .added-heading {
       font-size: 1.18em;
@@ -205,12 +242,27 @@ button[type="submit"]:hover {
       letter-spacing: 1px;
       position: relative;
       z-index: 1;
+      margin-left: 12px;
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .added-emoji {
+      font-size: 1.2em;
+      margin-right: 6px;
+      vertical-align: middle;
+      filter: drop-shadow(0 2px 8px #ff6f6144);
     }
     .recipe-list {
       margin-top: 18px;
       text-align: left;
       position: relative;
       z-index: 1;
+      width: 100%;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .recipe-card {
       background: linear-gradient(90deg,#fffde7 80%, #ffe082 100%);
@@ -220,9 +272,15 @@ button[type="submit"]:hover {
       margin-bottom: 28px;
       position: relative;
       border: 1.5px solid #ffb34744;
-      transition: box-shadow 0.2s, transform 0.2s;
+      transition: box-shadow 0.4s, transform 0.4s, opacity 0.5s;
       animation: fadeIn 0.7s;
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
       overflow: hidden;
+    }
+    .recipe-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px);}
@@ -241,6 +299,15 @@ button[type="submit"]:hover {
       letter-spacing: 1px;
       text-shadow: 0 1px 6px #ffb34722;
       font-family: 'Georgia', serif;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .recipe-title-emoji {
+      font-size: 1.1em;
+      margin-right: 6px;
+      vertical-align: middle;
+      filter: drop-shadow(0 2px 8px #ffb34744);
     }
     .recipe-ingredients, .recipe-instructions {
       margin-bottom: 10px;
@@ -277,169 +344,397 @@ button[type="submit"]:hover {
       box-shadow: 0 1px 6px #ffb34722;
       transition: background 0.2s, transform 0.2s;
       z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
     .delete-btn:hover {
       background: #b71c1c;
       transform: scale(1.08);
     }
-    .back-btn {
-      display: block;
+    .fancy-back-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       margin: 40px auto 0 auto;
-      background: #ffe082;
-      color: #ff6f61;
+      background: linear-gradient(90deg, #ffe082 10%, #ff6f61 90%);
+      color: #fffde7;
       border: none;
-      border-radius: 10px;
-      padding: 12px 28px;
+      border-radius: 24px;
+      padding: 16px 36px;
       font-weight: bold;
-      cursor: pointer;
-      font-size: 1.08em;
-      box-shadow: 0 2px 8px #ffb34733;
-      transition: background 0.2s, transform 0.2s;
+      font-size: 1.18em;
+      box-shadow: 0 4px 18px #ffb34744;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
       text-decoration: none;
       text-align: center;
       width: fit-content;
+      letter-spacing: 1px;
       position: relative;
-      z-index: 1;
+      overflow: hidden;
     }
-    .back-btn:hover {
-      background: #ffb347;
+    .fancy-back-btn:hover, .fancy-back-btn:focus {
+      background: linear-gradient(90deg, #ff6f61 10%, #ffe082 90%);
       color: #fff;
-      transform: scale(1.05);
+      transform: scale(1.04);
+      box-shadow: 0 8px 32px #ffb34744;
+      text-decoration: none;
     }
-    /* Decorative divider */
-    .divider {
-      width: 80px;
+    /* Mobile menu styles */
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 1001;
+      background: #ffe082;
+      color: #ff6f61;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 2em;
+      box-shadow: 0 2px 12px #ffb34744;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .menu-toggle:active,
+    .menu-toggle:focus {
+      background: #ff6f61;
+      color: #fff;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 80vw;
+      max-width: 320px;
+      height: 100vh;
+      background: #fffde7;
+      box-shadow: -2px 0 16px #ffb34744;
+      z-index: 1000;
+      padding: 48px 24px 24px 24px;
+      flex-direction: column;
+      gap: 18px;
+      border-radius: 0 0 0 32px;
+      animation: slideIn 0.3s;
+    }
+    .mobile-menu a {
+      display: block;
+      color: #ff6f61;
+      font-size: 1.18em;
+      text-decoration: none;
+      margin-bottom: 18px;
+      font-family: 'Georgia', serif;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover {
+      color: #fff;
+      background: #ff6f61;
+      border-radius: 8px;
+      padding: 4px 8px;
+    }
+    @keyframes slideIn {
+      from { right: -100vw; opacity: 0; }
+      to { right: 0; opacity: 1; }
+    }
+    @media (max-width: 900px) {
+      .menu-toggle { display: block; }
+    }
+    @media (min-width: 901px) {
+      .mobile-nav { display: none; }
+    }
+    /* Progress bar styles */
+    .progress-bar {
+      width: 100%;
+      max-width: 400px;
       height: 6px;
-      background: linear-gradient(90deg,#a5d6a7,#388e3c);
-      border-radius: 3px;
-      margin: 24px auto 32px auto;
-      opacity: 0.8;
+      background: #ffe082;
+      border-radius: 4px;
+      margin: 0 auto 18px auto;
+      overflow: hidden;
       position: relative;
-      z-index: 1;
+      display: none;
+    }
+    .progress-bar-inner {
+      height: 100%;
+      width: 0;
+      background: #ff6f61;
+      border-radius: 4px;
+      transition: width 0.4s;
     }
     @media (max-width: 700px) {
-  body { font-size: 1.22em; }
-  h1 { font-size: 2.1em; }
-  h2 { font-size: 1.5em; }
-  h3 { font-size: 1.18em; }
-  .about-text,
-  .info-note,
-  .feature-card,
-  .category-box,
-  .recipe-card {
-    font-size: 1.15em;
-    padding: 20px 4vw;
-  }
-  .feature-title,
-  .category-title,
-  .added-heading {
-    font-size: 1.18em;
-  }
-  .back-btn,
-  button,
-  .top-x-btn {
-    font-size: 1.15em;
-    padding: 16px 8vw;
-  }
-  input,
-  textarea,
-  #searchBox {
-    font-size: 1.12em;
-    padding: 14px 4vw;
-  }
+      body { font-size: 1.22em; }
+      h1 { font-size: 2.1em; }
+      .form-wrap { max-width: 98vw; }
+      .search-bar { max-width: 98vw; }
+      .recipe-list { max-width: 98vw; }
+      .fancy-back-btn { font-size: 1.08em; padding: 12px 18vw; }
+    }
+    body.dark-mode {
+  background: linear-gradient(135deg, #263238 0%, #47420c 100%);
+  color: #fffde7;
+}
+body.dark-mode .container,
+body.dark-mode .form-wrap,
+body.dark-mode .search-bar,
+body.dark-mode .tip,
+body.dark-mode .recipe-list,
+body.dark-mode .recipe-card,
+body.dark-mode .progress-bar,
+body.dark-mode .mobile-menu {
+  background: #263238 !important;
+  color: #fffde7 !important;
+  border-color: #ff6f61 !important;
+}
+body.dark-mode h1,
+body.dark-mode .subtitle,
+body.dark-mode .added-heading,
+body.dark-mode .recipe-title,
+body.dark-mode .recipe-category,
+body.dark-mode .recipe-author,
+body.dark-mode .tip,
+body.dark-mode .divider {
+  color: #ffe082 !important;
+}
+body.dark-mode .form-wrap::before {
+  background: #ff6f61 !important;
+  color: #fffde7 !important;
+}
+body.dark-mode input,
+body.dark-mode textarea {
+  background: #222 !important;
+  color: #ffe082 !important;
+  border-color: #ff6f61 !important;
+}
+body.dark-mode input:focus,
+body.dark-mode textarea:focus {
+  background: #263238 !important;
+  border-color: #ffe082 !important;
+}
+body.dark-mode button[type="submit"],
+body.dark-mode .delete-btn {
+  background: linear-gradient(90deg,#ff6f61,#ffe082) !important;
+  color: #fffde7 !important;
+}
+body.dark-mode button[type="submit"]:hover,
+body.dark-mode .delete-btn:hover {
+  background: linear-gradient(90deg,#ffe082,#ff6f61) !important;
+  color: #263238 !important;
+}
+body.dark-mode .fancy-back-btn {
+  background: linear-gradient(90deg, #ff6f61 10%, #ffe082 90%) !important;
+  color: #fffde7 !important;
+}
+body.dark-mode .fancy-back-btn:hover, body.dark-mode .fancy-back-btn:focus {
+  background: linear-gradient(90deg, #ffe082 10%, #ff6f61 90%) !important;
+  color: #263238 !important;
+}
+body.dark-mode .menu-toggle {
+  background: #ff6f61 !important;
+  color: #fffde7 !important;
+}
+body.dark-mode .mobile-menu a {
+  color: #ffe082 !important;
+}
+body.dark-mode .mobile-menu a:hover {
+  color: #fff !important;
+  background: #ff6f61 !important;
+}
+body.dark-mode .progress-bar-inner {
+  background: #ffe082 !important;
+}
+
+/* Add a dark mode toggle button */
+.dark-mode-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #ffe082;
+  color: #ff6f61;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.5em;
+  box-shadow: 0 2px 12px #ffb34744;
+  cursor: pointer;
+  z-index: 1001;
+  transition: background 0.2s;
+}
+.dark-mode-toggle.active {
+  background: #ff6f61;
+  color: #fff;
 }
   </style>
 </head>
 <body>
+  <!-- Mobile menu toggle -->
+  <nav class="mobile-nav" aria-label="Mobile Navigation">
+    <button id="menuToggle" aria-label="Open menu" class="menu-toggle">&#9776;</button>
+    <div id="mobileMenu" class="mobile-menu">
+      <a href="index.html">Home</a>
+      <a href="food-recipes.html">Food & Recipes</a>
+      <a href="recipe-book.html">Recipe Book</a>
+      <a href="tips-tricks.html">Tips & Tricks</a>
+      <a href="about-chef.html">About</a>
+    </div>
+  </nav>
   <div class="container">
-    <button class="top-x-btn" onclick="window.location.href='index.html'">&times;</button>
-    <h1>Recipe Book</h1>
+    <button class="top-x-btn" onclick="window.location.href='index.html'" aria-label="Close Recipe Book">&times;</button>
+    <h1><span class="book-emoji">&#128214;</span>Recipe Book</h1>
     <div class="subtitle">
-      Add your favorite recipes, search, and manage them all in one place!
+      Your personal recipe collection. Add, search, and manage your favorite dishes!
     </div>
     <div class="divider"></div>
-    <form id="recipeForm">
-      <input type="text" id="title" placeholder="Recipe Title" required>
-      <textarea id="ingredients" rows="3" placeholder="Ingredients (comma separated)" required></textarea>
-      <textarea id="instructions" rows="4" placeholder="Instructions" required></textarea>
-      <input type="text" id="category" placeholder="Category (e.g. Cake, Snack, Fruit)" required>
-      <input type="text" id="author" placeholder="Your Name (optional)">
-      <button type="submit">Add Recipe</button>
-    </form>
+    <div class="form-wrap">
+      <form id="recipeForm">
+        <input type="text" id="title" placeholder="Recipe Title" required>
+        <textarea id="ingredients" rows="3" placeholder="Ingredients (comma separated)" required></textarea>
+        <textarea id="instructions" rows="4" placeholder="Instructions" required></textarea>
+        <input type="text" id="category" placeholder="Category (e.g. Cake, Snack, Fruit)" required>
+        <input type="text" id="author" placeholder="Your Name (optional)">
+        <button type="submit">Add Recipe</button>
+      </form>
+    </div>
     <div class="tip">
-      <b>Tip:</b> You can add your favorite recipes, categorize them, and share your name!
+      <span class="tip-emoji">&#128161;</span>
+      <b>Tip:</b> Add your favorite recipes, categorize them, and share your name!
     </div>
     <div class="search-bar">
-  <b>If you've added recipes and they aren't showing up or too many, you can search for them here:</b>
-  <input type="text" id="searchBox" placeholder="Search by title, ingredient, or category">
-</div>
-    <div class="added-heading">Added Recipes</div>
+      <b>Search your recipes by title, ingredient, or category:</b>
+      <input type="text" id="searchBox" placeholder="Search by title, ingredient, or category">
+    </div>
+    <div class="progress-bar" id="progressBar">
+      <div class="progress-bar-inner" id="progressBarInner"></div>
+    </div>
+    <div class="added-heading"><span class="added-emoji">&#127859;</span>Added Recipes</div>
     <div class="recipe-list" id="recipeList"></div>
-    <a href="index.html" class="back-btn">← Back</a>
+    <a href="index.html" class="fancy-back-btn" aria-label="Back to main page">
+      <span style="font-size:1.3em;vertical-align:middle;">&#8592;</span>
+      <span style="margin-left:8px;vertical-align:middle;">Back to Main Page</span>
+    </a>
+    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">&#9790;</button>
   </div>
-<script>
-  // Load recipes from localStorage
-  function loadRecipes() {
-    return JSON.parse(localStorage.getItem('recipes') || '[]');
-  }
-  // Save recipes to localStorage
-  function saveRecipes(recipes) {
-    localStorage.setItem('recipes', JSON.stringify(recipes));
-  }
-  // Render all recipes (with optional filter)
-  function renderRecipes(filter = '') {
-    const recipeList = document.getElementById('recipeList');
-    const recipes = loadRecipes();
-    recipeList.innerHTML = '';
-    recipes.forEach((recipe, idx) => {
-      const searchText = (recipe.title + recipe.ingredients + recipe.instructions + (recipe.category||'')).toLowerCase();
-      if (!filter || searchText.includes(filter.toLowerCase())) {
-        const card = document.createElement('div');
-        card.className = 'recipe-card';
-        card.innerHTML = `
-          <div class="recipe-title">${recipe.title}</div>
-          <div class="recipe-ingredients"><b>Ingredients:</b> ${recipe.ingredients}</div>
-          <div class="recipe-instructions"><b>Instructions:</b> ${recipe.instructions}</div>
-          ${recipe.category ? `<div class="recipe-category"><b>Category:</b> ${recipe.category}</div>` : ''}
-          ${recipe.author ? `<div class="recipe-author"><b>By:</b> ${recipe.author}</div>` : ''}
-          <button class="delete-btn" data-idx="${idx}" title="Delete this recipe">Delete</button>
-        `;
-        recipeList.appendChild(card);
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let menuOpen = false;
+    menuToggle.addEventListener('click', function() {
+      menuOpen = !menuOpen;
+      mobileMenu.style.display = menuOpen ? 'flex' : 'none';
+      menuToggle.setAttribute('aria-label', menuOpen ? 'Close menu' : 'Open menu');
+      document.body.style.overflow = menuOpen ? 'hidden' : '';
+    });
+    mobileMenu.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') {
+        mobileMenu.style.display = 'none';
+        menuOpen = false;
+        document.body.style.overflow = '';
       }
     });
-    // Add delete functionality
-    document.querySelectorAll('.delete-btn').forEach(btn => {
-      btn.onclick = function() {
-        const idx = parseInt(this.getAttribute('data-idx'));
+    window.addEventListener('click', function(e) {
+      if (menuOpen && !mobileMenu.contains(e.target) && e.target !== menuToggle) {
+        mobileMenu.style.display = 'none';
+        menuOpen = false;
+        document.body.style.overflow = '';
+      }
+    });
+     const darkModeToggle = document.getElementById('darkModeToggle');
+darkModeToggle.addEventListener('click', function() {
+  document.body.classList.toggle('dark-mode');
+  darkModeToggle.classList.toggle('active');
+  localStorage.setItem('darkModeRecipeBook', document.body.classList.contains('dark-mode'));
+});
+// Load dark mode preference
+if (localStorage.getItem('darkModeRecipeBook') === 'true') {
+  document.body.classList.add('dark-mode');
+  darkModeToggle.classList.add('active');
+}
+    // Load recipes from localStorage
+    function loadRecipes() {
+      return JSON.parse(localStorage.getItem('recipes') || '[]');
+    }
+    // Save recipes to localStorage
+    function saveRecipes(recipes) {
+      localStorage.setItem('recipes', JSON.stringify(recipes));
+    }
+    // Render all recipes (with optional filter)
+    function renderRecipes(filter = '') {
+      const recipeList = document.getElementById('recipeList');
+      const progressBar = document.getElementById('progressBar');
+      const progressBarInner = document.getElementById('progressBarInner');
+      recipeList.innerHTML = '';
+      // Show progress bar
+      progressBar.style.display = 'block';
+      progressBarInner.style.width = '0';
+      setTimeout(() => { progressBarInner.style.width = '80%'; }, 50);
+
+      setTimeout(() => {
         const recipes = loadRecipes();
-        recipes.splice(idx, 1);
+        let visibleCount = 0;
+        recipes.forEach((recipe, idx) => {
+          const searchText = (recipe.title + recipe.ingredients + recipe.instructions + (recipe.category||'')).toLowerCase();
+          if (!filter || searchText.includes(filter.toLowerCase())) {
+            const card = document.createElement('div');
+            card.className = 'recipe-card';
+            card.innerHTML = `
+              <div class="recipe-title"><span class="recipe-title-emoji">&#127858;</span>${recipe.title}</div>
+              <div class="recipe-ingredients"><b>Ingredients:</b> ${recipe.ingredients}</div>
+              <div class="recipe-instructions"><b>Instructions:</b> ${recipe.instructions}</div>
+              ${recipe.category ? `<div class="recipe-category"><b>Category:</b> ${recipe.category}</div>` : ''}
+              ${recipe.author ? `<div class="recipe-author"><b>By:</b> ${recipe.author}</div>` : ''}
+              <button class="delete-btn" data-idx="${idx}" title="Delete this recipe">&#128465; Delete</button>
+            `;
+            recipeList.appendChild(card);
+            visibleCount++;
+          }
+        });
+        // Animate entry
+        setTimeout(() => {
+          document.querySelectorAll('.recipe-card').forEach((card, i) => {
+            setTimeout(() => card.classList.add('visible'), 80 * i);
+          });
+          progressBarInner.style.width = '100%';
+          setTimeout(() => { progressBar.style.display = 'none'; }, 400);
+        }, 100);
+        // Add delete functionality
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+          btn.onclick = function() {
+            const idx = parseInt(this.getAttribute('data-idx'));
+            const recipes = loadRecipes();
+            recipes.splice(idx, 1);
+            saveRecipes(recipes);
+            renderRecipes(document.getElementById('searchBox').value);
+          };
+        });
+      }, 500); // Simulate loading delay
+    }
+    // Handle form submit
+    document.getElementById('recipeForm').onsubmit = function(e) {
+      e.preventDefault();
+      const title = document.getElementById('title').value.trim();
+      const ingredients = document.getElementById('ingredients').value.trim();
+      const instructions = document.getElementById('instructions').value.trim();
+      const category = document.getElementById('category').value.trim();
+      const author = document.getElementById('author').value.trim();
+      if (title && ingredients && instructions && category) {
+        const recipes = loadRecipes();
+        recipes.push({ title, ingredients, instructions, category, author });
         saveRecipes(recipes);
         renderRecipes(document.getElementById('searchBox').value);
-      };
-    });
-  }
-  // Handle form submit
-  document.getElementById('recipeForm').onsubmit = function(e) {
-    e.preventDefault();
-    const title = document.getElementById('title').value.trim();
-    const ingredients = document.getElementById('ingredients').value.trim();
-    const instructions = document.getElementById('instructions').value.trim();
-    const category = document.getElementById('category').value.trim();
-    const author = document.getElementById('author').value.trim();
-    if (title && ingredients && instructions && category) {
-      const recipes = loadRecipes();
-      recipes.push({ title, ingredients, instructions, category, author });
-      saveRecipes(recipes);
-      renderRecipes(document.getElementById('searchBox').value);
-      this.reset();
-    }
-  };
-  // Search functionality
-  document.getElementById('searchBox').oninput = function() {
-    renderRecipes(this.value);
-  };
-  // Initial render
-  renderRecipes();
-</script>
+        this.reset();
+      }
+    };
+    // Search functionality
+    document.getElementById('searchBox').oninput = function() {
+      renderRecipes(this.value);
+    };
+    // Initial render
+    renderRecipes();
+  </script>
 </body>
 </html>

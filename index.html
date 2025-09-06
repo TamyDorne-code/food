@@ -2,76 +2,166 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Chef's Favourite</title>
+  <title>Chef's Favourite — New Version</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: url('https://www.extreme-design.co.uk/wp-content/uploads/2023/06/Custom-Luxury-Kitchen-Design-by-Extreme-Design.jpg') no-repeat center center fixed;
+    html, body {
+      height: 100%;
       margin: 0;
+      padding: 0;
+    }
+    body {
+      min-height: 100vh;
+      width: 100vw;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #e8f5e9 0%, #a5d6a7 100%);
       color: #222;
+      font-size: 1.18em;
+      overflow-x: hidden;
     }
     .container {
-      max-width: 700px;
-      margin: 40px auto;
-      background: linear-gradient(115deg, #585858 10%, #3a3838 50%, #3b3939 40%);
-      border-radius: 24px;
-      box-shadow: 0 8px 32px #38373744;
-      padding: 40px 32px 32px 32px;
+      min-height: 100vh;
+      width: 100vw;
+      max-width: none;
+      margin: 0;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
       text-align: center;
       position: relative;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     h1 {
-      font-size: 2.8em;
-      color:#999090;
-      margin-bottom: 10px;
+      font-size: 2.5em;
+      color: #388e3c;
+      font-family: 'Georgia', serif;
       letter-spacing: 2px;
-      font-family: 'Georgia', sans-serif;
-      text-shadow: 0 2px 12px #0c0c0c33;
+      text-shadow: 0 2px 12px #a5d6a744;
+      margin-top: 48px;
+      margin-bottom: 12px;
     }
     .subtitle {
-      font-size: 1.25em;
-      color: #487fc7;
-      margin-bottom: 32px;
+      font-size: 1.18em;
+      color: #388e3c;
+      margin-bottom: 28px;
       font-style: italic;
+    }
+    .search-main {
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .search-main input {
+      padding: 12px 18px;
+      border-radius: 10px;
+      border: 2px solid #a5d6a7;
+      font-size: 1.08em;
+      background: #fff;
+      color: #388e3c;
+      box-shadow: 0 1px 6px #a5d6a744;
+      transition: border 0.2s, box-shadow 0.2s;
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 0;
+      z-index: 2;
+      position: relative;
+    }
+    .search-main input:focus {
+      border: 2px solid #388e3c;
+      background: #e8f5e9;
+      outline: none;
+    }
+    .search-suggestions {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #e8f5e9;
+      border: 2px solid #a5d6a7;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 2px 12px #a5d6a744;
+      padding: 18px 24px 12px 24px;
+      z-index: 10;
+      text-align: left;
+      font-size: 1.05em;
+      color: #388e3c;
+      animation: fadeIn 0.3s;
+    }
+    .search-suggestions span {
+      display: inline-block;
+      background: #c8e6c9;
+      color: #388e3c;
+      border-radius: 8px;
+      padding: 6px 14px;
+      margin: 4px 6px 4px 0;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background 0.2s, color 0.2s;
+    }
+    .search-suggestions span:hover {
+      background: #388e3c;
+      color: #fff;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px);}
+      to { opacity: 1; transform: translateY(0);}
     }
     .box-list {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
       gap: 24px;
-      align-items: center;
+      justify-content: center;
       margin-bottom: 32px;
+      width: 100%;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .food-box, .add-box {
-      background: #41413d;
+      background: linear-gradient(120deg,#e8f5e9 80%, #c8e6c9 100%);
       border-radius: 18px;
-      box-shadow: 0 2px 12px #29282733;
-      width: 96%;
-      max-width: 600px;
+      box-shadow: 0 2px 12px #a5d6a744;
+      min-width: 220px;
+      max-width: 320px;
       padding: 32px 24px;
       text-align: left;
       cursor: pointer;
-      transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
+      transition: box-shadow 0.3s cubic-bezier(.4,0,.2,1), transform 0.3s cubic-bezier(.4,0,.2,1), background 0.4s;
       position: relative;
       margin: 0 auto;
       display: block;
+      font-size: 1.08em;
+      border: 2px solid #a5d6a7;
+      animation: fadeIn 0.7s;
     }
-    .food-box:hover {
-      box-shadow: 0 6px 24px #5f5e5c66;
-      transform: translateY(-4px) scale(1.03);
-      background: #363636;
+    .food-box:hover, .add-box:hover {
+      box-shadow: 0 12px 32px #388e3c33, 0 2px 8px #a5d6a744;
+     transform: scale(1.025);
+     background: linear-gradient(120deg,#c8e6c9 80%, #e8f5e9 100%);
+     z-index: 1;
     }
     .food-title {
-      font-size: 1.35em;
-      color: #bba8a8;
+      font-size: 1.25em;
+      color: #388e3c;
       font-weight: bold;
       margin-bottom: 8px;
+      letter-spacing: 0.5px;
     }
     .food-desc {
-      font-family:'Courier New', Courier, monospace;
-      font-size: 1.09em;
-      line-height: 1.4em;
-      color: #a591ee;
+      font-size: 1.08em;
+      color: #526885;
       margin-bottom: 10px;
     }
     .food-link {
@@ -82,45 +172,43 @@
       z-index: 2;
     }
     .add-box {
-      background: #555452;
-      border: 2px dashed #252523;
-      color: #cab7b3;
+      background: #a5d6a7;
+      color: #fff;
       text-align: center;
       font-size: 1.15em;
       font-weight: bold;
       border-radius: 18px;
       padding: 32px 24px;
-      width: 96%;
-      max-width: 600px;
       cursor: pointer;
+      border: 2px dashed #388e3c;
       transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
-      position: relative;
       margin: 0 auto;
       display: block;
     }
     .add-box:hover {
-      box-shadow: 0 6px 24px #5c585366;
-      transform: translateY(-4px) scale(1.03);
-      background: #3a3939;
+      box-shadow: 0 8px 32px #388e3c44;
+      transform: scale(1.04);
+      background: #388e3c;
+      color: #fffde7;
     }
     .info {
-      font-size: 1.05em;
-      color: #c281dbbb;
+      font-size: 1.08em;
+      color: #388e3c;
       margin-top: 10px;
       font-style: italic;
       letter-spacing: 0.5px;
     }
     footer {
-      background: linear-gradient(90deg, #585858 10%, #242121 90%);
-      border-top: 4px solid #3a3a3a;
+      background: linear-gradient(90deg, #a5d6a7 10%, #388e3c 90%);
+      border-top: 4px solid #388e3c;
       margin-top: 40px;
       padding: 40px 0 24px 0;
       text-align: center;
-      font-size: 1.08em;
-      color: #615757;
+      font-size: 1.12em;
+      color: #fffde7;
       border-radius: 0 0 32px 32px;
-      box-shadow: 0 -2px 16px #4b4a4844;
-      width: 100%;
+      box-shadow: 0 -2px 16px #388e3c44;
+      width: 100vw;
     }
     .footer-columns {
       display: flex;
@@ -137,9 +225,9 @@
       text-align: left;
     }
     .footer-col h3 {
-      color: #f7f5f1e1;
-      font-family: 'Menlo Regular', 'Menlo', 'Monaco', 'Courier New', monospace;
-      font-size: 1.3em;
+      color: #388e3c;
+      font-family: 'Georgia', serif;
+      font-size: 1.18em;
       margin-bottom: 10px;
       margin-top: 0;
       letter-spacing: 1px;
@@ -153,106 +241,405 @@
       margin-bottom: 8px;
     }
     .footer-col ul li a {
-      color: #f7ecd893;
+      color: #fffde7;
       text-decoration: none;
-      font-family: Georgia,  'Times New Roman', Times, serif;
+      font-family: 'Georgia', serif;
       font-weight: 500;
       transition: color 0.2s;
     }
     .footer-col ul li a:hover {
-      color: #fcfafa;
+      color: #388e3c;
       text-decoration: underline;
-    }
-    .footer-social {
-      margin-bottom: 18px;
-    }
-    .footer-social a {
-      color: #fffde7;
-      margin: 0 10px;
-      font-size: 1.5em;
-      text-decoration: none;
-      vertical-align: middle;
-      transition: color 0.2s;
     }
     .footer-copy {
       font-family: "Georgia", serif;
-      font-size: 0.98em;
-      color: #fffde7;
+      font-size: 1.08em;
+      color: #062e0f;
       margin-top: 18px;
-      opacity: 0.85;
+      opacity: 0.9;
     }
+      .logo-wrap {
+    margin-top: 32px;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .logo {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    border-radius: 50%;
+    box-shadow: 0 2px 12px #a5d6a744;
+    background: #fff;
+    border: 2px solid #a5d6a7;
+    margin-bottom: 0;
+  }
     @media (max-width: 700px) {
-  body { font-size: 1.22em; }
-  h1 { font-size: 2.1em; }
-  h2 { font-size: 1.5em; }
-  h3 { font-size: 1.18em; }
-  .about-text,
-  .info-note,
-  .feature-card,
-  .category-box,
-  .recipe-card {
-    font-size: 1.15em;
-    padding: 20px 4vw;
+      body { font-size: 1.22em; }
+      h1 { font-size: 2.1em; }
+      .container { padding: 8vw 2vw; }
+      .box-list { flex-direction: column; gap: 18px; }
+      .food-box, .add-box { max-width: 98vw; min-width: 0; }
+      .footer-columns { flex-direction: column; gap: 18px; }
+      .footer-col { min-width: 0; }
+      .search-main { max-width: 98vw; }
+      .search-main input { max-width: 98vw; }
+      .search-suggestions { max-width: 98vw; }
+      .logo { width: 54px; height: 54px; }
+      .logo-wrap { margin-top: 18px; }
+    }
+      .visually-hidden {
+    position: absolute !important;
+    height: 1px; width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+    border: 0;
+    padding: 0;
+    margin: 0;
   }
-  .feature-title,
-  .category-title,
-  .added-heading {
-    font-size: 1.18em;
-  }
-  .back-btn,
-  button,
-  .top-x-btn {
-    font-size: 1.15em;
-    padding: 16px 8vw;
-  }
-  input,
-  textarea,
-  #searchBox {
-    font-size: 1.12em;
-    padding: 14px 4vw;
+  .menu-toggle {
+  display: none;
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 1001;
+  background: #a5d6a7;
+  color: #388e3c;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 2em;
+  box-shadow: 0 2px 12px #a5d6a744;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.menu-toggle:active,
+.menu-toggle:focus {
+  background: #388e3c;
+  color: #fff;
+}
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 80vw;
+  max-width: 320px;
+  height: 100vh;
+  background: #e8f5e9;
+  box-shadow: -2px 0 16px #388e3c44;
+  z-index: 1000;
+  padding: 48px 24px 24px 24px;
+  flex-direction: column;
+  gap: 18px;
+  border-radius: 0 0 0 32px;
+  animation: slideIn 0.3s;
+}
+.mobile-menu a {
+  display: block;
+  color: #388e3c;
+  font-size: 1.18em;
+  text-decoration: none;
+  margin-bottom: 18px;
+  font-family: 'Georgia', serif;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+.mobile-menu a:hover {
+  color: #fff;
+  background: #388e3c;
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+@keyframes slideIn {
+  from { right: -100vw; opacity: 0; }
+  to { right: 0; opacity: 1; }
+}
+@media (max-width: 900px) {
+  .menu-toggle { display: block; }
+}
+@media (min-width: 901px) {
+  .mobile-nav { display: none; }
+}
+    body.dark-mode {
+  background: linear-gradient(135deg, #263238 0%, #388e3c 100%);
+  color: #fffde7;
+}
+body.dark-mode .container,
+body.dark-mode .food-box,
+body.dark-mode .add-box,
+body.dark-mode .search-main input,
+body.dark-mode .search-suggestions,
+body.dark-mode .recently-viewed,
+body.dark-mode footer,
+body.dark-mode .footer-columns,
+body.dark-mode .footer-col ul li a,
+body.dark-mode .logo {
+  background: #263238 !important;
+  color: #fffde7 !important;
+  border-color: #388e3c !important;
+}
+body.dark-mode .food-title,
+body.dark-mode .food-desc,
+body.dark-mode .subtitle,
+body.dark-mode .info,
+body.dark-mode .footer-col h3,
+body.dark-mode .footer-copy,
+body.dark-mode .recently-viewed h2 {
+  color: #a5d6a7 !important;
+}
+body.dark-mode .food-box:hover,
+body.dark-mode .add-box:hover {
+  background: #388e3c !important;
+  color: #fffde7 !important;
+}
+body.dark-mode .menu-toggle {
+  background: #388e3c !important;
+  color: #fffde7 !important;
+}
+body.dark-mode .mobile-menu {
+  background: #263238 !important;
+}
+body.dark-mode .mobile-menu a {
+  color: #a5d6a7 !important;
+}
+body.dark-mode .mobile-menu a:hover {
+  color: #fff !important;
+  background: #388e3c !important;
+}
+body.dark-mode .delete-recent {
+  color: #fffde7 !important;
+}
+
+/* Optional: dark mode for logo border */
+body.dark-mode .logo {
+  border: 2px solid #388e3c !important;
+}
+
+/* Add a dark mode toggle button */
+.dark-mode-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #a5d6a7;
+  color: #388e3c;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.5em;
+  box-shadow: 0 2px 12px #a5d6a744;
+  cursor: pointer;
+  z-index: 1001;
+  transition: background 0.2s;
+}
+.dark-mode-toggle.active {
+  background: #388e3c;
+  color: #fff;
+}
+.logo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 0 2px 12px #a5d6a744;
+  background: #fff;
+  border: 2px solid #a5d6a7;
+  margin-bottom: 0;
+}
+@media (max-width: 700px) {
+  .logo {
+    width: 80px;
+    height: 80px;
   }
 }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Chef's Favourite</h1>
-    <div class="subtitle">
+  <div id="welcomeOverlay" style="
+  position:fixed;top:0;left:0;width:100vw;height:100vh;
+  background:linear-gradient(135deg,#e8f5e9 0%,#4f9751 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  z-index:2000;
+  transition:opacity 0.5s;
+">
+  <div style="
+    background:#fff;
+    border-radius:24px;
+    box-shadow:0 4px 32px #07eb1244;
+    padding:48px 32px;
+    text-align:center;
+    max-width:340px;
+    font-family:'Georgia',serif;
+    color:#388e3c;
+    font-size:1.25em;
+    animation:fadeIn 0.7s;
+  ">
+  <div style="
+  display:inline-block;
+  background:#388e3c;
+  color:#fff;
+  font-size:1em;
+  font-weight:bold;
+  border-radius:12px;
+  padding:6px 18px;
+  margin-bottom:18px;
+  box-shadow:0 2px 8px #388e3c44;
+  letter-spacing:1px;
+">
+   💚 Chef's Favourite Green Edition
+</div>
+    <img src="chef-hat-logo.png" alt="Chef's Favourite Logo" style="width:120px;height:120px;margin-bottom:18px;">
+    <h2 style="margin:0 0 12px 0;">Welcome to Chef's Favourite!</h2>
+    <p style="margin-bottom:24px;">
       Discover delicious recipes, add your own, and explore the world of cooking.<br>
-      Click on any box to see more!
+      <span style="color:#1e6d13;">Your personal recipe book — private, beautiful, and just for you!</span>
+    </p>
+    <button id="welcomeContinue" style="
+      background:#032004;
+      color:#fff;
+      border:none;
+      border-radius:12px;
+      padding:12px 32px;
+      font-size:1.1em;
+      font-family:'Georgia',serif;
+      cursor:pointer;
+      box-shadow:0 2px 8px #a5d6a744;
+      font-weight:bold;
+      transition:background 0.2s;
+    ">Let's Start Cooking!</button>
+  </div>
+</div>
+  <nav class="mobile-nav" aria-label="Mobile Navigation">
+  <button id="menuToggle" aria-label="Open menu" class="menu-toggle">
+    &#9776;
+  </button>
+  <!--mobile menu-->
+  <div id="mobileMenu" class="mobile-menu">
+    <a href="food-recipes.html">Food & Recipes</a>
+    <a href="recipe-book.html">Recipe Book</a>
+    <a href="tips-tricks.html">Tips & Tricks</a>
+    <a href="about-chef.html">About</a>
+    <a href="seafood-recipes.html">Seafood</a>
+    <a href="vegetable-recipes.html">Vegetables</a>
+    <a href="steak-recipes.html">Steak & Beef</a>
+    <a href="poultry-recipes.html">Poultry</a>
+    <a href="plant-based-recipes.html">Plant-Based</a>
+    <a href="sweet-recipes.html">Sweet</a>
+    <a href="snack-recipes.html">Snacks</a>
+    <a href="cake-recipes.html">Cakes</a>
+    <a href="jelly-recipes.html">Jelly</a>
+    <a href="fruit-recipes.html">Fruits</a>
+  </div>
+</nav>
+<div class="container">
+  <div class="logo-wrap">
+    <!--Logo-->
+    <img src="chef-hat-logo.png" alt="Chef's Favourite Logo" class="logo">
+  </div>
+  <!--Welcome Message-->
+  <div class="welcome-message" style="margin-top:24px; font-size:1.25em; color:#388e3c; font-family:'Georgia',serif; font-weight:bold;">
+  👋 Welcome, food lover! Ready to discover, create, and enjoy your favourite recipes?
+  </div>
+  <!--Main Title and Subtitle-->
+  <h1>Chef's Favourite</h1>
+  <div class="subtitle">
+    Discover delicious recipes, add your own, and explore the world of cooking.<br>
+    <span style="color:#1e6d13;">Your personal recipe book — private, beautiful, and just for you!</span>
+  </div>
+  <!--Search bar and suggestions-->
+    <div class="search-main">
+      <input type="text" id="mainSearch" placeholder="Search recipes, tips, or categories" autocomplete="off">
+      <div class="search-suggestions" id="searchSuggestions">
+        <div><b>Try searching for:</b></div>
+        <span>Food</span>
+        <span>Recipes</span>
+        <span>Tips</span>
+        <span>Tricks</span>
+        <span>Seafood</span>
+        <span>Vegetables</span>
+        <span>Steak</span>
+        <span>Poultry</span>
+        <span>Plant-Based</span>
+        <span>Sweet</span>
+        <span>Snacks</span>
+        <span>Cakes</span>
+        <span>Jelly</span>
+        <span>Fruits</span>
+        <span>About</span>
+        <span>Creator</span>
+      </div>
     </div>
+    <!--Food & Recipes-->
     <div class="box-list">
       <div class="food-box" id="food-recipes">
         <span class="food-title">Food & Recipes</span>
         <div class="food-desc">Browse classic dishes and their recipes. Find inspiration for your next meal!</div>
         <a href="food-recipes.html" class="food-link">Food & Recipes</a>
       </div>
+      <!--Recipe Book-->
       <div class="food-box" id="recipe-book">
         <span class="food-title">Recipe Book</span>
-        <div class="food-desc">Add your own recipes for others to see and try. Share your kitchen secrets!</div>
+        <div class="food-desc">Add your own recipes for your private collection. Organize and manage your favorites!</div>
         <a href="recipe-book.html" class="food-link">Recipe Book</a>
       </div>
+      <!--Add Recipe-->
       <div class="add-box" onclick="window.location.href='recipe-book.html'">
         + Add Your Recipe
       </div>
+      <!--Tips & Tricks-->
       <div class="food-box" id="tips-tricks">
         <span class="food-title">Tips & Tricks</span>
         <div class="food-desc">Learn cooking tips, ingredient swaps, and chef's advice for perfect results.</div>
         <a href="tips-tricks.html" class="food-link">Tips & Tricks</a>
       </div>
+      <!--About-->
       <div class="food-box" id="about-chef">
         <span class="food-title">About</span>
-        <div class="food-desc">Learn more about Chef's Favourite and how you can contribute.</div>
+        <div class="food-desc">Learn more about Chef's Favourite and the creator, Doreen Baker.</div>
         <a href="about-chef.html" class="food-link">About</a>
       </div>
     </div>
+      <div style="
+  background:#315531;
+  color:#fff;
+  font-size:1.08em;
+  font-family:'Georgia',serif;
+  border-radius:10px;
+  padding:10px 24px;
+  margin:18px auto 0 auto;
+  max-width:400px;
+  box-shadow:0 2px 8px #388e3c44;
+">
+  <b>What's New?</b>  
+  <ul style="margin:8px 0 0 0; padding-left:18px; color:#fff;">
+    <li>Fresh new design & improved navigation</li>
+    <li>Mobile menu for easy access</li>
+    <li>Welcome message & private recipe book</li>
+    <li>Dark mode & more categories</li>
+  </ul>
+</div>
+    <!--Info-->
     <div class="info">
       Want to share your recipe? Click "Add Your Recipe" or visit the Recipe Book.<br>
-      More features coming soon!
+      <span style="color:#388e3c;">All recipes you add are private and only visible to you.</span>
     </div>
+    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">&#9790;</button>
   </div>
+  <!--Recently Viewed Section-->
+<div class="recently-viewed" id="recentlyViewed" style="width:100%;max-width:600px;margin:32px auto 0 auto;text-align:left;">
+  <div style="display:flex;align-items:center;justify-content:space-between;">
+    <h2 style="color:#388e3c;font-size:1.3em;margin-bottom:12px;">Recently Viewed</h2>
+    <button id="clearRecent" style="background:#a5d6a7;color:#388e3c;border:none;border-radius:8px;padding:6px 16px;font-size:1em;cursor:pointer;font-weight:bold;box-shadow:0 1px 6px #a5d6a744;transition:background 0.2s;">Clear All</button>
+  </div>
+<div id="recentList" style="font-size:1.08em;color:#526885;width:100%;"></div></div>
+  <!--Footer-->
   <footer>
-    <div class="footer-columns">
+    <div class="footer-columns" aria-label="Footer Navigation">
+      <!--Quick Links-->
       <div class="footer-col">
         <h3>Quick Links</h3>
         <ul>
@@ -262,6 +649,7 @@
           <li><a href="about-chef.html">About</a></li>
         </ul>
       </div>
+      <!--Categories-->
       <div class="footer-col">
         <h3>Categories</h3>
         <ul>
@@ -277,10 +665,12 @@
           <li><a href="fruit-recipes.html">Fruits</a></li>
         </ul>
       </div>
-<div class="footer-copy">
-  &copy; 2025 Chef's Favourite &mdash; All recipes and tips are for inspiration only.<br>
-  <em>Made with love for cooking by <strong>Doreen Baker</strong> for food lovers.</em>
-</div>
+    </div>
+    <!--Footer Copy-->
+    <div class="footer-copy">
+      &copy; 2025 Chef's Favourite &mdash; All recipes and tips are for inspiration only.<br>
+      <em>Made with love for cooking by <strong>Doreen Baker</strong> for food lovers.</em>
+    </div>
   </footer>
   <script>
     // Save last clicked box
@@ -300,6 +690,177 @@
         }
       }
     });
+    // dark mode toggle (optional)
+    const darkModeToggle = document.getElementById('darkModeToggle');
+darkModeToggle.addEventListener('click', function() {
+  document.body.classList.toggle('dark-mode');
+  darkModeToggle.classList.toggle('active');
+  localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+});
+// Load dark mode preference
+if (localStorage.getItem('darkMode') === 'true') {
+  document.body.classList.add('dark-mode');
+  darkModeToggle.classList.add('active');
+}
+
+    // Search bar suggestions and navigation
+    const mainSearch = document.getElementById('mainSearch');
+    const searchSuggestions = document.getElementById('searchSuggestions');
+
+    mainSearch.addEventListener('focus', function() {
+      searchSuggestions.style.display = 'block';
+    });
+    mainSearch.addEventListener('blur', function() {
+      setTimeout(() => { searchSuggestions.style.display = 'none'; }, 150);
+    });
+
+    // Fill search bar when suggestion clicked
+    document.querySelectorAll('#searchSuggestions span').forEach(function(suggestion) {
+      suggestion.addEventListener('mousedown', function(e) {
+        e.preventDefault();
+        mainSearch.value = this.textContent;
+        mainSearch.focus();
+        searchSuggestions.style.display = 'none';
+      });
+    });
+
+    // Main page search: go to page if match found
+    mainSearch.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        var val = this.value.trim().toLowerCase();
+        // Map keywords to page links
+        var pages = [
+          { keywords: ['food', 'recipes', 'dishes', 'meal'], link: 'food-recipes.html' },
+          { keywords: ['recipe book', 'add recipe', 'my recipes', 'private'], link: 'recipe-book.html' },
+          { keywords: ['tips', 'tricks', 'advice', 'kitchen'], link: 'tips-tricks.html' },
+          { keywords: ['about', 'creator', 'doreen'], link: 'about-chef.html' },
+          { keywords: ['seafood'], link: 'seafood-recipes.html' },
+          { keywords: ['vegetable', 'veggies'], link: 'vegetable-recipes.html' },
+          { keywords: ['steak', 'beef'], link: 'steak-recipes.html' },
+          { keywords: ['poultry', 'chicken'], link: 'poultry-recipes.html' },
+          { keywords: ['plant', 'plant-based', 'vegan'], link: 'plant-based-recipes.html' },
+          { keywords: ['sweet', 'dessert'], link: 'sweet-recipes.html' },
+          { keywords: ['snack', 'snacks'], link: 'snack-recipes.html' },
+          { keywords: ['cake', 'cakes'], link: 'cake-recipes.html' },
+          { keywords: ['jelly'], link: 'jelly-recipes.html' },
+          { keywords: ['fruit', 'fruits'], link: 'fruit-recipes.html' }
+        ];
+        for (var i = 0; i < pages.length; i++) {
+          for (var j = 0; j < pages[i].keywords.length; j++) {
+            if (val.includes(pages[i].keywords[j])) {
+              window.location.href = pages[i].link;
+              return;
+            }
+          }
+        }
+        // If no match, show a gentle shake animation
+        this.style.borderColor = "#d84315";
+        this.style.animation = "shake 0.3s";
+        setTimeout(() => {
+          this.style.borderColor = "#a5d6a7";
+          this.style.animation = "";
+        }, 350);
+      }
+    });
+
+    // Optional: shake animation for no match
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes shake {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-6px); }
+        50% { transform: translateX(6px); }
+        75% { transform: translateX(-6px); }
+        100% { transform: translateX(0); }
+      }
+    `;
+    document.head.appendChild(style);
+      // Track recently viewed pages
+ function addRecentlyViewed(name, link) {
+    let recent = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');
+    recent = recent.filter(item => item.link !== link);
+    recent.unshift({ name, link });
+    if (recent.length > 5) recent = recent.slice(0, 5);
+    localStorage.setItem('recentlyViewed', JSON.stringify(recent));
+  }
+
+  document.querySelectorAll('.food-link').forEach(function(link) {
+    link.addEventListener('click', function() {
+      const name = link.parentElement.querySelector('.food-title')?.textContent || 'Page';
+      addRecentlyViewed(name, link.getAttribute('href'));
+    });
+  });
+
+      function showRecentlyViewed() {
+  const recent = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');
+  const recentList = document.getElementById('recentList');
+  if (recent.length === 0) {
+    recentList.innerHTML = '<span style="color:#bdbdbd;">No pages viewed yet.</span>';
+    return;
+  }
+  recentList.innerHTML = recent.map((item, idx) =>
+    `<div style="display:flex;align-items:center;justify-content:space-between;width:100%;margin-bottom:8px;">
+      <a href="${item.link}" style="color:#388e3c;text-decoration:none;font-weight:bold;flex:1;">${item.name}</a>
+      <span class="delete-recent" data-idx="${idx}" title="Remove" style="cursor:pointer;font-size:1.15em;margin-left:18px;">&#x1F5D1;</span>
+    </div>`
+  ).join('');
+  // Add click event for trash icons
+  document.querySelectorAll('.delete-recent').forEach(function(trash) {
+    trash.onclick = function() {
+      let recent = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');
+      const idx = parseInt(this.getAttribute('data-idx'));
+      recent.splice(idx, 1);
+      localStorage.setItem('recentlyViewed', JSON.stringify(recent));
+      showRecentlyViewed();
+    };
+  });
+}
+
+  // Clear recently viewed
+  document.getElementById('clearRecent').onclick = function() {
+    localStorage.removeItem('recentlyViewed');
+    showRecentlyViewed();
+  };
+
+  showRecentlyViewed();
   </script>
+  <script>
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  let menuOpen = false;
+
+  menuToggle.addEventListener('click', function() {
+    menuOpen = !menuOpen;
+    mobileMenu.style.display = menuOpen ? 'flex' : 'none';
+    menuToggle.setAttribute('aria-label', menuOpen ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+  });
+
+  // Close menu when clicking a link or outside
+  mobileMenu.addEventListener('click', function(e) {
+    if (e.target.tagName === 'A') {
+      mobileMenu.style.display = 'none';
+      menuOpen = false;
+      document.body.style.overflow = '';
+    }
+  });
+  window.addEventListener('click', function(e) {
+    if (menuOpen && !mobileMenu.contains(e.target) && e.target !== menuToggle) {
+      mobileMenu.style.display = 'none';
+      menuOpen = false;
+      document.body.style.overflow = '';
+    }
+  });
+
+document.getElementById('welcomeOverlay').style.display = 'flex';
+document.body.style.overflow = 'hidden';
+document.getElementById('welcomeContinue').onclick = function() {
+  document.getElementById('welcomeOverlay').style.opacity = '0';
+  setTimeout(function() {
+    document.getElementById('welcomeOverlay').style.display = 'none';
+    document.body.style.overflow = '';
+  }, 500);
+};
+</script>
 </body>
 </html>

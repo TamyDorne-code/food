@@ -3,36 +3,119 @@
 <head>
   <meta charset="UTF-8">
   <title>Tips & Tricks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #c7b063;
+    html, body {
+      height: 100%;
+      width: 100%;
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+    body {
+      min-height: 100vh;
+      min-width: 100vw;
+      width: 100vw;
+      height: 100vh;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #e8f5e9 0%, #a5d6a7 100%);
       color: #222;
+      overflow-x: hidden;
     }
     .container {
-      max-width: 700px;
-      margin: 40px auto;
-      background: #b1a15a;
-      border-radius: 24px;
-      box-shadow: 0 8px 32px #ffb34744;
-      padding: 40px 32px 32px 32px;
+      min-height: 100vh;
+      min-width: 100vw;
+      width: 100vw;
+      max-width: none;
+      margin: 0;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
       text-align: center;
       position: relative;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .top-x-btn {
+      position: fixed;
+      top: 18px;
+      right: 24px;
+      background: #388e3c;
+      color: #fffde7;
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 2em;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #388e3c44;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      z-index: 100;
+    }
+    .top-x-btn:hover {
+      background: #a5d6a7;
+      color: #388e3c;
     }
     h1 {
-      color: #323b04;
+      color: #388e3c;
       margin-bottom: 10px;
       font-size: 2.3em;
       font-family: 'Georgia', serif;
       letter-spacing: 2px;
-      text-shadow: 0 2px 12px #ffb34733;
+      text-shadow: 0 2px 12px #a5d6a744;
+      margin-top: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
     }
     .subtitle {
       font-size: 1.15em;
-      color: #354d08;
+      color: #388e3c;
       margin-bottom: 28px;
       font-style: italic;
+      background: #e8f5e9;
+      border-radius: 12px;
+      padding: 10px 24px;
+      box-shadow: 0 2px 8px #a5d6a744;
+      display: inline-block;
+    }
+    .divider {
+      width: 80px;
+      height: 6px;
+      background: linear-gradient(90deg,#a5d6a7,#388e3c,#8bc34a);
+      border-radius: 3px;
+      margin: 24px auto 32px auto;
+      opacity: 0.8;
+      position: relative;
+      z-index: 1;
+    }
+    .progress-bar {
+      width: 100%;
+      max-width: 400px;
+      height: 6px;
+      background: #c8e6c9;
+      border-radius: 4px;
+      margin: 0 auto 18px auto;
+      overflow: hidden;
+      position: relative;
+      display: none;
+    }
+    .progress-bar-inner {
+      height: 100%;
+      width: 0;
+      background: #388e3c;
+      border-radius: 4px;
+      transition: width 0.4s;
     }
     .category-list {
       display: flex;
@@ -40,130 +123,721 @@
       gap: 28px;
       align-items: center;
       margin-bottom: 32px;
+      width: 100%;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .category-box {
-      background: #fffde7;
+      background: linear-gradient(90deg,#e8f5e9 80%, #c8e6c9 100%);
       border-radius: 18px;
-      box-shadow: 0 2px 12px #ffb34733;
+      box-shadow: 0 2px 12px #a5d6a744;
       width: 96%;
       max-width: 600px;
       padding: 32px 24px;
       text-align: left;
       cursor: pointer;
-      transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
+      transition: box-shadow 0.4s, transform 0.4s, background 0.4s, opacity 0.5s;
       position: relative;
       margin: 0 auto;
       display: block;
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+      animation: fadeIn 0.7s;
+      border: 2px solid #a5d6a7;
+    }
+    .category-box.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
     }
     .category-box:hover {
-      box-shadow: 0 6px 24px #ffb34766;
-      transform: translateY(-4px) scale(1.03);
-      background: #ffe082;
+      box-shadow: 0 8px 32px #388e3c44;
+      transform: scale(1.03);
+      background: linear-gradient(90deg,#c8e6c9 80%, #e8f5e9 100%);
+      border-color: #388e3c;
     }
     .category-title {
       font-size: 1.35em;
-      color: #768623;
+      color: #388e3c;
       font-weight: bold;
       margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
     .category-desc {
       font-size: 1.08em;
-      color: #49500b;
+      color: #526885;
       margin-bottom: 10px;
     }
-    ul {
-      text-align: left;
-      margin: 0 0 0 0;
-      max-width: 500px;
-      font-size: 1.08em;
-      color: #526885;
-      padding-left: 18px;
+    .category-icon {
+      font-size: 1.3em;
+      margin-right: 8px;
+      vertical-align: middle;
+      filter: drop-shadow(0 2px 8px #a5d6a744);
     }
-    .back-btn {
-      display: block;
-      margin: 32px auto 0 auto;
-      background: #2f3804;
-      color: #c9b372;
-      border: none;
+    .category-tips {
+      font-size: 1.08em;
+      color: #8bc34a;
+      margin-top: 10px;
+      margin-bottom: 0;
+      font-style: italic;
+      background: #f1f8e9;
       border-radius: 8px;
-      padding: 10px 22px;
+      padding: 8px 14px;
+      box-shadow: 0 1px 6px #a5d6a744;
+      display: inline-block;
+    }
+    .fancy-back-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 40px auto 0 auto;
+      background: linear-gradient(90deg, #c8e6c9 10%, #388e3c 90%);
+      color: #fffde7;
+      border: none;
+      border-radius: 24px;
+      padding: 16px 36px;
       font-weight: bold;
-      cursor: pointer;
-      font-size: 1em;
-      box-shadow: 0 2px 8px #ffb34733;
-      transition: background 0.2s;
+      font-size: 1.18em;
+      box-shadow: 0 4px 18px #388e3c44;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
       text-decoration: none;
       text-align: center;
       width: fit-content;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
     }
-    .back-btn:hover {
-      background: #3b2b14;
-      color: #dbdf16;
+    .fancy-back-btn:hover, .fancy-back-btn:focus {
+      background: linear-gradient(90deg, #388e3c 10%, #c8e6c9 90%);
+      color: #fff;
+      transform: scale(1.04);
+      box-shadow: 0 8px 32px #388e3c44;
+      text-decoration: none;
+    }
+    /* Mobile menu styles */
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 1001;
+      background: #c8e6c9;
+      color: #388e3c;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 2em;
+      box-shadow: 0 2px 12px #a5d6a744;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .menu-toggle:active,
+    .menu-toggle:focus {
+      background: #388e3c;
+      color: #fff;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 80vw;
+      max-width: 320px;
+      height: 100vh;
+      background: #e8f5e9;
+      box-shadow: -2px 0 16px #388e3c44;
+      z-index: 1000;
+      padding: 48px 24px 24px 24px;
+      flex-direction: column;
+      gap: 18px;
+      border-radius: 0 0 0 32px;
+      animation: slideIn 0.3s;
+    }
+    .mobile-menu a {
+      display: block;
+      color: #388e3c;
+      font-size: 1.18em;
+      text-decoration: none;
+      margin-bottom: 18px;
+      font-family: 'Georgia', serif;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover {
+      color: #fff;
+      background: #388e3c;
+      border-radius: 8px;
+      padding: 4px 8px;
+    }
+    @keyframes slideIn {
+      from { right: -100vw; opacity: 0; }
+      to { right: 0; opacity: 1; }
     }
     @media (max-width: 700px) {
-  body { font-size: 1.22em; }
-  h1 { font-size: 2.1em; }
-  h2 { font-size: 1.5em; }
-  h3 { font-size: 1.18em; }
-  .about-text,
-  .info-note,
-  .feature-card,
-  .category-box,
-  .recipe-card {
-    font-size: 1.15em;
-    padding: 20px 4vw;
-  }
-  .feature-title,
-  .category-title,
-  .added-heading {
-    font-size: 1.18em;
-  }
-  .back-btn,
-  button,
-  .top-x-btn {
-    font-size: 1.15em;
-    padding: 16px 8vw;
-  }
-  input,
-  textarea,
-  #searchBox {
-    font-size: 1.12em;
-    padding: 14px 4vw;
-  }
+      body { font-size: 1.22em; }
+      h1 { font-size: 2.1em; }
+      .category-box { font-size: 1.15em; padding: 20px 4vw; }
+      .category-title { font-size: 1.18em; }
+      .fancy-back-btn, .top-x-btn { font-size: 1.15em; padding: 16px 8vw; }
+    }
+       .search-bar {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto 22px auto;
+      color: #388e3c;
+      font-size: 1.08em;
+      background: linear-gradient(90deg, #e8f5e9 70%, #c8e6c9 100%);
+      border-radius: 12px;
+      padding: 14px 0;
+      box-shadow: 0 1px 8px #a5d6a744;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .search-bar label {
+      color: #388e3c;
+      margin-bottom: 8px;
+      font-size: 1.08em;
+      letter-spacing: 0.5px;
+    }
+    #searchBox {
+      width: 80%;
+      max-width: 340px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 2px solid #a5d6a7;
+      font-size: 1.08em;
+      background: #fff;
+      color: #388e3c;
+      box-shadow: 0 1px 6px #a5d6a744;
+      transition: border 0.2s, box-shadow 0.2s;
+      margin-top: 4px;
+    }
+    #searchBox:focus {
+      border: 2px solid #388e3c;
+      box-shadow: 0 2px 12px #a5d6a744;
+      outline: none;
+      background: #e8f5e9;
+    }
+    /* Category filter styles */
+    .filter-bar {
+      margin: 0 auto 18px auto;
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+    }
+    .filter-bar label {
+      color: #388e3c;
+      font-weight: bold;
+      font-size: 1.08em;
+    }
+    .filter-select {
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 2px solid #a5d6a7;
+      font-size: 1.08em;
+      background: #e8f5e9;
+      color: #388e3c;
+      transition: border 0.2s;
+    }
+    .filter-select:focus {
+      border: 2px solid #388e3c;
+      outline: none;
+      background: #c8e6c9;
+    }
+    /* Favorite button styles */
+    .favorite-btn {
+      background: none;
+      border: none;
+      color: #8bc34a;
+      font-size: 1.3em;
+      cursor: pointer;
+      margin-left: 8px;
+      transition: color 0.2s;
+      vertical-align: middle;
+      outline: none;
+    }
+    .favorite-btn.favorited {
+      color: #388e3c;
+      text-shadow: 0 2px 8px #388e3c44;
+    }
+    .favorite-btn:focus {
+      outline: 2px solid #388e3c;
+    }
+    /* Accessibility focus styles */
+    .category-box:focus-within, .category-box:focus {
+      outline: 3px solid #8bc34a;
+      z-index: 2;
+    }
+    /* Favorite tips section */
+    .favorites-section {
+      width: 100%;
+      max-width: 700px;
+      margin: 32px auto 0 auto;
+      text-align: left;
+      padding: 0 16px;
+      background: #f1f8e9;
+      border-radius: 14px;
+      box-shadow: 0 2px 12px #a5d6a744;
+      margin-bottom: 24px;
+      display: none;
+    }
+    .favorites-section.active {
+      display: block;
+    }
+    .favorites-heading {
+      font-size: 1.18em;
+      color: #388e3c;
+      font-weight: bold;
+      margin-bottom: 14px;
+      letter-spacing: 1px;
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .favorites-heading .category-icon {
+      font-size: 1.2em;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    .show-favorites-btn {
+      background: linear-gradient(90deg, #c8e6c9 10%, #388e3c 90%);
+      color: #fffde7;
+      border: none;
+      border-radius: 18px;
+      padding: 8px 22px;
+      font-weight: bold;
+      font-size: 1em;
+      box-shadow: 0 2px 8px #388e3c44;
+      transition: background 0.2s, transform 0.2s;
+      cursor: pointer;
+      margin-bottom: 12px;
+      margin-top: 8px;
+    }
+    .show-favorites-btn.active {
+      background: linear-gradient(90deg, #388e3c 10%, #c8e6c9 90%);
+      color: #fff;
+      transform: scale(1.04);
+    }
+    body.dark-mode {
+  background: linear-gradient(135deg, #263238 0%, #388e3c 100%);
+  color: #fffde7;
+}
+body.dark-mode .container,
+body.dark-mode .category-box,
+body.dark-mode .subtitle,
+body.dark-mode .divider,
+body.dark-mode .progress-bar,
+body.dark-mode .mobile-menu {
+  background: #263238 !important;
+  color: #fffde7 !important;
+  border-color: #388e3c !important;
+}
+body.dark-mode h1,
+body.dark-mode .category-title,
+body.dark-mode .category-desc,
+body.dark-mode .category-tips,
+body.dark-mode .fancy-back-btn {
+  color: #a5d6a7 !important;
+}
+body.dark-mode .category-box:hover {
+  background: #388e3c !important;
+  color: #fffde7 !important;
+  border-color: #a5d6a7 !important;
+}
+body.dark-mode .menu-toggle {
+  background: #388e3c !important;
+  color: #fffde7 !important;
+}
+body.dark-mode .mobile-menu a {
+  color: #a5d6a7 !important;
+}
+body.dark-mode .mobile-menu a:hover {
+  color: #fff !important;
+  background: #388e3c !important;
+}
+body.dark-mode .progress-bar-inner {
+  background: #a5d6a7 !important;
+}
+body.dark-mode .fancy-back-btn {
+  background: linear-gradient(90deg, #388e3c 10%, #a5d6a7 90%) !important;
+  color: #fffde7 !important;
+}
+body.dark-mode .fancy-back-btn:hover, body.dark-mode .fancy-back-btn:focus {
+  background: linear-gradient(90deg, #a5d6a7 10%, #388e3c 90%) !important;
+  color: #263238 !important;
+}
+
+/* Add a dark mode toggle button */
+.dark-mode-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #a5d6a7;
+  color: #388e3c;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.5em;
+  box-shadow: 0 2px 12px #a5d6a744;
+  cursor: pointer;
+  z-index: 1001;
+  transition: background 0.2s;
+}
+.dark-mode-toggle.active {
+  background: #388e3c;
+  color: #fff;
+}
+.category-box {
+  position: relative;
+}
+.category-box a {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  text-indent: -9999px;
+  z-index: 1;
+}
+.favorite-btn {
+  position: relative;
+  z-index: 2;
+  background: none;
+  border: none;
+  color: #8bc34a;
+  font-size: 1.3em;
+  cursor: pointer;
+  margin-left: 8px;
+  transition: color 0.2s;
+  vertical-align: middle;
+  outline: none;
+}
+.favorite-btn.favorited {
+  color: #388e3c;
+  text-shadow: 0 2px 8px #388e3c44;
+}
+.favorite-btn:focus {
+  outline: 2px solid #388e3c;
 }
   </style>
 </head>
 <body>
+  <!-- Mobile menu toggle -->
+  <nav class="mobile-nav" aria-label="Mobile Navigation">
+    <button id="menuToggle" aria-label="Open menu" class="menu-toggle">&#9776;</button>
+    <div id="mobileMenu" class="mobile-menu">
+      <a href="index.html">Home</a>
+      <a href="food-recipes.html">Food & Recipes</a>
+      <a href="recipe-book.html">Recipe Book</a>
+      <a href="tips-tricks.html">Tips & Tricks</a>
+      <a href="about-chef.html">About</a>
+    </div>
+  </nav>
   <div class="container">
-    <button class="top-x-btn" onclick="window.location.href='index.html'" 
-  style="position:fixed;top:18px;right:24px;background:#3b2b14;color:#dbdf16;border:none;border-radius:50%;width:38px;height:38px;font-size:1.8em;font-weight:bold;cursor:pointer;box-shadow:0 2px 8px #0005;display:flex;align-items:center;justify-content:center;transition:background 0.2s;z-index:100;">&times;</button>
-    <h1>Tips & Tricks</h1>
+    <button class="top-x-btn" onclick="window.location.href='index.html'" aria-label="Close Tips & Tricks">&times;</button>
+    <h1><span class="category-icon">&#129367;</span>Tips & Tricks</h1>
     <div class="subtitle">
       Explore kitchen wisdom by category for better cooking!
     </div>
-  <div class="category-list">
-  <div class="category-box">
-    <span class="category-title">Preparation</span>
-    <div class="category-desc">Get ready for smooth cooking.</div>
-    <a href="tips-preparation.html" style="position:absolute;top:0;left:0;right:0;bottom:0;text-indent:-9999px;">Preparation</a>
+    <div class="divider"></div>
+    <div class="filter-bar" aria-label="Filter tips by category">
+      <label for="filterSelect">Category:</label>
+      <select id="filterSelect" class="filter-select" aria-label="Tip category filter">
+        <option value="all">All</option>
+        <option value="Preparation">Preparation</option>
+        <option value="Flavor & Seasoning">Flavor & Seasoning</option>
+        <option value="Cooking Techniques">Cooking Techniques</option>
+        <option value="Kitchen Safety">Kitchen Safety</option>
+        <option value="Green Living">Green Living</option>
+      </select>
+      <button class="show-favorites-btn" id="showFavoritesBtn" aria-label="Show favorite tips">&#9733; Favorites</button>
+    </div>
+    <div class="search-bar">
+      <label for="searchBox">Search tips:</label>
+      <input type="text" id="searchBox" placeholder="Type to search..." aria-label="Search tips">
+    </div>
+    <div class="progress-bar" id="progressBar">
+      <div class="progress-bar-inner" id="progressBarInner"></div>
+    </div>
+    <div class="favorites-section" id="favoritesSection" aria-live="polite">
+      <div class="favorites-heading"><span class="category-icon">&#9733;</span>Favorite Tips</div>
+      <div id="favoritesList"></div>
+    </div>
+    <div class="category-list" id="categoryList" tabindex="0" aria-label="Tips categories">
+      <!-- Categories will be rendered by JS -->
+    </div>
+    <a href="index.html" class="fancy-back-btn" aria-label="Back to main page">
+      <span style="font-size:1.3em;vertical-align:middle;">&#8592;</span>
+      <span style="margin-left:8px;vertical-align:middle;">Back to Main Page</span>
+    </a>
+    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">&#9790;</button>
   </div>
-  <div class="category-box">
-    <span class="category-title">Flavor & Seasoning</span>
-    <div class="category-desc">Make your dishes taste amazing.</div>
-    <a href="tips-flavor.html" style="position:absolute;top:0;left:0;right:0;bottom:0;text-indent:-9999px;">Flavor & Seasoning</a>
-  </div>
-  <div class="category-box">
-    <span class="category-title">Cooking Techniques</span>
-    <div class="category-desc">Master the art of cooking.</div>
-    <a href="tips-techniques.html" style="position:absolute;top:0;left:0;right:0;bottom:0;text-indent:-9999px;">Cooking Techniques</a>
-  </div>
-  <div class="category-box">
-    <span class="category-title">Kitchen Safety</span>
-    <div class="category-desc">Stay safe while you cook.</div>
-    <a href="tips-safety.html" style="position:absolute;top:0;left:0;right:0;bottom:0;text-indent:-9999px;">Kitchen Safety</a>
-  </div>
-</div>
-    <a href="index.html" class="back-btn">← Back</a>
-  </div>
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let menuOpen = false;
+    menuToggle.addEventListener('click', function() {
+      menuOpen = !menuOpen;
+      mobileMenu.style.display = menuOpen ? 'flex' : 'none';
+      menuToggle.setAttribute('aria-label', menuOpen ? 'Close menu' : 'Open menu');
+      document.body.style.overflow = menuOpen ? 'hidden' : '';
+    });
+    mobileMenu.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') {
+        mobileMenu.style.display = 'none';
+        menuOpen = false;
+        document.body.style.overflow = '';
+      }
+    });
+    window.addEventListener('click', function(e) {
+      if (menuOpen && !mobileMenu.contains(e.target) && e.target !== menuToggle) {
+        mobileMenu.style.display = 'none';
+        menuOpen = false;
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Category data with icons and extra tips
+    const categories = [
+      {
+        name: "Preparation",
+        desc: "Get ready for smooth cooking.",
+        icon: "🧑‍🍳",
+        link: "tips-preparation.html",
+        tips: "Prep all ingredients before you start. Clean as you go!"
+      },
+      {
+        name: "Flavor & Seasoning",
+        desc: "Make your dishes taste amazing.",
+        icon: "🧂",
+        link: "tips-flavor.html",
+        tips: "Taste as you cook. Use fresh herbs for a flavor boost."
+      },
+      {
+        name: "Cooking Techniques",
+        desc: "Master the art of cooking.",
+        icon: "🍳",
+        link: "tips-techniques.html",
+        tips: "Learn to control heat. Sear, simmer, and sauté for best results."
+      },
+      {
+        name: "Kitchen Safety",
+        desc: "Stay safe while you cook.",
+        icon: "🦺",
+        link: "tips-safety.html",
+        tips: "Keep knives sharp and fingers clear. Wipe spills immediately."
+      },
+      {
+        name: "Green Living",
+        desc: "Eco-friendly kitchen habits.",
+        icon: "🌿",
+        link: "tips-green.html",
+        tips: "Compost scraps, use reusable containers, and save energy."
+      }
+    ];
+
+    // Accessibility: keyboard navigation for tips
+    document.addEventListener('keydown', function(e) {
+      if (document.activeElement.classList.contains('category-box')) {
+        if (e.key === 'ArrowDown') {
+          let next = document.activeElement.nextElementSibling;
+          if (next && next.classList.contains('category-box')) next.focus();
+        }
+        if (e.key === 'ArrowUp') {
+          let prev = document.activeElement.previousElementSibling;
+          if (prev && prev.classList.contains('category-box')) prev.focus();
+        }
+      }
+    });
+
+    // Favorite tips logic
+    function getFavorites() {
+      return JSON.parse(localStorage.getItem('favoriteTipsTricks') || '[]');
+    }
+    function saveFavorites(favs) {
+      localStorage.setItem('favoriteTipsTricks', JSON.stringify(favs));
+    }
+
+    // Render categories with animated entry and progress bar
+    function renderCategories(filter = "", categoryFilter = "all", showFavorites = false) {
+      const list = document.getElementById('categoryList');
+      const progressBar = document.getElementById('progressBar');
+      const progressBarInner = document.getElementById('progressBarInner');
+      const favoritesSection = document.getElementById('favoritesSection');
+      const favoritesList = document.getElementById('favoritesList');
+      const favorites = getFavorites();
+
+      // Show progress bar
+      progressBar.style.display = 'block';
+      progressBarInner.style.width = '0';
+      setTimeout(() => { progressBarInner.style.width = '80%'; }, 50);
+
+      setTimeout(() => {
+        let filtered = categories.filter(cat => {
+          let matchesFilter = !filter || (cat.name + cat.desc + cat.tips).toLowerCase().includes(filter.toLowerCase());
+          let matchesCategory = categoryFilter === "all" || cat.name === categoryFilter;
+          return matchesFilter && matchesCategory;
+        });
+        if (showFavorites) {
+          filtered = filtered.filter(cat => favorites.includes(cat.name));
+        }
+        list.innerHTML = filtered.map(cat => `
+          <div class="category-box" tabindex="0" aria-label="${cat.name}">
+            <span class="category-title">
+              <span class="category-icon" aria-hidden="true">${cat.icon}</span>
+              ${cat.name}
+              <button class="favorite-btn${favorites.includes(cat.name) ? ' favorited' : ''}" data-name="${cat.name}" aria-label="Favorite ${cat.name}" title="Favorite">&#9733;</button>
+            </span>
+            <div class="category-desc">${cat.desc}</div>
+            <div class="category-tips">${cat.tips}</div>
+            <a href="${cat.link}" style="position:absolute;top:0;left:0;right:0;bottom:0;text-indent:-9999px;" aria-label="Go to ${cat.name}"></a>
+          </div>
+        `).join('');
+        // Animate entry
+        setTimeout(() => {
+          document.querySelectorAll('.category-box').forEach((box, i) => {
+            setTimeout(() => box.classList.add('visible'), 100 * i);
+          });
+          progressBarInner.style.width = '100%';
+          setTimeout(() => { progressBar.style.display = 'none'; }, 400);
+        }, 100);
+
+        // Favorite button events
+        document.querySelectorAll('.favorite-btn').forEach(btn => {
+          btn.onclick = function(e) {
+            e.stopPropagation();
+            const name = this.getAttribute('data-name');
+            let favs = getFavorites();
+            if (favs.includes(name)) {
+              favs = favs.filter(f => f !== name);
+            } else {
+              favs.push(name);
+            }
+            saveFavorites(favs);
+            renderCategories(
+              document.getElementById('searchBox').value,
+              document.getElementById('filterSelect').value,
+              document.getElementById('showFavoritesBtn').classList.contains('active')
+            );
+          };
+        });
+
+        // Accessibility: focus first tip if tabbing into list
+        list.onfocus = function() {
+          const first = list.querySelector('.category-box');
+          if (first) first.focus();
+        };
+
+        // Render favorites section
+        if (showFavorites) {
+          favoritesSection.classList.add('active');
+          list.style.display = 'none';
+          favoritesList.innerHTML = categories.filter(cat => favorites.includes(cat.name)).map(cat => `
+            <div class="category-box visible" tabindex="0" aria-label="${cat.name}">
+              <span class="category-title">
+                <span class="category-icon" aria-hidden="true">${cat.icon}</span>
+                ${cat.name}
+                <button class="favorite-btn favorited" data-name="${cat.name}" aria-label="Unfavorite ${cat.name}" title="Unfavorite">&#9733;</button>
+              </span>
+              <div class="category-desc">${cat.desc}</div>
+              <div class="category-tips">${cat.tips}</div>
+              <a href="${cat.link}" style="position:absolute;top:0;left:0;right:0;bottom:0;text-indent:-9999px;" aria-label="Go to ${cat.name}"></a>
+            </div>
+          `).join('');
+          // Favorite button events in favorites section
+          // In renderCategories, after setting up favorite button events:
+document.querySelectorAll('.favorite-btn').forEach(btn => {
+  btn.onclick = function(e) {
+    e.stopPropagation(); // Prevent link click
+    const name = this.getAttribute('data-name');
+    let favs = getFavorites();
+    if (favs.includes(name)) {
+      favs = favs.filter(f => f !== name);
+    } else {
+      favs.push(name);
+    }
+    saveFavorites(favs);
+    renderCategories(
+      document.getElementById('searchBox').value,
+      document.getElementById('filterSelect').value,
+      document.getElementById('showFavoritesBtn').classList.contains('active')
+    );
+  };
+});
+
+// Also, for favorites section:
+favoritesList.querySelectorAll('.favorite-btn').forEach(btn => {
+  btn.onclick = function(e) {
+    e.stopPropagation(); // Prevent link click
+    const name = this.getAttribute('data-name');
+    let favs = getFavorites();
+    favs = favs.filter(f => f !== name);
+    saveFavorites(favs);
+    renderCategories(
+      document.getElementById('searchBox').value,
+      document.getElementById('filterSelect').value,
+      true
+    );
+  };
+});
+        } else {
+          favoritesSection.classList.remove('active');
+          list.style.display = 'flex';
+        }
+      }, 500);
+    }
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    darkModeToggle.addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+      darkModeToggle.classList.toggle('active');
+      localStorage.setItem('darkModeTipsTricks', document.body.classList.contains('dark-mode'));
+    });
+    // Load dark mode preference
+    if (localStorage.getItem('darkModeTipsTricks') === 'true') {
+      document.body.classList.add('dark-mode');
+      darkModeToggle.classList.add('active');
+    }
+
+    // Filter and search logic
+    document.getElementById('searchBox').addEventListener('input', function() {
+      renderCategories(
+        this.value,
+        document.getElementById('filterSelect').value,
+        document.getElementById('showFavoritesBtn').classList.contains('active')
+      );
+    });
+    document.getElementById('filterSelect').addEventListener('change', function() {
+      renderCategories(
+        document.getElementById('searchBox').value,
+        this.value,
+        document.getElementById('showFavoritesBtn').classList.contains('active')
+      );
+    });
+    document.getElementById('showFavoritesBtn').addEventListener('click', function() {
+      this.classList.toggle('active');
+      renderCategories(
+        document.getElementById('searchBox').value,
+        document.getElementById('filterSelect').value,
+        this.classList.contains('active')
+      );
+    });
+
+    // Initial render
+    renderCategories();
+  </script>
 </body>
 </html>

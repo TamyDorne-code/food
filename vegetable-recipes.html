@@ -3,139 +3,231 @@
 <head>
   <meta charset="UTF-8">
   <title>Vegetable Recipes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
-      margin: 0;
-      color: #222;
-      background: url('https://img.delicious.com.au/nvIc70cA/del/2017/06/minestrone-soup-47671-2.jpg') no-repeat center center fixed;
-      background-size: cover;
+      min-height: 100vh;
+      min-width: 100vw;
+      background: linear-gradient(135deg, #fffde7 0%, #c8e6c9 60%, #388e3c 100%);
+      color: #388e3c;
+      transition: background 0.3s, color 0.3s;
     }
     .container {
-      max-width: 900px;
-      margin: 40px auto;
-      background: rgba(237, 241, 236, 0.712);
-      border-radius: 18px;
-      box-shadow: 0 4px 24px #ffb34744;
-      padding: 32px 24px;
+      min-height: 100vh;
+      min-width: 100vw;
+      width: 100vw;
+      max-width: none;
+      margin: 0;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
       text-align: center;
       position: relative;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
     }
     .top-x-btn {
-      position: absolute;
+      position: fixed;
       top: 18px;
       right: 24px;
-      background: #4caf50;
-      color: #fff;
+      background: #388e3c;
+      color: #fffde7;
       border: none;
       border-radius: 50%;
-      width: 38px;
-      height: 38px;
-      font-size: 1.8em;
+      width: 44px;
+      height: 44px;
+      font-size: 2em;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 2px 8px #0005;
+      box-shadow: 0 2px 8px #388e3c44;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: background 0.2s;
-      z-index: 10;
+      z-index: 100;
     }
     .top-x-btn:hover {
-      background: #388e3c;
+      background: #c8e6c9;
+      color: #388e3c;
     }
     h1 {
-      color: #044b0c;
-      margin-bottom: 24px;
-      font-size: 2em;
+      color: #388e3c;
+      margin-bottom: 10px;
+      font-size: 2.3em;
+      font-family: 'Georgia', serif;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 12px #c8e6c944;
+      margin-top: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      animation: fadeIn 1s;
+    }
+    .divider {
+      width: 80px;
+      height: 6px;
+      background: linear-gradient(90deg,#fffde7,#c8e6c9,#388e3c);
+      border-radius: 3px;
+      margin: 18px auto 32px auto;
+      opacity: 0.8;
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 1.2s;
+    }
+    .subtitle {
+      font-size: 1.15em;
+      color: #388e3c;
+      margin-bottom: 18px;
+      font-style: italic;
+      background: #fffde7;
+      border-radius: 12px;
+      padding: 10px 24px;
+      box-shadow: 0 2px 8px #c8e6c944;
+      display: inline-block;
+      animation: fadeIn 1.3s;
     }
     .recipes-list {
       display: flex;
       flex-direction: column;
       gap: 32px;
       margin-bottom: 24px;
+      width: 100%;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .recipe-card {
-      background: #9ff17980;
-      border-radius: 12px;
-      box-shadow: 0 1px 8px #4caf5033;
-      padding: 18px;
-      width: 100%;
-      box-sizing: border-box;
+      background: linear-gradient(90deg,#fffde7 80%, #c8e6c9 100%);
+      border-radius: 18px;
+      box-shadow: 0 2px 12px #c8e6c944;
+      padding: 32px 24px;
       text-align: left;
-      margin-bottom: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      position: relative;
+      margin: 0 auto;
+      display: block;
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+      animation: fadeInCard 0.7s;
+      border: 2px solid #c8e6c9;
+    }
+    .recipe-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInCard {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .recipe-card:hover {
+      box-shadow: 0 8px 32px #c8e6c944;
+      transform: scale(1.03);
+      background: linear-gradient(90deg,#c8e6c9 80%, #fffde7 100%);
+      border-color: #388e3c;
     }
     .recipe-title {
       font-size: x-large;
-      color: #032e05;
+      color: #388e3c;
       margin-bottom: 8px;
       font-weight: bold;
       text-align: center;
       width: 100%;
+      letter-spacing: 1px;
     }
     .recipe-ingredients, .recipe-instructions {
       margin-bottom: 8px;
       width: 100%;
+      color: #388e3c;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
-      font-size: large;    
-      color:#012503;
+      font-size: large;
     }
     .meal-previews {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
-      justify-content: center;
+      justify-items: center;
+      align-items: stretch;
       margin-top: 10px;
       margin-bottom: 8px;
       width: 100%;
+      min-height: 140px;
     }
     .meal-preview {
-      flex: 1 1 180px;
-      max-width: 22%;
+      width: 100%;
+      max-width: 180px;
       min-width: 160px;
       text-align: center;
+      min-height: 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
     }
     .meal-preview img {
       width: 100%;
       max-width: 180px;
       border-radius: 10px;
-      box-shadow: 0 2px 12px #4caf5033;
+      box-shadow: 0 2px 12px #c8e6c944;
       margin-bottom: 4px;
       height: 120px;
       object-fit: cover;
       cursor: pointer;
       transition: box-shadow 0.2s;
+      background: #fffde7;
+      padding: 2px;
     }
     .meal-preview img:hover {
       box-shadow: 0 4px 24px #388e3c66;
     }
     .meal-caption {
-      font-size: 1.09em;
-      color: #03234d;
+      font-size: 0.98em;
+      color: #388e3c;
       font-style: italic;
       margin-bottom: 4px;
     }
     .back-btn {
-      display: inline-block;
-      margin: 24px auto 0 auto;
-      background: #39a53d;
-      color: #032905;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 32px auto 0 auto;
+      background: linear-gradient(90deg, #c8e6c9 10%, #388e3c 90%);
+      color: #fffde7;
       border: none;
-      border-radius: 8px;
-      padding: 10px 22px;
+      border-radius: 18px;
+      padding: 12px 28px;
       font-weight: bold;
-      cursor: pointer;
-      font-size: 1em;
-      box-shadow: 0 2px 8px #4caf5033;
-      transition: background 0.2s;
+      font-size: 1.08em;
+      box-shadow: 0 2px 8px #c8e6c944;
+      transition: background 0.2s, transform 0.2s;
       text-decoration: none;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
     }
-    .back-btn:hover {
-      background: #011402;
-      color: #44da30;
+    .back-btn:hover, .back-btn:focus {
+      background: linear-gradient(90deg, #388e3c 10%, #c8e6c9 90%);
+      color: #388e3c;
+      transform: scale(1.04);
+      box-shadow: 0 8px 32px #c8e6c944;
+      text-decoration: none;
     }
     /* Modal styles */
     .modal {
@@ -166,11 +258,11 @@
       border-radius: 16px;
       box-shadow: 0 4px 32px #000a;
       margin-bottom: 12px;
-      background: #fff;
+      background: #fffde7;
       padding: 8px;
     }
     .modal-caption {
-      color: #fffde7;
+      color: #388e3c;
       font-size: 1.1em;
       font-style: italic;
       text-align: center;
@@ -181,7 +273,7 @@
       top: 12px;
       right: 18px;
       background: #388e3c;
-      color: #fff;
+      color: #fffde7;
       border: none;
       border-radius: 50%;
       width: 38px;
@@ -189,7 +281,7 @@
       font-size: 1.8em;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 2px 8px #0005;
+      box-shadow: 0 2px 8px #388e3c44;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -197,158 +289,400 @@
       z-index: 2;
     }
     .close-btn:hover {
-      background: #1b5e20;
+      background: #c8e6c9;
+      color: #388e3c;
+    }
+    /* Mobile menu styles */
+    .menu-toggle {
+      display: block;
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 1001;
+      background: #c8e6c9;
+      color: #388e3c;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 2em;
+      box-shadow: 0 2px 12px #c8e6c944;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .menu-toggle:active,
+    .menu-toggle:focus {
+      background: #388e3c;
+      color: #fffde7;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 80vw;
+      max-width: 320px;
+      height: 100vh;
+      background: #fffde7;
+      box-shadow: -2px 0 16px #c8e6c944;
+      z-index: 1000;
+      padding: 48px 24px 24px 24px;
+      flex-direction: column;
+      gap: 18px;
+      border-radius: 0 0 0 32px;
+      animation: slideIn 0.3s;
+    }
+    .mobile-menu a {
+      display: block;
+      color: #388e3c;
+      font-size: 1.18em;
+      text-decoration: none;
+      margin-bottom: 18px;
+      font-family: 'Georgia', serif;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover {
+      color: #fffde7;
+      background: #388e3c;
+      border-radius: 8px;
+      padding: 4px 8px;
+    }
+    .menu-link.active {
+      background: #388e3c !important;
+      color: #fffde7 !important;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    @keyframes slideIn {
+      from { right: -100vw; opacity: 0; }
+      to { right: 0; opacity: 1; }
+    }
+    /* Desktop sidebar styles */
+    .desktop-sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 180px;
+      height: 100vh;
+      background: #fffde7;
+      box-shadow: 2px 0 16px #c8e6c944;
+      z-index: 100;
+      padding: 48px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .sidebar-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+    .sidebar-link {
+      display: block;
+      color: #388e3c;
+      font-size: 1.12em;
+      text-decoration: none;
+      padding: 12px 24px;
+      font-family: 'Georgia', serif;
+      font-weight: bold;
+      transition: color 0.2s, background 0.2s;
+      border-radius: 8px;
+      margin-bottom: 4px;
+    }
+    .sidebar-link:hover, .sidebar-link:focus {
+      background: #388e3c;
+      color: #fffde7;
+    }
+    .sidebar-link.active {
+      background: #388e3c;
+      color: #fffde7;
+      font-weight: bold;
+    }
+    @media (max-width: 900px) {
+      .desktop-sidebar {
+        display: none;
+      }
+      .container {
+        margin-left: 0 !important;
+      }
+    }
+    .container {
+      margin-left: 180px;
+    }
+    .dark-mode-toggle {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #c8e6c9;
+      color: #388e3c;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 1.5em;
+      box-shadow: 0 2px 12px #c8e6c944;
+      cursor: pointer;
+      z-index: 1001;
+      transition: background 0.2s;
+      display: block !important;
+    }
+    .dark-mode-toggle.active {
+      background: #388e3c;
+      color: #fffde7;
+    }
+    /* Dark mode styles */
+    body.dark-mode {
+      background: linear-gradient(135deg, #263238 0%, #388e3c 100%);
+      color: #fffde7;
+    }
+    body.dark-mode .container,
+    body.dark-mode .recipe-card,
+    body.dark-mode .subtitle,
+    body.dark-mode .divider,
+    body.dark-mode .mobile-menu,
+    body.dark-mode .desktop-sidebar {
+      background: #263238 !important;
+      color: #fffde7 !important;
+      border-color: #388e3c !important;
+    }
+    body.dark-mode h1,
+    body.dark-mode .recipe-title,
+    body.dark-mode .recipe-ingredients,
+    body.dark-mode .recipe-instructions,
+    body.dark-mode .meal-caption,
+    body.dark-mode .back-btn,
+    body.dark-mode .sidebar-link {
+      color: #c8e6c9 !important;
+    }
+    body.dark-mode .recipe-card:hover {
+      background: #388e3c !important;
+      color: #fffde7 !important;
+      border-color: #c8e6c9 !important;
+    }
+    body.dark-mode .back-btn {
+      background: linear-gradient(90deg, #388e3c 10%, #c8e6c9 90%) !important;
+      color: #fffde7 !important;
+    }
+    body.dark-mode .back-btn:hover, body.dark-mode .back-btn:focus {
+      background: linear-gradient(90deg, #c8e6c9 10%, #388e3c 90%) !important;
+      color: #263238 !important;
+    }
+    body.dark-mode .meal-preview img {
+      background: #263238 !important;
+    }
+    body.dark-mode .modal-content {
+      background: #263238 !important;
+    }
+    body.dark-mode .close-btn {
+      background: #388e3c !important;
+      color: #fffde7 !important;
+    }
+    body.dark-mode .close-btn:hover {
+      background: #c8e6c9 !important;
+      color: #388e3c !important;
+    }
+    body.dark-mode .sidebar-link.active,
+    body.dark-mode .sidebar-link:hover,
+    body.dark-mode .sidebar-link:focus {
+      background: #388e3c !important;
+      color: #fffde7 !important;
     }
     @media (max-width: 700px) {
-  body { font-size: 1.22em; }
-  h1 { font-size: 2.1em; }
-  h2 { font-size: 1.5em; }
-  h3 { font-size: 1.18em; }
-  .about-text,
-  .info-note,
-  .feature-card,
-  .category-box,
-  .recipe-card {
-    font-size: 1.15em;
-    padding: 20px 4vw;
-  }
-  .feature-title,
-  .category-title,
-  .added-heading {
-    font-size: 1.18em;
-  }
-  .back-btn,
-  button,
-  .top-x-btn {
-    font-size: 1.15em;
-    padding: 16px 8vw;
-  }
-  input,
-  textarea,
-  #searchBox {
-    font-size: 1.12em;
-    padding: 14px 4vw;
-  }
-}
+      body { font-size: 1.22em; }
+      h1 { font-size: 2.1em; }
+      .recipe-card { font-size: 1.15em; padding: 20px 4vw; }
+      .recipe-title { font-size: 1.18em; }
+      .back-btn, .top-x-btn { font-size: 1.15em; padding: 16px 8vw; }
+    }
   </style>
 </head>
 <body>
+  <!-- Desktop sidebar for categories -->
+  <nav class="desktop-sidebar" aria-label="Recipe Categories">
+    <ul class="sidebar-list">
+      <li><a href="food-recipes.html" class="sidebar-link" data-page="food-recipes.html">Food Sections</a></li>
+      <li><a href="seafood-recipes.html" class="sidebar-link" data-page="seafood-recipes.html">Seafood</a></li>
+      <li><a href="vegetable-recipes.html" class="sidebar-link" data-page="vegetable-recipes.html">Vegetables</a></li>
+      <li><a href="snack-recipes.html" class="sidebar-link" data-page="snack-recipes.html">Snacks</a></li>
+      <li><a href="poultry-recipes.html" class="sidebar-link" data-page="poultry-recipes.html">Poultry</a></li>
+      <li><a href="steak-recipes.html" class="sidebar-link" data-page="steak-recipes.html">Beef</a></li>
+      <li><a href="plant-based-recipes.html" class="sidebar-link" data-page="plant-based-recipes.html">Plant-Based</a></li>
+      <li><a href="cake-recipes.html" class="sidebar-link" data-page="cake-recipes.html">Cakes</a></li>
+      <li><a href="jelly-recipes.html" class="sidebar-link" data-page="jelly-recipes.html">Jelly</a></li>
+      <li><a href="fruit-recipes.html" class="sidebar-link" data-page="fruit-recipes.html">Fruits</a></li>
+      <li><a href="sweet-recipes.html" class="sidebar-link" data-page="sweet-recipes.html">Sweet-food</a></li>
+    </ul>
+  </nav>
+  <!-- Mobile menu toggle -->
+  <nav class="mobile-nav" aria-label="Mobile Navigation">
+    <button id="menuToggle" aria-label="Open menu" class="menu-toggle">&#9776;</button>
+    <div id="mobileMenu" class="mobile-menu">
+      <a href="food-recipes.html" class="menu-link" data-page="food-recipes.html">Food Sections</a>
+      <a href="seafood-recipes.html" class="menu-link" data-page="seafood-recipes.html">Seafood</a>
+      <a href="vegetable-recipes.html" class="menu-link" data-page="vegetable-recipes.html">Vegetables</a>
+      <a href="snack-recipes.html" class="menu-link" data-page="snack-recipes.html">Snacks</a>
+      <a href="poultry-recipes.html" class="menu-link" data-page="poultry-recipes.html">Poultry</a>
+      <a href="steak-recipes.html" class="menu-link" data-page="steak-recipes.html">Beef</a>
+      <a href="plant-based-recipes.html" class="menu-link" data-page="plant-based-recipes.html">Plant-Based</a>
+      <a href="cake-recipes.html" class="menu-link" data-page="cake-recipes.html">Cakes</a>
+      <a href="jelly-recipes.html" class="menu-link" data-page="jelly-recipes.html">Jelly</a>
+      <a href="fruit-recipes.html" class="menu-link" data-page="fruit-recipes.html">Fruits</a>
+      <a href="sweet-recipes.html" class="menu-link" data-page="sweet-recipes.html">Sweet-food</a>
+    </div>
+  </nav>
   <div class="container">
-    <button class="top-x-btn" onclick="window.location.href='food-recipes.html'">&times;</button>
+    <button class="top-x-btn" onclick="window.location.href='food-recipes.html'" aria-label="Close Vegetable Recipes">&times;</button>
     <h1>Vegetable Recipes</h1>
-    <div><em>Click on the images for a bigger view</em></div>
-    <div class="recipes-list">
-      <div class="recipe-card">
-        <div class="recipe-title">Roasted Vegetables</div>
-        <div class="recipe-ingredients"><b>Ingredients:</b> Carrots, potatoes, bell peppers, olive oil, salt, pepper, thyme</div>
-        <div class="recipe-instructions"><b>Instructions:</b> Chop vegetables, toss with olive oil, salt, pepper, and thyme. Roast at 200°C for 30-40 minutes.</div>
-        <div class="meal-previews">
-          <div class="meal-preview">
-            <img src="https://www.chewoutloud.com/wp-content/uploads/2025/01/roasted-vegetables-square-500x375.jpg" alt="Roasted Vegetables 1" onclick="showModal(this)">
-            <div class="meal-caption">Your meal will look like this after</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://i.ytimg.com/vi/SFX1EfovBCg/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLD87OwERIuXzBzenyMZlMdt-GNcCg" alt="Roasted Vegetables 2" onclick="showModal(this)">
-            <div class="meal-caption">Colorful and healthy</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://www.marthastewart.com/thmb/minse1fldlov5Q8XUrDnLDw9NYo=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/roast-chicken-vegetables-potatoes-3e8b194b-0819_hz-2a7af2430d7a4d0087bb4c7e0d161436.jpg" alt="Roasted Vegetables 3" onclick="showModal(this)">
-            <div class="meal-caption">Perfect side dish</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://tasteisyours.com/wp-content/uploads/2023/12/Roasted-Vegetables-with-Herbs-A-Delightful-Medley-480x270.png" alt="Roasted Vegetables 4" onclick="showModal(this)">
-            <div class="meal-caption">Serve with herbs</div>
-          </div>
-        </div>
-      </div>
-      <div class="recipe-card">
-        <div class="recipe-title">Stuffed Peppers</div>
-        <div class="recipe-ingredients"><b>Ingredients:</b> Bell peppers, rice, tomato sauce, onion, garlic, cheese</div>
-        <div class="recipe-instructions"><b>Instructions:</b> Cook rice, mix with tomato sauce, onion, and garlic. Stuff into peppers, top with cheese, bake at 180°C for 25 minutes.</div>
-        <div class="meal-previews">
-          <div class="meal-preview">
-            <img src="https://www.tasteofhome.com/wp-content/uploads/2018/01/Traditional-Stuffed-Peppers_EXPS_TOHcom23_23192_P2_MD_03_02_9b.jpg" alt="Stuffed Peppers 1" onclick="showModal(this)">
-            <div class="meal-caption">Your meal will look like this after</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://healthyfitnessmeals.com/wp-content/uploads/2019/09/Stuffed-peppers-2.jpg" alt="Stuffed Peppers 2" onclick="showModal(this)">
-            <div class="meal-caption">Cheesy and delicious</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://www.theblackpeppercorn.com/wp-content/uploads/2018/01/Stuffed-Peppers-Beef-and-Rice-angle-wide-hires.jpg" alt="Stuffed Peppers 3" onclick="showModal(this)">
-            <div class="meal-caption">Colorful presentation</div>
-          </div>
-                    <div class="meal-preview">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjm3QIh76F0_w3rQAHqTYVe3xSngU1uYBwuw&s" alt="Stuffed Peppers 4" onclick="showModal(this)">
-            <div class="meal-caption">Skewers</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://mealpractice.b-cdn.net/287698953330364416/mediterranean-stuffed-bell-peppers-with-feta-and-orzo-served-with-a-side-of-greek-salad-cgVPKaRhjA.webp" alt="Stuffed Peppers 5" onclick="showModal(this)">
-            <div class="meal-caption">Serve with salad</div>
-          </div>
-        </div>
-      </div>
-      <div class="recipe-card">
-        <div class="recipe-title">Vegetable Stir Fry</div>
-        <div class="recipe-ingredients"><b>Ingredients:</b> Broccoli, carrots, bell peppers, snap peas, soy sauce, garlic, ginger, sesame oil</div>
-        <div class="recipe-instructions"><b>Instructions:</b> Sauté garlic and ginger in sesame oil. Add vegetables, stir fry until crisp-tender. Add soy sauce and cook 2 more minutes.</div>
-        <div class="meal-previews">
-          <div class="meal-preview">
-            <img src="https://vegetablerecipes.com/wp-content/uploads/2022/06/Sweet-and-Spicy-Chicken-Vegetable-Stir-Fry-1-1-of-1-500x500.jpg" alt="Vegetable Stir Fry 1" onclick="showModal(this)">
-            <div class="meal-caption">Your meal will look like this after</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://kenhomwoks.com/cdn/shop/articles/9c639f7aa9d31c5b2149d8310cc067ea.jpg?v=1688152741" alt="Vegetable Stir Fry 2" onclick="showModal(this)">
-            <div class="meal-caption">Bright and fresh</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://asimplepalate.com/wp-content/uploads/2019/03/vegetable-stir-fry-14-500x375.jpg" alt="Vegetable Stir Fry 3" onclick="showModal(this)">
-            <div class="meal-caption">Serve with rice</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://cdn.loveandlemons.com/wp-content/uploads/2025/02/stir-fry-recipe-social.jpg" alt="Vegetable Stir Fry 4" onclick="showModal(this)">
-            <div class="meal-caption">Add sesame seeds</div>
-          </div>
-        </div>
-      </div>
-      <div class="recipe-card">
-        <div class="recipe-title">Vegetable Soup</div>
-        <div class="recipe-ingredients"><b>Ingredients:</b> Carrots, potatoes, celery, onion, tomatoes, green beans, vegetable broth, herbs</div>
-        <div class="recipe-instructions"><b>Instructions:</b> Sauté onion and celery. Add remaining vegetables and broth. Simmer for 30 minutes. Season with herbs.</div>
-        <div class="meal-previews">
-          <div class="meal-preview">
-            <img src="https://monkeyandmekitchenadventures.com/wp-content/uploads/2020/01/Creamy-Vegetable-Soup_09.jpg" alt="Vegetable Soup 1" onclick="showModal(this)">
-            <div class="meal-caption">Your meal will look like this after</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://www.betterthanbouillon.com/wp-content/uploads/2018/06/Vegetarian-Vegetable-Soup.jpg" alt="Vegetable Soup 2" onclick="showModal(this)">
-            <div class="meal-caption">Warm and comforting</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://www.bowlofdelicious.com/wp-content/uploads/2025/04/Spring-Lentil-Vegetable-Soup-square.jpg" alt="Vegetable Soup 3" onclick="showModal(this)">
-            <div class="meal-caption">Loaded with veggies</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://i0.wp.com/siamesesourdough.com/wp-content/uploads/2020/08/IMG_8670-e1597341003126.jpeg?fit=720%2C468&ssl=1" alt="Vegetable Soup 4" onclick="showModal(this)">
-            <div class="meal-caption">Serve with bread</div>
-          </div>
-        </div>
-      </div>
+    <div class="divider"></div>
+    <div class="subtitle">
+      Click on the images for a bigger view. Enjoy animated entries, dark mode, and mobile navigation!
+    </div>
+    <div class="recipes-list" id="recipesList">
+      <!-- Recipe cards will be rendered by JS -->
     </div>
     <div>
       <em>Have a favorite vegetable recipe? Share it in the <a href="recipe-book.html">Recipe Book</a>!</em>
     </div>
-    <a href="food-recipes.html" class="back-btn">← Back</a>
+    <a href="food-recipes.html" class="back-btn" aria-label="Back to Food Recipes">← Back</a>
+    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">&#9790;</button>
   </div>
   <!-- Modal for full image -->
   <div id="imgModal" class="modal" onclick="closeModal(event)">
     <div class="modal-content">
-      <button class="close-btn" onclick="closeModal(event)">&times;</button>
+      <button class="close-btn" onclick="closeModal(event)" aria-label="Close image">&times;</button>
       <img id="modalImg" class="modal-img" src="" alt="Full Meal">
       <div id="modalCaption" class="modal-caption"></div>
     </div>
   </div>
   <script>
+    // Desktop sidebar highlight
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+      if (window.location.pathname.endsWith(link.getAttribute('data-page'))) {
+        link.classList.add('active');
+      }
+    });
+    // Mobile menu highlight
+    document.querySelectorAll('.menu-link').forEach(link => {
+      if (window.location.pathname.endsWith(link.getAttribute('data-page'))) {
+        link.classList.add('active');
+      }
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let menuOpen = false;
+    menuToggle.addEventListener('click', function() {
+      menuOpen = !menuOpen;
+      mobileMenu.style.display = menuOpen ? 'flex' : 'none';
+      menuToggle.setAttribute('aria-label', menuOpen ? 'Close menu' : 'Open menu');
+      document.body.style.overflow = menuOpen ? 'hidden' : '';
+    });
+    mobileMenu.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') {
+        mobileMenu.style.display = 'none';
+        menuOpen = false;
+        document.body.style.overflow = '';
+      }
+    });
+    window.addEventListener('click', function(e) {
+      if (menuOpen && !mobileMenu.contains(e.target) && e.target !== menuToggle) {
+        mobileMenu.style.display = 'none';
+        menuOpen = false;
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    darkModeToggle.addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+      darkModeToggle.classList.toggle('active');
+      localStorage.setItem('darkModeVegetable', document.body.classList.contains('dark-mode'));
+    });
+    if (localStorage.getItem('darkModeVegetable') === 'true') {
+      document.body.classList.add('dark-mode');
+      darkModeToggle.classList.add('active');
+    }
+
+    // Recipes data
+    const recipes = [
+      {
+        title: "Roasted Vegetables",
+        ingredients: "Carrots, potatoes, bell peppers, olive oil, salt, pepper, thyme",
+        instructions: "Chop vegetables, toss with olive oil, salt, pepper, and thyme. Roast at 200°C for 30-40 minutes.",
+        images: [
+          {src:"https://www.chewoutloud.com/wp-content/uploads/2025/01/roasted-vegetables-square-500x375.jpg",caption:"Your meal will look like this after"},
+          {src:"https://i.ytimg.com/vi/SFX1EfovBCg/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLD87OwERIuXzBzenyMZlMdt-GNcCg",caption:"Colorful and healthy"},
+          {src:"https://www.marthastewart.com/thmb/minse1fldlov5Q8XUrDnLDw9NYo=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/roast-chicken-vegetables-potatoes-3e8b194b-0819_hz-2a7af2430d7a4d0087bb4c7e0d161436.jpg",caption:"Perfect side dish"}
+        ]
+      },
+      {
+        title: "Stuffed Peppers",
+        ingredients: "Bell peppers, rice, tomato sauce, onion, garlic, cheese",
+        instructions: "Cook rice, mix with tomato sauce, onion, and garlic. Stuff into peppers, top with cheese, bake at 180°C for 25 minutes.",
+        images: [
+          {src:"https://www.tasteofhome.com/wp-content/uploads/2018/01/Traditional-Stuffed-Peppers_EXPS_TOHcom23_23192_P2_MD_03_02_9b.jpg",caption:"Your meal will look like this after"},
+          {src:"https://healthyfitnessmeals.com/wp-content/uploads/2019/09/Stuffed-peppers-2.jpg",caption:"Cheesy and delicious"},
+          {src:"https://www.theblackpeppercorn.com/wp-content/uploads/2018/01/Stuffed-Peppers-Beef-and-Rice-angle-wide-hires.jpg",caption:"Colorful presentation"}
+        ]
+      },
+      {
+        title: "Vegetable Stir Fry",
+        ingredients: "Broccoli, carrots, bell peppers, snap peas, soy sauce, garlic, ginger, sesame oil",
+        instructions: "Sauté garlic and ginger in sesame oil. Add vegetables, stir fry until crisp-tender. Add soy sauce and cook 2 more minutes.",
+        images: [
+          {src:"https://vegetablerecipes.com/wp-content/uploads/2022/06/Sweet-and-Spicy-Chicken-Vegetable-Stir-Fry-1-1-of-1-500x500.jpg",caption:"Your meal will look like this after"},
+          {src:"https://kenhomwoks.com/cdn/shop/articles/9c639f7aa9d31c5b2149d8310cc067ea.jpg?v=1688152741",caption:"Bright and fresh"},
+          {src:"https://asimplepalate.com/wp-content/uploads/2019/03/vegetable-stir-fry-14-500x375.jpg",caption:"Serve with rice"}
+        ]
+      },
+      {
+        title: "Vegetable Soup",
+        ingredients: "Carrots, potatoes, celery, onion, tomatoes, green beans, vegetable broth, herbs",
+        instructions: "Sauté onion and celery. Add remaining vegetables and broth. Simmer for 30 minutes. Season with herbs.",
+        images: [
+          {src:"https://monkeyandmekitchenadventures.com/wp-content/uploads/2020/01/Creamy-Vegetable-Soup_09.jpg",caption:"Your meal will look like this after"},
+          {src:"https://www.betterthanbouillon.com/wp-content/uploads/2018/06/Vegetarian-Vegetable-Soup.jpg",caption:"Warm and comforting"},
+          {src:"https://www.bowlofdelicious.com/wp-content/uploads/2025/04/Spring-Lentil-Vegetable-Soup-square.jpg",caption:"Loaded with veggies"}
+        ]
+      }
+    ];
+
+    // Render recipes with animated entry
+    function renderRecipes() {
+      const recipesList = document.getElementById('recipesList');
+      recipesList.innerHTML = recipes.map(recipe => {
+        const maxImages = 3;
+        const imagesHtml = recipe.images.map(img => `
+          <div class="meal-preview">
+            <img src="${img.src}" alt="${recipe.title}" onclick="showModal(this)">
+            <div class="meal-caption">${img.caption}</div>
+          </div>
+        `).join('');
+        const emptyCells = Array(Math.max(0, maxImages - recipe.images.length)).fill('<div class="meal-preview"></div>').join('');
+        return `
+          <div class="recipe-card">
+            <div class="recipe-title">${recipe.title}</div>
+            <div class="recipe-ingredients"><b>Ingredients:</b> ${recipe.ingredients}</div>
+            <div class="recipe-instructions"><b>Instructions:</b> ${recipe.instructions}</div>
+            <div class="meal-previews">
+              ${imagesHtml}${emptyCells}
+            </div>
+          </div>
+        `;
+      }).join('');
+      setTimeout(() => {
+        document.querySelectorAll('.recipe-card').forEach((card, i) => {
+          setTimeout(() => card.classList.add('visible'), 100 * i);
+        });
+      }, 100);
+    }
+    renderRecipes();
+
+    // Modal logic
     function showModal(img) {
       var modal = document.getElementById('imgModal');
       var modalImg = document.getElementById('modalImg');
@@ -359,7 +693,6 @@
       document.body.style.overflow = 'hidden';
     }
     function closeModal(event) {
-      // Only close if clicking the X or outside the modal-content
       if (event.target.classList.contains('close-btn') || event.target.id === 'imgModal') {
         document.getElementById('imgModal').style.display = 'none';
         document.body.style.overflow = '';

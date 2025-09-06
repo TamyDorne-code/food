@@ -3,172 +3,368 @@
 <head>
   <meta charset="UTF-8">
   <title>Flavor & Seasoning Tips</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body { font-family: 'Segoe UI', Arial, sans-serif; 
-    background: #daacd6; 
-    margin: 0; 
-    color: #222; 
-}
-    .container { max-width: 650px; 
-        margin: 40px auto; 
-        background: #ce82c8; 
-        border-radius: 18px; 
-        box-shadow: 0 4px 24px #ffb34744; 
-        padding: 32px 24px; 
-        text-align: center; 
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Georgia', 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #e6f2ed 0%, #b7b872 60%, #a47ad6 100%);
+      color: #222;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
-    h1 { color: #630463; 
-        margin-bottom: 24px; 
-        font-size: 2em; 
+    .main-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 48px;
+      padding-bottom: 48px;
     }
-    .flavor-category-list { display: flex; 
-        flex-direction: column; 
-        gap: 28px; 
-        align-items: center; 
-        margin-bottom: 32px; 
+    .top-x-btn {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      background: #7a3ad6;
+      color: #e6f2ed;
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 2em;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #7a3ad644;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      z-index: 101;
     }
-    .flavor-category-box { background: #f7c8e2; 
-        border-radius: 14px; 
-        box-shadow: 0 2px 12px #ffb34733; 
-        width: 96%; 
-        max-width: 500px; 
-        padding: 24px 18px; 
-        text-align: left; 
-        margin: 0 auto; 
+    .top-x-btn:hover {
+      background: #b7b872;
+      color: #7a3ad6;
     }
-    .flavor-category-title { font-size: 1.18em; 
-        color: #881a92; 
-        font-weight: bold; 
-        margin-bottom: 8px; 
+    .title-section {
+      text-align: center;
+      margin-bottom: 18px;
     }
-    .flavor-category-desc { font-size: 1.05em; 
-        color: #526885; 
-        margin-bottom: 10px; 
+    h1 {
+      color: #7a3ad6;
+      font-size: 2.5em;
+      font-family: 'Georgia', serif;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      margin-top: 0;
+      text-shadow: 0 2px 12px #b7b87244;
     }
-    ul { text-align: left; 
-        font-size: 1.08em; 
-        color: #526885; 
-        padding-left: 18px; 
-        margin-bottom: 0; 
+    .divider {
+      width: 80px;
+      height: 6px;
+      background: linear-gradient(90deg,#7a3ad6,#b7b872,#e6f2ed);
+      border-radius: 3px;
+      margin: 0 auto 24px auto;
+      opacity: 0.8;
+      position: relative;
+      z-index: 1;
     }
-    .back-btn { display: block; 
-        margin: 32px auto 0 auto; 
-        background: #b87aaa; 
-        color: #3d0e33; 
-        border: none; 
-        border-radius: 8px; 
-        padding: 10px 22px; 
-        font-weight: bold; 
-        cursor: pointer; 
-        font-size: 1em; 
-        box-shadow: 0 2px 8px #ffb34733; 
-        transition: background 0.2s; 
-        text-decoration: none; 
-        text-align: center; 
-        width: fit-content; 
+    .subtitle {
+      font-size: 1.15em;
+      color: #314766;
+      margin-bottom: 22px;
+      font-style: italic;
+      background: #e6e9c6;
+      border-radius: 12px;
+      padding: 10px 24px;
+      box-shadow: 0 2px 8px #b7b87244;
+      display: inline-block;
+      font-family: 'Georgia', serif;
     }
-    .back-btn:hover { background: #290122; 
-        color: #864381; 
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto 32px auto;
     }
-    p {
-        color: #32063b;
-        margin: 12px 0;
-        line-height: 1.6em;
-        font-family:'Courier New', Courier, monospace;
-        font-style: italic;
+    .tip-card {
+      background: linear-gradient(120deg, #f7c8e2 70%, #e6f2ed 100%);
+      border-radius: 18px;
+      box-shadow: 0 2px 12px #b7b87233;
+      padding: 32px 24px;
+      text-align: left;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border: 2px solid #b7b872;
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+      animation: fadeInCard 0.7s;
+      font-family: 'Georgia', serif;
+      transition: box-shadow 0.2s, background 0.2s, border-color 0.2s;
+    }
+    .tip-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .tip-card:hover {
+      box-shadow: 0 8px 32px #7a3ad666;
+      background: linear-gradient(120deg, #e6f2ed 70%, #b7b872 100%);
+      border-color: #7a3ad6;
+    }
+    .tip-title {
+      font-size: 1.25em;
+      color: #7a3ad6;
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-family: 'Georgia', serif;
+      letter-spacing: 1px;
+    }
+    .tip-desc {
+      font-size: 1.07em;
+      color: #388e3c;
+      margin-bottom: 10px;
+      font-style: italic;
+      font-family: 'Georgia', serif;
+    }
+    ul {
+      text-align: left;
+      font-size: 1.08em;
+      color: #526885;
+      padding-left: 18px;
+      margin-bottom: 0;
+      font-family: 'Georgia', serif;
+    }
+    .back-btn {
+      display: block;
+      margin: 32px auto 0 auto;
+      background: linear-gradient(90deg, #b7b872 10%, #7a3ad6 90%);
+      color: #e6f2ed;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 28px;
+      font-weight: bold;
+      font-size: 1.08em;
+      box-shadow: 0 2px 8px #b7b87244;
+      transition: background 0.2s, transform 0.2s;
+      text-decoration: none;
+      text-align: center;
+      width: fit-content;
+      font-family: 'Georgia', serif;
+      cursor: pointer;
+    }
+    .back-btn:hover, .back-btn:focus {
+      background: linear-gradient(90deg, #7a3ad6 10%, #b7b872 90%);
+      color: #20311a;
+      transform: scale(1.04);
+      box-shadow: 0 8px 32px #b7b87244;
+      text-decoration: none;
+    }
+    @keyframes fadeInCard {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
     }
     @media (max-width: 700px) {
-  body { font-size: 1.22em; }
-  h1 { font-size: 2.1em; }
-  h2 { font-size: 1.5em; }
-  h3 { font-size: 1.18em; }
-  .about-text,
-  .info-note,
-  .feature-card,
-  .category-box,
-  .recipe-card {
-    font-size: 1.15em;
-    padding: 20px 4vw;
-  }
-  .feature-title,
-  .category-title,
-  .added-heading {
-    font-size: 1.18em;
-  }
-  .back-btn,
-  button,
-  .top-x-btn {
-    font-size: 1.15em;
-    padding: 16px 8vw;
-  }
-  input,
-  textarea,
-  #searchBox {
-    font-size: 1.12em;
-    padding: 14px 4vw;
+      body { font-size: 1.22em; }
+      h1 { font-size: 2.1em; }
+      .tip-card { font-size: 1.15em; padding: 20px 4vw; }
+      .tip-title { font-size: 1.18em; }
+      .back-btn, .top-x-btn { font-size: 1.15em; padding: 16px 8vw; }
+      .tips-grid { grid-template-columns: 1fr; }
+    }
+    .menu-toggle {
+  display: block;
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 1001;
+  background: #7a3ad6;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 2em;
+  box-shadow: 0 2px 12px #7a3ad644;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.menu-toggle:active,
+.menu-toggle:focus {
+  background: #b7b872;
+  color: #7a3ad6;
+}
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 80vw;
+  max-width: 320px;
+  height: 100vh;
+  background: #f7c8e2;
+  box-shadow: -2px 0 16px #7a3ad644;
+  z-index: 1000;
+  padding: 48px 24px 24px 24px;
+  flex-direction: column;
+  gap: 18px;
+  border-radius: 0 0 0 32px;
+  animation: slideIn 0.3s;
+}
+.mobile-menu a {
+  display: block;
+  color: #7a3ad6;
+  font-size: 1.18em;
+  text-decoration: none;
+  margin-bottom: 18px;
+  font-family: 'Georgia', serif;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+.mobile-menu a:hover {
+  color: #388e3c;
+  background: #b7b872;
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+@keyframes slideIn {
+  from { right: -100vw; opacity: 0; }
+  to { right: 0; opacity: 1; }
+}
+@media (min-width: 701px) {
+  .menu-toggle {
+    display: none;
   }
 }
   </style>
 </head>
 <body>
-  <div class="container">
-    <button class="top-x-btn" onclick="window.location.href='tips-tricks.html'" 
-  style="position:fixed;top:18px;right:24px;background:#2d0a35;color:#d49bd1;border:none;border-radius:50%;width:38px;height:38px;font-size:1.8em;font-weight:bold;cursor:pointer;box-shadow:0 2px 8px #0005;display:flex;align-items:center;justify-content:center;transition:background 0.2s;z-index:100;">&times;</button>   
-    <h1>Flavor & Seasoning Tips</h1>
-    <p>Enhance your dishes with these flavor and seasoning tips, organized by category for easy reference:</p>
-    <div class="flavor-category-list">
-      <div class="flavor-category-box">
-        <div class="flavor-category-title">Tasting & Adjusting</div>
-        <div class="flavor-category-desc">How to get the perfect taste.</div>
-        <ul>
-          <li>Always taste as you cook and adjust seasoning.</li>
-          <li>Start with small amounts of spices and herbs, then build up.</li>
-          <li>Add salt gradually to avoid over-seasoning.</li>
-          <li>Balance flavors with a touch of acid (lemon, vinegar) or sweetness.</li>
-        </ul>
-      </div>
-      <div class="flavor-category-box">
-        <div class="flavor-category-title">Herbs & Spices</div>
-        <div class="flavor-category-desc">Bring out the best in your food.</div>
-        <ul>
-          <li>Use fresh herbs for extra flavor and aroma.</li>
-          <li>Toast spices before adding to release their oils.</li>
-          <li>Experiment with spice blends for unique tastes.</li>
-          <li>Know when to add herbs: delicate ones at the end, robust ones earlier.</li>
-        </ul>
-      </div>
-      <div class="flavor-category-box">
-        <div class="flavor-category-title">Ingredient Swaps</div>
-        <div class="flavor-category-desc">Adapt recipes for allergies or preferences.</div>
-        <ul>
-          <li>Try ingredient swaps for allergies or dietary needs.</li>
-          <li>Use lemon juice instead of vinegar for a milder acid.</li>
-          <li>Replace salt with herbs for lower sodium dishes.</li>
-        </ul>
-      </div>
-      <div class="flavor-category-box">
-        <div class="flavor-category-title">Umami & Depth</div>
-        <div class="flavor-category-desc">Add richness to your meals.</div>
-        <ul>
-          <li>Add a splash of soy sauce or miso for umami.</li>
-          <li>Use mushrooms or tomatoes to deepen flavor.</li>
-          <li>Simmer sauces to concentrate taste.</li>
-        </ul>
-      </div>
-      <div class="flavor-category-box">
-        <div class="flavor-category-title">General Flavors & Seasoning</div>
-        <div class="flavor-category-desc">Incorporate global tastes.</div>
-        <ul>
-          <li>Explore spices and herbs from different cuisines.</li>
-          <li>Use citrus in Mexican dishes, coconut in Thai, and garlic in Mediterranean cooking.</li>
-          <li>Research traditional flavor pairings for authenticity.</li>
-          <li>Don't be afraid to use new spices and seasonings.</li>
-          <li>Keep a well-stocked spice rack for easy access.</li>
-          <li>Don’t use too much of any one spice to avoid overpowering the dish.</li>
-        </ul>
-        </div>
-    </div>
-    <a href="tips-tricks.html" class="back-btn">← Back</a>
+  <nav class="mobile-nav" aria-label="Mobile Navigation">
+  <button id="menuToggle" aria-label="Open menu" class="menu-toggle">&#9776;</button>
+  <div id="mobileMenu" class="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="food-recipes.html">Food & Recipes</a>
+    <a href="recipe-book.html">Recipe Book</a>
+    <a href="tips-tricks.html">Tips & Tricks</a>
+    <a href="about-chef.html">About</a>
   </div>
+</nav>
+  <button class="top-x-btn" onclick="window.location.href='tips-tricks.html'" aria-label="Close Flavor & Seasoning Tips">&times;</button>
+  <div class="main-wrapper">
+    <div class="title-section">
+      <h1>Flavor &amp; Seasoning Tips</h1>
+      <div class="divider"></div>
+      <div class="subtitle">
+        Enhance your dishes with these flavor and seasoning tips, organized by category for easy reference:
+      </div>
+    </div>
+    <div class="tips-grid" id="flavorTipsGrid">
+      <!-- Cards will be rendered by JS for animation -->
+    </div>
+    <a href="tips-tricks.html" class="back-btn" aria-label="Back to Tips & Tricks">← Back</a>
+  </div>
+  <script>
+    const flavorCategories = [
+      {
+        title: "Tasting & Adjusting",
+        desc: "How to get the perfect taste.",
+        tips: [
+          "Always taste as you cook and adjust seasoning.",
+          "Start with small amounts of spices and herbs, then build up.",
+          "Add salt gradually to avoid over-seasoning.",
+          "Balance flavors with a touch of acid (lemon, vinegar) or sweetness."
+        ]
+      },
+      {
+        title: "Herbs & Spices",
+        desc: "Bring out the best in your food.",
+        tips: [
+          "Use fresh herbs for extra flavor and aroma.",
+          "Toast spices before adding to release their oils.",
+          "Experiment with spice blends for unique tastes.",
+          "Know when to add herbs: delicate ones at the end, robust ones earlier."
+        ]
+      },
+      {
+        title: "Ingredient Swaps",
+        desc: "Adapt recipes for allergies or preferences.",
+        tips: [
+          "Try ingredient swaps for allergies or dietary needs.",
+          "Use lemon juice instead of vinegar for a milder acid.",
+          "Replace salt with herbs for lower sodium dishes."
+        ]
+      },
+      {
+        title: "Umami & Depth",
+        desc: "Add richness to your meals.",
+        tips: [
+          "Add a splash of soy sauce or miso for umami.",
+          "Use mushrooms or tomatoes to deepen flavor.",
+          "Simmer sauces to concentrate taste."
+        ]
+      },
+      {
+        title: "General Flavors & Seasoning",
+        desc: "Incorporate global tastes.",
+        tips: [
+          "Explore spices and herbs from different cuisines.",
+          "Use citrus in Mexican dishes, coconut in Thai, and garlic in Mediterranean cooking.",
+          "Research traditional flavor pairings for authenticity.",
+          "Don't be afraid to use new spices and seasonings.",
+          "Keep a well-stocked spice rack for easy access.",
+          "Don’t use too much of any one spice to avoid overpowering the dish."
+        ]
+      }
+    ];
+
+    // Render cards with animated entry
+    function renderFlavorTips() {
+      const grid = document.getElementById('flavorTipsGrid');
+      grid.innerHTML = flavorCategories.map(cat => `
+        <div class="tip-card">
+          <div class="tip-title">${cat.title}</div>
+          <div class="tip-desc">${cat.desc}</div>
+          <ul>
+            ${cat.tips.map(tip => `<li>${tip}</li>`).join('')}
+          </ul>
+        </div>
+      `).join('');
+      setTimeout(() => {
+        document.querySelectorAll('.tip-card').forEach((card, i) => {
+          setTimeout(() => card.classList.add('visible'), 100 * i);
+        });
+      }, 100);
+    }
+    renderFlavorTips();
+    const menuToggle = document.getElementById('menuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+let menuOpen = false;
+menuToggle.addEventListener('click', function() {
+  menuOpen = !menuOpen;
+  mobileMenu.style.display = menuOpen ? 'flex' : 'none';
+  menuToggle.setAttribute('aria-label', menuOpen ? 'Close menu' : 'Open menu');
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+});
+mobileMenu.addEventListener('click', function(e) {
+  if (e.target.tagName === 'A') {
+    mobileMenu.style.display = 'none';
+    menuOpen = false;
+    document.body.style.overflow = '';
+  }
+});
+window.addEventListener('click', function(e) {
+  if (menuOpen && !mobileMenu.contains(e.target) && e.target !== menuToggle) {
+    mobileMenu.style.display = 'none';
+    menuOpen = false;
+    document.body.style.overflow = '';
+  }
+});
+  </script>
 </body>
 </html>

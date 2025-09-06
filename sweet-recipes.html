@@ -3,140 +3,231 @@
 <head>
   <meta charset="UTF-8">
   <title>Sweet Recipes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
-      margin: 0;
-      color: #f7f2f2;
-      background: url('https://media.istockphoto.com/id/1137312508/photo/assortment-of-products-with-high-sugar-level.jpg?s=612x612&w=0&k=20&c=pfMfQfo4pHnTfESlJCSB_wCrOvlHhtZ3Eqdu3CY5LDY=') no-repeat center center fixed;
-      background-size: cover;
+      min-height: 100vh;
+      min-width: 100vw;
+      background: linear-gradient(135deg, #e3f2fd 0%, #1976d2 60%, #43a047 100%);
+      color: #222;
+      transition: background 0.3s, color 0.3s;
     }
     .container {
-      max-width: 900px;
-      margin: 40px auto;
-      background: rgba(49, 29, 2, 0.95);
-      border-radius: 18px;
-      box-shadow: 0 4px 24px #ffb34744;
-      padding: 32px 24px;
+      min-height: 100vh;
+      min-width: 100vw;
+      width: 100vw;
+      max-width: none;
+      margin: 0;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
       text-align: center;
       position: relative;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
     }
     .top-x-btn {
-      position: absolute;
+      position: fixed;
       top: 18px;
       right: 24px;
-      background: #d84315;
-      color: #fff;
+      background: #1976d2;
+      color: #e3f2fd;
       border: none;
       border-radius: 50%;
-      width: 38px;
-      height: 38px;
-      font-size: 1.8em;
+      width: 44px;
+      height: 44px;
+      font-size: 2em;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 2px 8px #0005;
+      box-shadow: 0 2px 8px #1976d244;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: background 0.2s;
-      z-index: 10;
+      z-index: 100;
     }
     .top-x-btn:hover {
-      background: #a93226;
+      background: #43a047;
+      color: #1976d2;
     }
     h1 {
-      color: #ffe4e1;
-      margin-bottom: 24px;
-      font-size: 2em;
+      color: #1976d2;
+      margin-bottom: 10px;
+      font-size: 2.3em;
+      font-family: 'Georgia', serif;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 12px #1976d244;
+      margin-top: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      animation: fadeIn 1s;
+    }
+    .divider {
+      width: 80px;
+      height: 6px;
+      background: linear-gradient(90deg,#e3f2fd,#1976d2,#43a047);
+      border-radius: 3px;
+      margin: 18px auto 32px auto;
+      opacity: 0.8;
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 1.2s;
+    }
+    .subtitle {
+      font-size: 1.15em;
+      color: #43a047;
+      margin-bottom: 18px;
+      font-style: italic;
+      background: #e3f2fd;
+      border-radius: 12px;
+      padding: 10px 24px;
+      box-shadow: 0 2px 8px #1976d244;
+      display: inline-block;
+      animation: fadeIn 1.3s;
     }
     .recipes-list {
       display: flex;
       flex-direction: column;
       gap: 32px;
       margin-bottom: 24px;
+      width: 100%;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .recipe-card {
-      background: #ffd1b3;
-      border-radius: 12px;
-      box-shadow: 0 1px 8px #ffb34722;
-      padding: 18px;
-      width: 100%;
-      box-sizing: border-box;
+      background: linear-gradient(90deg,#e3f2fd 80%, #c8e6c9 100%);
+      border-radius: 18px;
+      box-shadow: 0 2px 12px #1976d244;
+      padding: 32px 24px;
       text-align: left;
-      margin-bottom: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      position: relative;
+      margin: 0 auto;
+      display: block;
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+      animation: fadeInCard 0.7s;
+      border: 2px solid #c8e6c9;
+    }
+    .recipe-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInCard {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .recipe-card:hover {
+      box-shadow: 0 8px 32px #1976d244;
+      transform: scale(1.03);
+      background: linear-gradient(90deg,#c8e6c9 80%, #e3f2fd 100%);
+      border-color: #1976d2;
     }
     .recipe-title {
-      font-size: 1.8em;
-      color: #a0522d;
+      font-size: x-large;
+      color: #1976d2;
       margin-bottom: 8px;
       font-weight: bold;
       text-align: center;
       width: 100%;
+      letter-spacing: 1px;
     }
     .recipe-ingredients, .recipe-instructions {
       margin-bottom: 8px;
       width: 100%;
-      color: #ff6f61;
+      color: #43a047;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
       font-size: large;
-
     }
     .meal-previews {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
-      justify-content: center;
+      justify-items: center;
+      align-items: stretch;
       margin-top: 10px;
       margin-bottom: 8px;
       width: 100%;
+      min-height: 140px;
     }
     .meal-preview {
-      flex: 1 1 180px;
-      max-width: 22%;
+      width: 100%;
+      max-width: 180px;
       min-width: 160px;
       text-align: center;
+      min-height: 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
     }
     .meal-preview img {
       width: 100%;
       max-width: 180px;
       border-radius: 10px;
-      box-shadow: 0 2px 12px #ffb34733;
+      box-shadow: 0 2px 12px #1976d244;
       margin-bottom: 4px;
       height: 120px;
       object-fit: cover;
       cursor: pointer;
       transition: box-shadow 0.2s;
+      background: #fff;
+      padding: 2px;
     }
     .meal-preview img:hover {
-      box-shadow: 0 4px 24px #d8431566;
+      box-shadow: 0 4px 24px #1976d266;
     }
     .meal-caption {
       font-size: 0.98em;
-      color: #d84315;
+      color: #1976d2;
       font-style: italic;
       margin-bottom: 4px;
     }
     .back-btn {
-      display: inline-block;
-      margin: 24px auto 0 auto;
-      background: #ffe082;
-      color: #d84315;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 32px auto 0 auto;
+      background: linear-gradient(90deg, #c8e6c9 10%, #1976d2 90%);
+      color: #e3f2fd;
       border: none;
-      border-radius: 8px;
-      padding: 10px 22px;
+      border-radius: 18px;
+      padding: 12px 28px;
       font-weight: bold;
-      cursor: pointer;
-      font-size: 1em;
-      box-shadow: 0 2px 8px #ffb34733;
-      transition: background 0.2s;
+      font-size: 1.08em;
+      box-shadow: 0 2px 8px #1976d244;
+      transition: background 0.2s, transform 0.2s;
       text-decoration: none;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
     }
-    .back-btn:hover {
-      background: #ffb347;
+    .back-btn:hover, .back-btn:focus {
+      background: linear-gradient(90deg, #1976d2 10%, #c8e6c9 90%);
       color: #fff;
+      transform: scale(1.04);
+      box-shadow: 0 8px 32px #1976d244;
+      text-decoration: none;
     }
     /* Modal styles */
     .modal {
@@ -171,7 +262,7 @@
       padding: 8px;
     }
     .modal-caption {
-      color: #fffde7;
+      color: #e3f2fd;
       font-size: 1.1em;
       font-style: italic;
       text-align: center;
@@ -181,8 +272,8 @@
       position: absolute;
       top: 12px;
       right: 18px;
-      background: #d84315;
-      color: #fff;
+      background: #1976d2;
+      color: #e3f2fd;
       border: none;
       border-radius: 50%;
       width: 38px;
@@ -190,7 +281,7 @@
       font-size: 1.8em;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 2px 8px #0005;
+      box-shadow: 0 2px 8px #1976d244;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -198,154 +289,405 @@
       z-index: 2;
     }
     .close-btn:hover {
-      background: #a93226;
+      background: #43a047;
+      color: #1976d2;
     }
-   @media (max-width: 700px) {
-  body { font-size: 1.22em; }
-  h1 { font-size: 2.1em; }
-  h2 { font-size: 1.5em; }
-  h3 { font-size: 1.18em; }
-  .about-text,
-  .info-note,
-  .feature-card,
-  .category-box,
-  .recipe-card {
-    font-size: 1.15em;
-    padding: 20px 4vw;
-  }
-  .feature-title,
-  .category-title,
-  .added-heading {
-    font-size: 1.18em;
-  }
-  .back-btn,
-  button,
-  .top-x-btn {
-    font-size: 1.15em;
-    padding: 16px 8vw;
-  }
-  input,
-  textarea,
-  #searchBox {
-    font-size: 1.12em;
-    padding: 14px 4vw;
-  }
-}
+    /* Mobile menu styles */
+    .menu-toggle {
+      display: block;
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 1001;
+      background: #c8e6c9;
+      color: #1976d2;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 2em;
+      box-shadow: 0 2px 12px #1976d244;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .menu-toggle:active,
+    .menu-toggle:focus {
+      background: #1976d2;
+      color: #fff;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 80vw;
+      max-width: 320px;
+      height: 100vh;
+      background: #e3f2fd;
+      box-shadow: -2px 0 16px #1976d244;
+      z-index: 1000;
+      padding: 48px 24px 24px 24px;
+      flex-direction: column;
+      gap: 18px;
+      border-radius: 0 0 0 32px;
+      animation: slideIn 0.3s;
+    }
+    .mobile-menu a {
+      display: block;
+      color: #1976d2;
+      font-size: 1.18em;
+      text-decoration: none;
+      margin-bottom: 18px;
+      font-family: 'Georgia', serif;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover {
+      color: #fff;
+      background: #1976d2;
+      border-radius: 8px;
+      padding: 4px 8px;
+    }
+    .menu-link.active {
+      background: #1976d2 !important;
+      color: #e3f2fd !important;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    @keyframes slideIn {
+      from { right: -100vw; opacity: 0; }
+      to { right: 0; opacity: 1; }
+    }
+    /* Desktop sidebar styles */
+    .desktop-sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 180px;
+      height: 100vh;
+      background: #e3f2fd;
+      box-shadow: 2px 0 16px #1976d244;
+      z-index: 100;
+      padding: 48px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .sidebar-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+    .sidebar-link {
+      display: block;
+      color: #1976d2;
+      font-size: 1.12em;
+      text-decoration: none;
+      padding: 12px 24px;
+      font-family: 'Georgia', serif;
+      font-weight: bold;
+      transition: color 0.2s, background 0.2s;
+      border-radius: 8px;
+      margin-bottom: 4px;
+    }
+    .sidebar-link:hover, .sidebar-link:focus {
+      background: #1976d2;
+      color: #e3f2fd;
+    }
+    .sidebar-link.active {
+      background: #1976d2;
+      color: #e3f2fd;
+      font-weight: bold;
+    }
+    @media (max-width: 900px) {
+      .desktop-sidebar {
+        display: none;
+      }
+      .container {
+        margin-left: 0 !important;
+      }
+    }
+    .container {
+      margin-left: 180px;
+    }
+    /* Dark mode styles */
+    body.dark-mode {
+      background: linear-gradient(135deg, #263238 0%, #1976d2 100%);
+      color: #e3f2fd;
+    }
+    body.dark-mode .container,
+    body.dark-mode .recipe-card,
+    body.dark-mode .subtitle,
+    body.dark-mode .divider,
+    body.dark-mode .progress-bar,
+    body.dark-mode .mobile-menu,
+    body.dark-mode .desktop-sidebar {
+      background: #263238 !important;
+      color: #e3f2fd !important;
+      border-color: #1976d2 !important;
+    }
+    body.dark-mode h1,
+    body.dark-mode .recipe-title,
+    body.dark-mode .recipe-ingredients,
+    body.dark-mode .recipe-instructions,
+    body.dark-mode .meal-caption,
+    body.dark-mode .back-btn,
+    body.dark-mode .sidebar-link {
+      color: #c8e6c9 !important;
+    }
+    body.dark-mode .recipe-card:hover {
+      background: #1976d2 !important;
+      color: #e3f2fd !important;
+      border-color: #c8e6c9 !important;
+    }
+    body.dark-mode .back-btn {
+      background: linear-gradient(90deg, #1976d2 10%, #c8e6c9 90%) !important;
+      color: #e3f2fd !important;
+    }
+    body.dark-mode .back-btn:hover, body.dark-mode .back-btn:focus {
+      background: linear-gradient(90deg, #c8e6c9 10%, #1976d2 90%) !important;
+      color: #263238 !important;
+    }
+    body.dark-mode .meal-preview img {
+      background: #263238 !important;
+    }
+    body.dark-mode .modal-content {
+      background: #263238 !important;
+    }
+    body.dark-mode .close-btn {
+      background: #1976d2 !important;
+      color: #e3f2fd !important;
+    }
+    body.dark-mode .close-btn:hover {
+      background: #43a047 !important;
+      color: #1976d2 !important;
+    }
+    body.dark-mode .sidebar-link.active,
+    body.dark-mode .sidebar-link:hover,
+    body.dark-mode .sidebar-link:focus {
+      background: #1976d2 !important;
+      color: #e3f2fd !important;
+    }
+    .dark-mode-toggle {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #c8e6c9;
+      color: #1976d2;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 1.5em;
+      box-shadow: 0 2px 12px #1976d244;
+      cursor: pointer;
+      z-index: 1001;
+      transition: background 0.2s;
+      display: block !important;
+    }
+    .dark-mode-toggle.active {
+      background: #1976d2;
+      color: #fff;
+    }
+    @media (max-width: 700px) {
+      body { font-size: 1.22em; }
+      h1 { font-size: 2.1em; }
+      .recipe-card { font-size: 1.15em; padding: 20px 4vw; }
+      .recipe-title { font-size: 1.18em; }
+      .back-btn, .top-x-btn { font-size: 1.15em; padding: 16px 8vw; }
+    }
   </style>
 </head>
 <body>
+  <!-- Desktop sidebar for categories -->
+  <nav class="desktop-sidebar" aria-label="Recipe Categories">
+    <ul class="sidebar-list">
+      <li><a href="food-recipes.html" class="sidebar-link" data-page="food-recipes.html">Food Sections</a></li>
+      <li><a href="seafood-recipes.html" class="sidebar-link" data-page="seafood-recipes.html">Seafood</a></li>
+      <li><a href="vegetable-recipes.html" class="sidebar-link" data-page="vegetable-recipes.html">Vegetables</a></li>
+      <li><a href="snack-recipes.html" class="sidebar-link" data-page="snack-recipes.html">Snacks</a></li>
+      <li><a href="poultry-recipes.html" class="sidebar-link" data-page="poultry-recipes.html">Poultry</a></li>
+      <li><a href="steak-recipes.html" class="sidebar-link" data-page="steak-recipes.html">Beef</a></li>
+      <li><a href="plant-based-recipes.html" class="sidebar-link" data-page="plant-based-recipes.html">Plant-Based</a></li>
+      <li><a href="cake-recipes.html" class="sidebar-link" data-page="cake-recipes.html">Cakes</a></li>
+      <li><a href="jelly-recipes.html" class="sidebar-link" data-page="jelly-recipes.html">Jelly</a></li>
+      <li><a href="fruit-recipes.html" class="sidebar-link" data-page="fruit-recipes.html">Fruits</a></li>
+      <li><a href="sweet-recipes.html" class="sidebar-link" data-page="sweet-recipes.html">Sweet-food</a></li>
+    </ul>
+  </nav>
+  <!-- Mobile menu toggle -->
+  <nav class="mobile-nav" aria-label="Mobile Navigation">
+    <button id="menuToggle" aria-label="Open menu" class="menu-toggle">&#9776;</button>
+    <div id="mobileMenu" class="mobile-menu">
+      <a href="food-recipes.html" class="menu-link" data-page="food-recipes.html">Food Sections</a>
+      <a href="seafood-recipes.html" class="menu-link" data-page="seafood-recipes.html">Seafood</a>
+      <a href="vegetable-recipes.html" class="menu-link" data-page="vegetable-recipes.html">Vegetables</a>
+      <a href="snack-recipes.html" class="menu-link" data-page="snack-recipes.html">Snacks</a>
+      <a href="poultry-recipes.html" class="menu-link" data-page="poultry-recipes.html">Poultry</a>
+      <a href="steak-recipes.html" class="menu-link" data-page="steak-recipes.html">Beef</a>
+      <a href="plant-based-recipes.html" class="menu-link" data-page="plant-based-recipes.html">Plant-Based</a>
+      <a href="cake-recipes.html" class="menu-link" data-page="cake-recipes.html">Cakes</a>
+      <a href="jelly-recipes.html" class="menu-link" data-page="jelly-recipes.html">Jelly</a>
+      <a href="fruit-recipes.html" class="menu-link" data-page="fruit-recipes.html">Fruits</a>
+      <a href="sweet-recipes.html" class="menu-link" data-page="sweet-recipes.html">Sweet-food</a>
+    </div>
+  </nav>
   <div class="container">
-    <button class="top-x-btn" onclick="window.location.href='food-recipes.html'">&times;</button>
+    <button class="top-x-btn" onclick="window.location.href='food-recipes.html'" aria-label="Close Sweet Recipes">&times;</button>
     <h1>Sweet Recipes</h1>
-        <div><em>Click on the images for a bigger view</em></div>
-    <div class="recipes-list">
-      <div class="recipe-card">
-        <div class="recipe-title">Doughnuts</div>
-        <div class="recipe-ingredients"><b>Ingredients:</b> Flour, sugar, eggs, milk, butter, baking powder</div>
-        <div class="recipe-instructions"><b>Instructions:</b> Mix dry ingredients. Add eggs, melted butter, and milk. Fry until golden brown. Add toppings as desired.</div>
-        <div class="meal-previews">
-          <div class="meal-preview">
-            <img src="https://i.ytimg.com/vi/Qh6j6F_Frvw/maxresdefault.jpg" alt="Doughnut 1" onclick="showModal(this)">
-            <div class="meal-caption">Classic glazed doughnuts</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://www.marthastewart.com/thmb/udaXs6DV_t0b9DaBPDQsF5cuR4I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/strawberry-jam-filled-doughnuts-7182-172-msl1018_horiz-7e91dd310f194d04b1ee60a08dad7477.jpgitokxVEeJLcz" alt="Doughnut 2" onclick="showModal(this)">
-            <div class="meal-caption">Raspberry-filled doughnuts</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://dobosdelights.com/wp-content/uploads/2013/07/sugared-donuts-scaled.jpg" alt="Doughnut 3" onclick="showModal(this)">
-            <div class="meal-caption">Sugar-coated doughnuts</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://images.squarespace-cdn.com/content/v1/5e431900f8a3865a4fd57d7b/1582324650136-WYY3L49H0L6FK8CF79W4/IMG_5535.JPG.jpg" alt="Chocolate Cake 4" onclick="showModal(this)">
-            <div class="meal-caption">Decorate with berries</div>
-          </div>
-        </div>
-      </div>
-      <div class="recipe-card">
-        <div class="recipe-title">Croissant</div>
-        <div class="recipe-ingredients"><b>Ingredients:</b> Flour, butter, sugar, salt, yeast, milk, eggs</div>
-        <div class="recipe-instructions"><b>Instructions:</b> Make dough with flour, butter, sugar, salt, and yeast. Roll and fold to create layers. Cut into triangles, shape into croissants, and bake.</div>
-        <div class="meal-previews">
-          <div class="meal-preview">
-            <img src="https://insanelygoodrecipes.com/wp-content/uploads/2020/09/Breakfast-Croissant-With-Coffee.png" alt="Croissant 1" onclick="showModal(this)">
-            <div class="meal-caption">French breakfast</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://www.biteoffox.com/recipe/130dbeb7-f422-4a32-9556-90494b1bc097.jpg?d=1408x1120" alt="Croissant 2" onclick="showModal(this)">
-            <div class="meal-caption">Croissant sandwich</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://www.jonathangarnier.com/cdn/shop/articles/Mini_croissants_aux_fruits_et_creme_chantilly_18680b28-d5aa-4faf-afb9-28b22d0c3cff.png?v=1745351631&width=2048" alt="Croissant 3" onclick="showModal(this)">
-            <div class="meal-caption">Fruits add taste</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://static.wixstatic.com/media/b8697b_69948bb2c559427181f6d613fcc6c436~mv2.png/v1/fill/w_568,h_738,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/b8697b_69948bb2c559427181f6d613fcc6c436~mv2.png" alt="Strawberry Cheesecake 4" onclick="showModal(this)">
-            <div class="meal-caption">They're sweet and have elegance</div>
-          </div>
-        </div>
-      </div>
-      <div class="recipe-card">
-        <div class="recipe-title">Lemon Tart</div>
-        <div class="recipe-ingredients"><b>Ingredients:</b> Flour, butter, sugar, eggs, lemon juice, lemon zest</div>
-        <div class="recipe-instructions"><b>Instructions:</b> Make crust with flour, butter, and sugar. Mix eggs, lemon juice, and zest for filling. Bake crust, add filling, bake again at 170°C for 25 minutes.</div>
-        <div class="meal-previews">
-          <div class="meal-preview">
-            <img src="https://www.cranleighmagazine.co.uk/wp-content/uploads/2019/07/Tangy-Lemon-Tart.jpg" alt="Lemon Tart 1" onclick="showModal(this)">
-            <div class="meal-caption">Tangy lemon tart</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://bojongourmet.com/wp-content/uploads/2020/03/Gluten-Free-Lemon-Tart-Recipe-3.jpg" alt="Lemon Tart 2" onclick="showModal(this)">
-            <div class="meal-caption">Golden crust</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://www.foodandwine.com/thmb/uo4QMoo0aG49X4wHLxS5tlvn5TM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Lemon-EVOO-Cream-Tart-FT-RECIPE0622-4176f311b5434b9faa605aff373bb61b.jpg" alt="Lemon Tart 3" onclick="showModal(this)">
-            <div class="meal-caption">Creamy lemon tart</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://thesavorycipolla.com/wp-content/uploads/2023/05/mini-lemon-tarts-16.jpg" alt="Lemon Tart 4" onclick="showModal(this)">
-            <div class="meal-caption">Mini lemon tarts</div>
-          </div>
-        </div>
-      </div>
-      <div class="recipe-card">
-        <div class="recipe-title">Chocolate Chip Cookies</div>
-        <div class="recipe-ingredients"><b>Ingredients:</b> Flour, sugar, brown sugar, butter, eggs, vanilla, baking soda, salt, chocolate chips</div>
-        <div class="recipe-instructions"><b>Instructions:</b> Cream butter and sugars, add eggs and vanilla. Mix in dry ingredients and chocolate chips. Bake at 180°C for 10-12 minutes.</div>
-        <div class="meal-previews">
-          <div class="meal-preview">
-            <img src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/7/17/1/FN_Simple-Chocolate-Chip-Cookies_s4x3.jpg.rend.hgtvcom.1280.720.suffix/1438794106265.webp" alt="Cookies 1" onclick="showModal(this)">
-            <div class="meal-caption">Classic cookies</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://fitwafflekitchen.com/wp-content/uploads/2021/10/Soft-and-chewy-cookies-resize-500x375.jpg" alt="Cookies 2" onclick="showModal(this)">
-            <div class="meal-caption">Chewy and soft</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://sweetgirltreatsmn.com/wp-content/uploads/2022/01/IMG_4168.jpg" alt="Cookies 3" onclick="showModal(this)">
-            <div class="meal-caption">Loaded with chips</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://www.hersheyland.com/content/dam/hersheyland/en-us/recipes/recipe-images/430-gluten-free-hersheys-milk-chocolate-chip-cookies.jpg" alt="Cookies 4" onclick="showModal(this)">
-            <div class="meal-caption">Perfect snack</div>
-          </div>
-        </div>
-      </div>
+    <div class="divider"></div>
+    <div class="subtitle">
+      Click on the images for a bigger view. Enjoy animated entries, dark mode, and mobile navigation!
+    </div>
+    <div class="recipes-list" id="recipesList">
+      <!-- Recipe cards will be rendered by JS -->
     </div>
     <div>
       <em>Have a favorite sweet recipe? Share it in the <a href="recipe-book.html">Recipe Book</a>!</em>
     </div>
-    <a href="food-recipes.html" class="back-btn">← Back</a>
+    <a href="food-recipes.html" class="back-btn" aria-label="Back to Food Recipes">← Back</a>
+    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">&#9790;</button>
   </div>
   <!-- Modal for full image -->
   <div id="imgModal" class="modal" onclick="closeModal(event)">
     <div class="modal-content">
-      <button class="close-btn" onclick="closeModal(event)">&times;</button>
-      <img id="modalImg" class="modal-img" src="" alt="Full Meal">
+      <button class="close-btn" onclick="closeModal(event)" aria-label="Close image">&times;</button>
+      <img id="modalImg" class="modal-img" src="" alt="Full Sweet">
       <div id="modalCaption" class="modal-caption"></div>
     </div>
   </div>
   <script>
+    // Desktop sidebar highlight
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+      if (window.location.pathname.endsWith(link.getAttribute('data-page'))) {
+        link.classList.add('active');
+      }
+    });
+    // Mobile menu highlight
+    document.querySelectorAll('.menu-link').forEach(link => {
+      if (window.location.pathname.endsWith(link.getAttribute('data-page'))) {
+        link.classList.add('active');
+      }
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let menuOpen = false;
+    menuToggle.addEventListener('click', function() {
+      menuOpen = !menuOpen;
+      mobileMenu.style.display = menuOpen ? 'flex' : 'none';
+      menuToggle.setAttribute('aria-label', menuOpen ? 'Close menu' : 'Open menu');
+      document.body.style.overflow = menuOpen ? 'hidden' : '';
+    });
+    mobileMenu.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') {
+        mobileMenu.style.display = 'none';
+        menuOpen = false;
+        document.body.style.overflow = '';
+      }
+    });
+    window.addEventListener('click', function(e) {
+      if (menuOpen && !mobileMenu.contains(e.target) && e.target !== menuToggle) {
+        mobileMenu.style.display = 'none';
+        menuOpen = false;
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    darkModeToggle.addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+      darkModeToggle.classList.toggle('active');
+      localStorage.setItem('darkModeSweet', document.body.classList.contains('dark-mode'));
+    });
+    if (localStorage.getItem('darkModeSweet') === 'true') {
+      document.body.classList.add('dark-mode');
+      darkModeToggle.classList.add('active');
+    }
+
+    // Recipes data
+    const recipes = [
+      {
+        title: "Doughnuts",
+        ingredients: "Flour, sugar, eggs, milk, butter, baking powder",
+        instructions: "Mix dry ingredients. Add eggs, melted butter, and milk. Fry until golden brown. Add toppings as desired.",
+        images: [
+          {src:"https://i.ytimg.com/vi/Qh6j6F_Frvw/maxresdefault.jpg",caption:"Classic glazed doughnuts"},
+          {src:"https://www.marthastewart.com/thmb/udaXs6DV_t0b9DaBPDQsF5cuR4I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/strawberry-jam-filled-doughnuts-7182-172-msl1018_horiz-7e91dd310f194d04b1ee60a08dad7477.jpgitokxVEeJLcz",caption:"Raspberry-filled doughnuts"},
+          {src:"https://dobosdelights.com/wp-content/uploads/2013/07/sugared-donuts-scaled.jpg",caption:"Sugar-coated doughnuts"},
+          {src:"https://images.squarespace-cdn.com/content/v1/5e431900f8a3865a4fd57d7b/1582324650136-WYY3L49H0L6FK8CF79W4/IMG_5535.JPG.jpg",caption:"Decorate with berries"}
+        ]
+      },
+      {
+        title: "Croissant",
+        ingredients: "Flour, butter, sugar, salt, yeast, milk, eggs",
+        instructions: "Make dough with flour, butter, sugar, salt, and yeast. Roll and fold to create layers. Cut into triangles, shape into croissants, and bake.",
+        images: [
+          {src:"https://insanelygoodrecipes.com/wp-content/uploads/2020/09/Breakfast-Croissant-With-Coffee.png",caption:"French breakfast"},
+          {src:"https://www.biteoffox.com/recipe/130dbeb7-f422-4a32-9556-90494b1bc097.jpg?d=1408x1120",caption:"Croissant sandwich"},
+          {src:"https://www.jonathangarnier.com/cdn/shop/articles/Mini_croissants_aux_fruits_et_creme_chantilly_18680b28-d5aa-4faf-afb9-28b22d0c3cff.png?v=1745351631&width=2048",caption:"Fruits add taste"},
+          {src:"https://static.wixstatic.com/media/b8697b_69948bb2c559427181f6d613fcc6c436~mv2.png/v1/fill/w_568,h_738,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/b8697b_69948bb2c559427181f6d613fcc6c436~mv2.png",caption:"They're sweet and have elegance"}
+        ]
+      },
+      {
+        title: "Lemon Tart",
+        ingredients: "Flour, butter, sugar, eggs, lemon juice, lemon zest",
+        instructions: "Make crust with flour, butter, and sugar. Mix eggs, lemon juice, and zest for filling. Bake crust, add filling, bake again at 170°C for 25 minutes.",
+        images: [
+          {src:"https://www.cranleighmagazine.co.uk/wp-content/uploads/2019/07/Tangy-Lemon-Tart.jpg",caption:"Tangy lemon tart"},
+          {src:"https://bojongourmet.com/wp-content/uploads/2020/03/Gluten-Free-Lemon-Tart-Recipe-3.jpg",caption:"Golden crust"},
+          {src:"https://www.foodandwine.com/thmb/uo4QMoo0aG49X4wHLxS5tlvn5TM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Lemon-EVOO-Cream-Tart-FT-RECIPE0622-4176f311b5434b9faa605aff373bb61b.jpg",caption:"Creamy lemon tart"},
+          {src:"https://thesavorycipolla.com/wp-content/uploads/2023/05/mini-lemon-tarts-16.jpg",caption:"Mini lemon tarts"}
+        ]
+      },
+      {
+        title: "Chocolate Chip Cookies",
+        ingredients: "Flour, sugar, brown sugar, butter, eggs, vanilla, baking soda, salt, chocolate chips",
+        instructions: "Cream butter and sugars, add eggs and vanilla. Mix in dry ingredients and chocolate chips. Bake at 180°C for 10-12 minutes.",
+        images: [
+          {src:"https://food.fnr.sndimg.com/content/dam/images/food/fullset/2014/7/17/1/FN_Simple-Chocolate-Chip-Cookies_s4x3.jpg.rend.hgtvcom.1280.720.suffix/1438794106265.webp",caption:"Classic cookies"},
+          {src:"https://fitwafflekitchen.com/wp-content/uploads/2021/10/Soft-and-chewy-cookies-resize-500x375.jpg",caption:"Chewy and soft"},
+          {src:"https://sweetgirltreatsmn.com/wp-content/uploads/2022/01/IMG_4168.jpg",caption:"Loaded with chips"},
+          {src:"https://www.hersheyland.com/content/dam/hersheyland/en-us/recipes/recipe-images/430-gluten-free-hersheys-milk-chocolate-chip-cookies.jpg",caption:"Perfect snack"}
+        ]
+      }
+    ];
+
+    // Render recipes with animated entry
+    function renderRecipes() {
+      const recipesList = document.getElementById('recipesList');
+      recipesList.innerHTML = recipes.map(recipe => {
+        const maxImages = 3;
+        const imagesHtml = recipe.images.map(img => `
+          <div class="meal-preview">
+            <img src="${img.src}" alt="${recipe.title}" onclick="showModal(this)">
+            <div class="meal-caption">${img.caption}</div>
+          </div>
+        `).join('');
+        const emptyCells = Array(Math.max(0, maxImages - recipe.images.length)).fill('<div class="meal-preview"></div>').join('');
+        return `
+          <div class="recipe-card">
+            <div class="recipe-title">${recipe.title}</div>
+            <div class="recipe-ingredients"><b>Ingredients:</b> ${recipe.ingredients}</div>
+            <div class="recipe-instructions"><b>Instructions:</b> ${recipe.instructions}</div>
+            <div class="meal-previews">
+              ${imagesHtml}${emptyCells}
+            </div>
+          </div>
+        `;
+      }).join('');
+      setTimeout(() => {
+        document.querySelectorAll('.recipe-card').forEach((card, i) => {
+          setTimeout(() => card.classList.add('visible'), 100 * i);
+        });
+      }, 100);
+    }
+    renderRecipes();
+
+    // Modal logic
     function showModal(img) {
       var modal = document.getElementById('imgModal');
       var modalImg = document.getElementById('modalImg');

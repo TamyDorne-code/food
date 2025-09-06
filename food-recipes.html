@@ -3,90 +3,235 @@
 <head>
   <meta charset="UTF-8">
   <title>Food & Recipes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
+    html, body {
+      height: 100%;
       margin: 0;
+      padding: 0;
+    }
+    body {
+      min-height: 100vh;
+      width: 100vw;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Arial, sans-serif;
       color: #222;
-      background: url('https://www.healthaid.co.uk/cdn/shop/articles/Most_Healthy_Food_Choices_for_Daily_Consumption.jpg?v=1640121333') no-repeat center center fixed;
-      background-size: cover;
+      background: linear-gradient(135deg, #e8f5e9 0%, #a5d6a7 100%);
+      overflow-x: hidden;
     }
     .container {
-      max-width: 700px;
-      margin: 40px auto;
-      background: rgba(68, 53, 21, 0.95);
-      border-radius: 18px;
-      box-shadow: 0 4px 24px #ffb34744;
-      padding: 32px 24px;
+      min-height: 100vh;
+      width: 100vw;
+      max-width: none;
+      margin: 0;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
       text-align: center;
-      position: relative; /* Added for X button positioning */
+      position: relative;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .top-x-btn {
-      position: absolute;
+      position: fixed;
       top: 18px;
       right: 24px;
-      background: #413c02;
-      color: #f8b90c;
+      background: #388e3c;
+      color: #fff;
       border: none;
       border-radius: 50%;
-      width: 38px;
-      height: 38px;
-      font-size: 1.8em;
+      width: 44px;
+      height: 44px;
+      font-size: 2em;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 2px 8px #0005;
+      box-shadow: 0 2px 8px #388e3c44;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: background 0.2s;
-      z-index: 10;
+      z-index: 100;
     }
     .top-x-btn:hover {
-      background: #463507;
+      background: #a5d6a7;
+      color: #388e3c;
+    }
+    .logo-wrap {
+      margin-top: 32px;
+      margin-bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .logo {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      border-radius: 50%;
+      box-shadow: 0 2px 12px #a5d6a744;
+      background: #fff;
+      border: 2px solid #a5d6a7;
+      margin-bottom: 0;
+    }
+    .welcome-message {
+      margin-top: 24px;
+      font-size: 1.22em;
+      color: #388e3c;
+      font-family: 'Georgia',serif;
+      font-weight: bold;
     }
     h1 {
-      color: #e7ba58;
-      margin-bottom: 24px;
-      font-size: 2em;
+      color: #388e3c;
+      margin-bottom: 18px;
+      font-size: 2.3em;
       font-family: 'Georgia', serif;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 12px #a5d6a744;
+      margin-top: 18px;
     }
-    .category-list {
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-      align-items: center;
+    h3 {
+      color: #388e3c;
+      font-family: 'Segoe UI', Arial, sans-serif;
       margin-bottom: 32px;
+      font-size: 1.18em;
+      font-weight: normal;
+      font-style: italic;
     }
-    .category-box {
-      background: #725932;
-      border-radius: 18px;
-      box-shadow: 0 2px 12px #2b1a0233;
-      width: 96%;
-      max-width: 600px;
-      padding: 32px 24px;
-      text-align: left;
-      cursor: pointer;
-      transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
+    h2 {
+      color: #388e3c;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin-bottom: 16px;
+      font-size: 1.6em;
+      font-weight: bold;
+    }
+    .search-categories {
+      width: 100%;
+      max-width: 400px;
+      margin: 24px auto;
       position: relative;
-      margin: 0 auto;
-      display: block;
+    }
+    .search-categories input {
+      width: 100%;
+      padding: 12px 18px;
+      border-radius: 10px;
+      border: 2px solid #a5d6a7;
+      font-size: 1.08em;
+      background: #fff;
+      color: #388e3c;
+      box-shadow: 0 1px 6px #a5d6a744;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+    .search-categories input:focus {
+      border: 2px solid #388e3c;
+      background: #e8f5e9;
+      outline: none;
+    }
+/* Shorter boxes, still two per row, with content fitting nicely */
+/* Make one long box per row, with plenty of space for text */
+.category-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  justify-content: center;
+  margin-bottom: 32px;
+  width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.category-box {
+  background: linear-gradient(120deg,#e8f5e9 80%, #c8e6c9 100%);
+  border-radius: 18px;
+  box-shadow: 0 2px 12px #a5d6a744;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  padding: 38px 32px;
+  text-align: left;
+  cursor: pointer;
+  transition: box-shadow 0.3s cubic-bezier(.4,0,.2,1), transform 0.3s cubic-bezier(.4,0,.2,1), background 0.4s;
+  position: relative;
+  margin: 0;
+  font-size: 1.15em;
+  border: 2px solid #a5d6a7;
+  animation: fadeIn 0.7s;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  min-height: 90px;
+  box-sizing: border-box;
+  word-break: break-word;
+}
+
+@media (max-width: 900px) {
+  .category-list {
+    max-width: 98vw;
+    gap: 16px;
+  }
+  .category-box {
+    padding: 24px 10px;
+    font-size: 1.05em;
+    gap: 12px;
+    min-height: 70px;
+  }
+}
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
     }
     .category-box:hover {
-      box-shadow: 0 6px 24px #160e0266;
-      transform: translateY(-4px) scale(1.03);
-      background: #926830;
+      box-shadow: 0 12px 32px #388e3c33, 0 2px 8px #a5d6a744;
+      transform: scale(1.025);
+      background: linear-gradient(120deg,#c8e6c9 80%, #e8f5e9 100%);
+      z-index: 1;
+    }
+    .category-icon {
+      font-size: 2em;
+      margin-right: 8px;
+      flex-shrink: 0;
     }
     .category-title {
-      font-size: 1.35em;
-      color: #cc9e1f;
+      font-size: 1.25em;
+      color: #388e3c;
       font-weight: bold;
       margin-bottom: 8px;
+      letter-spacing: 0.5px;
+      display: block;
     }
     .category-desc {
       font-family: 'Georgia', serif;
-      font-size: 1.2em;
-      color: #19330a;
+      font-size: 1.08em;
+      color: #526885;
       margin-bottom: 10px;
+      display: block;
+    }
+    .category-count {
+      font-size: 0.98em;
+      color: #388e3c;
+      background: #c8e6c9;
+      border-radius: 8px;
+      padding: 2px 10px;
+      margin-left: 8px;
+      font-weight: bold;
+      display: inline-block;
+    }
+    .favorite-btn {
+      background: none;
+      border: none;
+      color: #ffb347;
+      font-size: 1.3em;
+      cursor: pointer;
+      margin-left: 8px;
+      transition: color 0.2s;
+    }
+    .favorite-btn.favorited {
+      color: #388e3c;
+      text-shadow: 0 2px 8px #a5d6a744;
     }
     .category-link {
       display: block;
@@ -95,154 +240,471 @@
       text-indent: -9999px;
       z-index: 2;
     }
-    .back-btn {
-      display: block;
+    .recent-categories {
+      width: 100%;
+      max-width: 600px;
       margin: 32px auto 0 auto;
-      background: #ffe082;
-      color: #464428;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 22px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 1em;
-      box-shadow: 0 2px 8px #ffb34733;
-      transition: background 0.2s;
-      text-decoration: none;
-      text-align: center;
-      width: fit-content;
+      text-align: left;
     }
-    .back-btn:hover {
-      background: #ffb347;
+    .recent-categories-title {
+      color: #388e3c;
+      font-size: 1.15em;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    .recent-categories-list {
+      font-size: 1.08em;
+      color: #526885;
+      width: 100%;
+    }
+    .dark-mode-toggle {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #a5d6a7;
+      color: #388e3c;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 1.5em;
+      box-shadow: 0 2px 12px #a5d6a744;
+      cursor: pointer;
+      z-index: 1001;
+      transition: background 0.2s;
+    }
+    .dark-mode-toggle.active {
+      background: #388e3c;
       color: #fff;
     }
-    h2 {
-      color: #c9a574;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      margin-bottom: 16px;
-      font-size: 1.9em;
+    .footer {
+      background: linear-gradient(90deg, #a5d6a7 10%, #388e3c 90%);
+      border-top: 4px solid #388e3c;
+      margin-top: 40px;
+      padding: 40px 0 24px 0;
+      text-align: center;
+      font-size: 1.12em;
+      color: #fffde7;
+      border-radius: 0 0 32px 32px;
+      box-shadow: 0 -2px 16px #388e3c44;
+      width: 100vw;
     }
-    h3 {
-      color: #9abbe6;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      margin-bottom: 32px;
-      font-size: 1.3em;
-      font-weight: normal;
+    .footer-copy {
+      font-family: "Georgia", serif;
+      font-size: 1.08em;
+      color: #fffde7;
+      margin-top: 18px;
+      opacity: 0.9;
     }
- @media (max-width: 700px) {
-  body { font-size: 1.22em; }
-  h1 { font-size: 2.1em; }
-  h2 { font-size: 1.5em; }
-  h3 { font-size: 1.18em; }
-  .about-text,
-  .info-note,
-  .feature-card,
-  .category-box,
-  .recipe-card {
-    font-size: 1.15em;
-    padding: 20px 4vw;
-  }
-  .feature-title,
-  .category-title,
-  .added-heading {
-    font-size: 1.18em;
-  }
-  .back-btn,
-  button,
-  .top-x-btn {
-    font-size: 1.15em;
-    padding: 16px 8vw;
-  }
-  input,
-  textarea,
-  #searchBox {
-    font-size: 1.12em;
-    padding: 14px 4vw;
-  }
+    @media (max-width: 700px) {
+      body { font-size: 1.22em; }
+      h1 { font-size: 2.1em; }
+      h2 { font-size: 1.5em; }
+      h3 { font-size: 1.18em; }
+      .category-box { max-width: 98vw; min-width: 0; }
+      .back-btn, .top-x-btn { font-size: 1.15em; padding: 16px 8vw; }
+      .search-categories { max-width: 98vw; }
+      .recent-categories { max-width: 98vw; }
+    }
+    /* Dark mode styles */
+    body.dark-mode {
+      background: linear-gradient(135deg, #263238 0%, #388e3c 100%);
+      color: #fffde7;
+    }
+    body.dark-mode .container,
+    body.dark-mode .category-box,
+    body.dark-mode .search-categories input,
+    body.dark-mode .recent-categories,
+    body.dark-mode .footer {
+      background: #263238 !important;
+      color: #fffde7 !important;
+      border-color: #388e3c !important;
+    }
+    body.dark-mode .category-title,
+    body.dark-mode .category-desc,
+    body.dark-mode .category-count,
+    body.dark-mode .recent-categories-title {
+      color: #a5d6a7 !important;
+    }
+    body.dark-mode .category-box:hover {
+      background: #388e3c !important;
+      color: #fffde7 !important;
+    }
+    body.dark-mode .favorite-btn {
+      color: #fffde7 !important;
+    }
+    body.dark-mode .favorite-btn.favorited {
+      color: #ffb347 !important;
+    }
+    body.dark-mode .dark-mode-toggle {
+      background: #388e3c !important;
+      color: #fffde7 !important;
+    }
+    .menu-toggle {
+  display: none;
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 1001;
+  background: #a5d6a7;
+  color: #388e3c;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 2em;
+  box-shadow: 0 2px 12px #a5d6a744;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.menu-toggle:active,
+.menu-toggle:focus {
+  background: #388e3c;
+  color: #fff;
+}
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 80vw;
+  max-width: 320px;
+  height: 100vh;
+  background: #e8f5e9;
+  box-shadow: -2px 0 16px #388e3c44;
+  z-index: 1000;
+  padding: 48px 24px 24px 24px;
+  flex-direction: column;
+  gap: 18px;
+  border-radius: 0 0 0 32px;
+  animation: slideIn 0.3s;
+}
+.mobile-menu a {
+  display: block;
+  color: #388e3c;
+  font-size: 1.18em;
+  text-decoration: none;
+  margin-bottom: 18px;
+  font-family: 'Georgia', serif;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+.mobile-menu a:hover {
+  color: #fff;
+  background: #388e3c;
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+@keyframes slideIn {
+  from { right: -100vw; opacity: 0; }
+  to { right: 0; opacity: 1; }
+}
+@media (max-width: 900px) {
+  .menu-toggle { display: block; }
+}
+@media (min-width: 901px) {
+  .mobile-nav { display: none; }
+}
+.category-box {
+  /* ...existing styles... */
+  opacity: 0;
+  transform: translateY(30px) scale(0.98);
+  transition: opacity 0.5s, transform 0.5s;
+}
+.category-box.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.progress-bar {
+  width: 100%;
+  max-width: 400px;
+  height: 6px;
+  background: #c8e6c9;
+  border-radius: 4px;
+  margin: 0 auto 18px auto;
+  overflow: hidden;
+  position: relative;
+  display: none;
+}
+.progress-bar-inner {
+  height: 100%;
+  width: 0;
+  background: #388e3c;
+  border-radius: 4px;
+  transition: width 0.4s;
+}
+.fancy-back-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 40px auto 0 auto;
+  background: linear-gradient(90deg, #a5d6a7 10%, #388e3c 90%);
+  color: #fffde7;
+  border: none;
+  border-radius: 24px;
+  padding: 16px 36px;
+  font-weight: bold;
+  font-size: 1.18em;
+  box-shadow: 0 4px 18px #388e3c44;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  text-align: center;
+  width: fit-content;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+.fancy-back-btn:hover, .fancy-back-btn:focus {
+  background: linear-gradient(90deg, #388e3c 10%, #a5d6a7 90%);
+  color: #fff;
+  transform: scale(1.04);
+  box-shadow: 0 8px 32px #388e3c44;
+  text-decoration: none;
 }
   </style>
 </head>
 <body>
+  <nav class="mobile-nav" aria-label="Mobile Navigation">
+  <button id="menuToggle" aria-label="Open menu" class="menu-toggle">
+    &#9776;
+  </button>
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="food-recipes.html">Food & Recipes</a>
+    <a href="recipe-book.html">Recipe Book</a>
+    <a href="tips-tricks.html">Tips & Tricks</a>
+    <a href="about-chef.html">About</a>
+    <a href="seafood-recipes.html">Seafood</a>
+    <a href="vegetable-recipes.html">Vegetables</a>
+    <a href="steak-recipes.html">Steak & Beef</a>
+    <a href="poultry-recipes.html">Poultry</a>
+    <a href="plant-based-recipes.html">Plant-Based</a>
+    <a href="sweet-recipes.html">Sweet</a>
+    <a href="snack-recipes.html">Snacks</a>
+    <a href="cake-recipes.html">Cakes</a>
+    <a href="jelly-recipes.html">Jelly</a>
+    <a href="fruit-recipes.html">Fruits</a>
+  </div>
+</nav>
   <div class="container">
-        <button class="top-x-btn" onclick="window.location.href='index.html'" 
-  style="position:fixed;top:18px;right:24px;background:#302003;color:#f5aa0a;border:none;border-radius:50%;width:38px;height:38px;font-size:1.8em;font-weight:bold;cursor:pointer;box-shadow:0 2px 8px #0005;display:flex;align-items:center;justify-content:center;transition:background 0.2s;z-index:100;">&times;</button>  
-    <h1>Food & Recipes</h1>
+    <button class="top-x-btn" onclick="window.location.href='index.html'" aria-label="Close Food & Recipes">&times;</button>
+    <div class="logo-wrap">
+      <!-- Logo -->
+      <img src="chef-hat-logo.png" alt="Chef's Favourite Logo" class="logo" aria-label="Chef's Favourite Logo">
+    </div>
+    <!-- Welcome Message -->
+    <div class="welcome-message" aria-live="polite">
+      🍽️ Welcome to Food & Recipes! Explore delicious categories and find your next favorite dish.
+    </div>
+    <!--Main title and subtitle-->
+    <h1 tabindex="0">Food & Recipes</h1>
     <h3>Explore a variety of delicious recipes through our <em>categories</em>.</h3>
+    <div class="search-categories">
+      <input type="text" id="categorySearch" placeholder="Search categories..." aria-label="Search categories">
+    </div>
+    <!-- Food Sections -->
     <h2>Food Sections</h2>
-    <div class="category-list">
-      <div class="category-box">
-        <span class="category-title">Seafood</span>
-        <div class="category-desc">Delicious recipes with fish, shrimp, and more from the sea.</div>
-        <a href="seafood-recipes.html" class="category-link">Seafood</a>
-      </div>
-      <div class="category-box">
-        <span class="category-title">Vegetables</span>
-        <div class="category-desc">Healthy and tasty vegetable-based dishes for every meal.</div>
-        <a href="vegetable-recipes.html" class="category-link">Vegetables</a>
-      </div>
-      <div class="category-box">
-        <span class="category-title">Steak & Beef</span>
-        <div class="category-desc">Juicy steak and beef recipes for meat lovers.</div>
-        <a href="steak-recipes.html" class="category-link">Steak & Beef</a>
-      </div>
-      <div class="category-box">
-        <span class="category-title">Poultry</span>
-        <div class="category-desc">Chicken, turkey, and other poultry favorites.</div>
-        <a href="poultry-recipes.html" class="category-link">Poultry</a>
-      </div>
-      <div class="category-box">
-        <span class="category-title">Plant-based</span>
-        <div class="category-desc">Plant-based recipes for a healthier lifestyle.</div>
-        <a href="plant-based-recipes.html" class="category-link">Plant-based</a>
-      </div>
-      <div class="category-box">
-        <span class="category-title">Sweet</span>
-        <div class="category-desc">Doughnuts, cookies, and other sweet treats.</div>
-        <a href="sweet-recipes.html" class="category-link">Sweet</a>
-      </div>
-      <div class="category-box">
-        <span class="category-title">Snacks</span>
-        <div class="category-desc">Chips, dips, and other savory snacks.</div>
-        <a href="snack-recipes.html" class="category-link">Snacks</a>
-      </div>
-  <div class="category-box">
-    <span class="category-title">Cakes</span>
-    <div class="category-desc">Delicious cakes for every occasion.</div>
-    <a href="cake-recipes.html" class="category-link">Cakes</a>
-  </div>
-  <div class="category-box">
-    <span class="category-title">Jelly</span>
-    <div class="category-desc">Indulge in our sweet and fruity jelly recipes.</div>
-    <a href="jelly-recipes.html" class="category-link">Jelly</a>
-  </div>
-  <div class="category-box">
-    <span class="category-title">Fruits</span>
-    <div class="category-desc">Fresh and delicious fruit recipes for all seasons.</div>
-    <a href="fruit-recipes.html" class="category-link">Fruits</a>
-  </div>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar">
+  <div class="progress-bar-inner" id="progressBarInner"></div>
 </div>
-</div>
-    <a href="index.html" class="back-btn">← Back</a>
+    <div class="category-list" id="categoryList">
+      <!-- Categories will be rendered by JS -->
+    </div>
+    <!-- Recently Viewed Categories -->
+    <div class="recent-categories" id="recentCategories">
+      <div class="recent-categories-title">Recently Viewed Categories</div>
+      <div class="recent-categories-list" id="recentCategoriesList"></div>
+    </div>
+    <!--Dark mode-->
+    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">&#9790;</button>
+<a href="index.html" class="back-btn fancy-back-btn" aria-label="Back to main page">
+  <span style="font-size:1.3em;vertical-align:middle;">&#8592;</span>
+  <span style="margin-left:8px;vertical-align:middle;">Back to Main Page</span>
+</a>
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-copy">
+        &copy; 2025 Chef's Favourite &mdash; All recipes and tips are for inspiration only.<br>
+        <em>Made with love for cooking by <strong>Doreen Baker</strong> for food lovers.</em>
+      </div>
+    </div>
   </div>
   <script>
-  // Save last clicked category
-  document.querySelectorAll('.category-link').forEach(function(link) {
-    link.addEventListener('click', function() {
-      localStorage.setItem('lastCategory', link.getAttribute('href'));
+    // Category data with icons and recipe counts
+    const categories = [
+      { name: "Seafood", desc: "Delicious recipes with fish, shrimp, and more from the sea.", icon: "🦐", link: "seafood-recipes.html", count: 12 },
+      { name: "Vegetables", desc: "Healthy and tasty vegetable-based dishes for every meal.", icon: "🥦", link: "vegetable-recipes.html", count: 15 },
+      { name: "Steak & Beef", desc: "Juicy steak and beef recipes for meat lovers.", icon: "🥩", link: "steak-recipes.html", count: 8 },
+      { name: "Poultry", desc: "Chicken, turkey, and other poultry favorites.", icon: "🍗", link: "poultry-recipes.html", count: 10 },
+      { name: "Plant-based", desc: "Plant-based recipes for a healthier lifestyle.", icon: "🌱", link: "plant-based-recipes.html", count: 14 },
+      { name: "Sweet", desc: "Doughnuts, cookies, and other sweet treats.", icon: "🍩", link: "sweet-recipes.html", count: 11 },
+      { name: "Snacks", desc: "Chips, dips, and other savory snacks.", icon: "🍿", link: "snack-recipes.html", count: 9 },
+      { name: "Cakes", desc: "Delicious cakes for every occasion.", icon: "🍰", link: "cake-recipes.html", count: 7 },
+      { name: "Jelly", desc: "Indulge in our sweet and fruity jelly recipes.", icon: "🍮", link: "jelly-recipes.html", count: 6 },
+      { name: "Fruits", desc: "Fresh and delicious fruit recipes for all seasons.", icon: "🍓", link: "fruit-recipes.html", count: 13 }
+    ];
+
+  <!--Update your renderCategories function in <script> like this:-->
+function renderCategories(filter = "") {
+  const list = document.getElementById('categoryList');
+  const favorites = JSON.parse(localStorage.getItem('favoriteCategories') || '[]');
+  const progressBar = document.getElementById('progressBar');
+  const progressBarInner = document.getElementById('progressBarInner');
+  // Show progress bar
+  progressBar.style.display = 'block';
+  progressBarInner.style.width = '0';
+  setTimeout(() => { progressBarInner.style.width = '80%'; }, 50);
+
+  // Simulate loading delay for animation
+  setTimeout(() => {
+    const filtered = categories
+      .filter(cat => cat.name.toLowerCase().includes(filter.toLowerCase()) || cat.desc.toLowerCase().includes(filter.toLowerCase()));
+    list.innerHTML = filtered
+      .map((cat, idx) => `
+        <div class="category-box" tabindex="0" aria-label="${cat.name}">
+          <span class="category-icon">${cat.icon}</span>
+          <div style="flex:1; display:flex; flex-direction:row; align-items:center; justify-content:space-between; width:100%;">
+            <div style="display:flex; align-items:center; flex-wrap:wrap;">
+              <span class="category-title" style="font-size:1.25em; color:#388e3c; font-weight:bold; margin-right:10px;">${cat.name}</span>
+              <span class="category-count">${cat.count} recipes</span>
+              <button class="favorite-btn${favorites.includes(cat.name) ? ' favorited' : ''}" data-name="${cat.name}" aria-label="Favorite ${cat.name}">
+                &#9733;
+              </button>
+            </div>
+            <span class="category-desc" style="margin-left:32px; font-size:1.08em; color:#526885; max-width:340px; word-break:break-word;">${cat.desc}</span>
+          </div>
+          <a href="${cat.link}" class="category-link" aria-label="Go to ${cat.name}"></a>
+        </div>
+      `).join('');
+    // Animate entry
+    setTimeout(() => {
+      document.querySelectorAll('.category-box').forEach((box, i) => {
+        setTimeout(() => box.classList.add('visible'), 80 * i);
+      });
+      progressBarInner.style.width = '100%';
+      setTimeout(() => { progressBar.style.display = 'none'; }, 400);
+    }, 100);
+    // Add favorite button events
+    document.querySelectorAll('.favorite-btn').forEach(btn => {
+      btn.onclick = function(e) {
+        e.stopPropagation();
+        const name = this.getAttribute('data-name');
+        let favs = JSON.parse(localStorage.getItem('favoriteCategories') || '[]');
+        if (favs.includes(name)) {
+          favs = favs.filter(f => f !== name);
+        } else {
+          favs.push(name);
+        }
+        localStorage.setItem('favoriteCategories', JSON.stringify(favs));
+        renderCategories(document.getElementById('categorySearch').value);
+      };
     });
+    // Add recently viewed tracking
+    document.querySelectorAll('.category-link').forEach(function(link) {
+      link.addEventListener('click', function() {
+        addRecentlyViewedCategory(link.parentElement.querySelector('.category-title').textContent, link.getAttribute('href'));
+        localStorage.setItem('lastCategory', link.getAttribute('href'));
+      });
+    });
+  }, 500); // Simulate loading delay
+}
+
+    // Search bar for categories
+    document.getElementById('categorySearch').addEventListener('input', function() {
+      renderCategories(this.value);
+    });
+
+    // Recently viewed categories
+    function addRecentlyViewedCategory(name, link) {
+      let recent = JSON.parse(localStorage.getItem('recentCategories') || '[]');
+      recent = recent.filter(item => item.link !== link);
+      recent.unshift({ name, link });
+      if (recent.length > 5) recent = recent.slice(0, 5);
+      localStorage.setItem('recentCategories', JSON.stringify(recent));
+      showRecentlyViewedCategories();
+    }
+
+    function showRecentlyViewedCategories() {
+      const recent = JSON.parse(localStorage.getItem('recentCategories') || '[]');
+      const recentList = document.getElementById('recentCategoriesList');
+      if (recent.length === 0) {
+        recentList.innerHTML = '<span style="color:#bdbdbd;">No categories viewed yet.</span>';
+        return;
+      }
+      recentList.innerHTML = recent.map((item, idx) =>
+        `<div style="display:flex;align-items:center;justify-content:space-between;width:100%;margin-bottom:8px;">
+          <a href="${item.link}" style="color:#388e3c;text-decoration:none;font-weight:bold;flex:1;">${item.name}</a>
+          <span class="delete-recent-cat" data-idx="${idx}" title="Remove" style="cursor:pointer;font-size:1.15em;margin-left:18px;">&#x1F5D1;</span>
+        </div>`
+      ).join('');
+      // Add click event for trash icons
+      document.querySelectorAll('.delete-recent-cat').forEach(function(trash) {
+        trash.onclick = function() {
+          let recent = JSON.parse(localStorage.getItem('recentCategories') || '[]');
+          const idx = parseInt(this.getAttribute('data-idx'));
+          recent.splice(idx, 1);
+          localStorage.setItem('recentCategories', JSON.stringify(recent));
+          showRecentlyViewedCategories();
+        };
+      });
+    }
+
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    darkModeToggle.addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+      darkModeToggle.classList.toggle('active');
+      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    });
+    // Load dark mode preference
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.body.classList.add('dark-mode');
+      darkModeToggle.classList.add('active');
+    }
+
+    // Initial render
+    renderCategories();
+    showRecentlyViewedCategories();
+
+    // On page load, scroll to last category
+    window.addEventListener('DOMContentLoaded', function() {
+      var lastCategory = localStorage.getItem('lastCategory');
+      if (lastCategory) {
+        var targetBox = Array.from(document.querySelectorAll('.category-link'))
+          .find(link => link.getAttribute('href') === lastCategory);
+        if (targetBox) {
+          targetBox.parentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    });
+      const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  let menuOpen = false;
+
+  menuToggle.addEventListener('click', function() {
+    menuOpen = !menuOpen;
+    mobileMenu.style.display = menuOpen ? 'flex' : 'none';
+    menuToggle.setAttribute('aria-label', menuOpen ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
   });
 
-  // On page load, scroll to last category
-  window.addEventListener('DOMContentLoaded', function() {
-    var lastCategory = localStorage.getItem('lastCategory');
-    if (lastCategory) {
-      var targetBox = Array.from(document.querySelectorAll('.category-link'))
-        .find(link => link.getAttribute('href') === lastCategory);
-      if (targetBox) {
-        targetBox.parentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
+  // Close menu when clicking a link or outside
+  mobileMenu.addEventListener('click', function(e) {
+    if (e.target.tagName === 'A') {
+      mobileMenu.style.display = 'none';
+      menuOpen = false;
+      document.body.style.overflow = '';
     }
   });
-</script>
+  window.addEventListener('click', function(e) {
+    if (menuOpen && !mobileMenu.contains(e.target) && e.target !== menuToggle) {
+      mobileMenu.style.display = 'none';
+      menuOpen = false;
+      document.body.style.overflow = '';
+    }
+  });
+  </script>
 </body>
 </html>

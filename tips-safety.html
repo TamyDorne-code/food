@@ -3,168 +3,358 @@
 <head>
   <meta charset="UTF-8">
   <title>Kitchen Safety Tips</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body { font-family: 'Segoe UI', Arial, sans-serif; 
-        background: #b6baec; 
-        margin: 0; 
-        color: #222; }
-    .container { max-width: 650px; 
-        margin: 40px auto; 
-        background: #9dabd1; 
-        border-radius: 18px; 
-        box-shadow: 0 4px 24px #ffb34744; 
-        padding: 32px 24px; 
-        text-align: center; 
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Georgia', 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #e6f2ed 0%, #b7b872 60%, #7ad6d6 100%);
+      color: #20311a;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
-    h1 { color: #1e3186; 
-        margin-bottom: 24px; 
-        font-size: 2em; 
+    .main-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 48px;
+      padding-bottom: 48px;
     }
-    .safety-category-list { display: flex; 
-        flex-direction: column; 
-        gap: 28px; 
-        align-items: center; 
-        margin-bottom: 32px; 
+    .top-x-btn {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      background: #2196f3;
+      color: #e6f2ed;
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 2em;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #2196f344;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      z-index: 101;
     }
-    .safety-category-box { background: #cbd0e4; 
-        border-radius: 14px; 
-        box-shadow: 0 2px 12px #ffb34733; 
-        width: 96%; 
-        max-width: 500px; 
-        padding: 24px 18px; 
-        text-align: left; 
-        margin: 0 auto; 
+    .top-x-btn:hover {
+      background: #b7b872;
+      color: #2196f3;
     }
-    .safety-category-title { font-size: 1.18em; 
-        color: #3e4488; 
-        font-weight: bold; 
-        margin-bottom: 8px; 
+    .title-section {
+      text-align: center;
+      margin-bottom: 18px;
     }
-    .safety-category-desc { font-size: 1.05em; 
-        color: #526885; 
-        margin-bottom: 10px; 
+    h1 {
+      color: #2196f3;
+      font-size: 2.5em;
+      font-family: 'Georgia', serif;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      margin-top: 0;
+      text-shadow: 0 2px 12px #b7b87244;
     }
-    ul { text-align: left; 
-        font-size: 1.08em; 
-        color: #526885; 
-        padding-left: 18px; 
-        margin-bottom: 0; 
+    .divider {
+      width: 80px;
+      height: 6px;
+      background: linear-gradient(90deg,#2196f3,#b7b872,#e6f2ed);
+      border-radius: 3px;
+      margin: 0 auto 24px auto;
+      opacity: 0.8;
+      position: relative;
+      z-index: 1;
     }
-    .back-btn { display: block; 
-        margin: 32px auto 0 auto; 
-        background: #c7bff8; 
-        color: #7961ff; 
-        border: none; 
-        border-radius: 8px; 
-        padding: 10px 22px; 
-        font-weight: bold; 
-        cursor: pointer; 
-        font-size: 1em; 
-        box-shadow: 0 2px 8px #ffb34733; 
-        transition: background 0.2s; 
-        text-decoration: none; 
-        text-align: center; 
-        width: fit-content; 
+    .subtitle {
+      font-size: 1.15em;
+      color: #314766;
+      margin-bottom: 22px;
+      font-style: italic;
+      background: #e6e9c6;
+      border-radius: 12px;
+      padding: 10px 24px;
+      box-shadow: 0 2px 8px #b7b87244;
+      display: inline-block;
+      font-family: 'Georgia', serif;
     }
-    .back-btn:hover { background: #5347ff; 
-        color: #ffffff; 
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto 32px auto;
     }
-    p {
-        margin: 12px 0;
-        line-height: 1.6em;
-        font-family:'Courier New', Courier, monospace;
-        font-style: italic;
-        color:#151841;
+    .tip-card {
+      background: linear-gradient(120deg, #e6f2ed 70%, #7ad6d6 100%);
+      border-radius: 18px;
+      box-shadow: 0 2px 12px #b7b87233;
+      padding: 32px 24px;
+      text-align: left;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border: 2px solid #b7b872;
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+      animation: fadeInCard 0.7s;
+      font-family: 'Georgia', serif;
+      transition: box-shadow 0.2s, background 0.2s, border-color 0.2s;
+    }
+    .tip-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .tip-card:hover {
+      box-shadow: 0 8px 32px #2196f366;
+      background: linear-gradient(120deg, #e6f2ed 70%, #b7b872 100%);
+      border-color: #2196f3;
+    }
+    .tip-title {
+      font-size: 1.25em;
+      color: #2196f3;
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-family: 'Georgia', serif;
+      letter-spacing: 1px;
+    }
+    .tip-desc {
+      font-size: 1.07em;
+      color: #388e3c;
+      margin-bottom: 10px;
+      font-style: italic;
+      font-family: 'Georgia', serif;
+    }
+    ul {
+      text-align: left;
+      font-size: 1.08em;
+      color: #526885;
+      padding-left: 18px;
+      margin-bottom: 0;
+      font-family: 'Georgia', serif;
+    }
+    .back-btn {
+      display: block;
+      margin: 32px auto 0 auto;
+      background: linear-gradient(90deg, #b7b872 10%, #2196f3 90%);
+      color: #e6f2ed;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 28px;
+      font-weight: bold;
+      font-size: 1.08em;
+      box-shadow: 0 2px 8px #b7b87244;
+      transition: background 0.2s, transform 0.2s;
+      text-decoration: none;
+      text-align: center;
+      width: fit-content;
+      font-family: 'Georgia', serif;
+      cursor: pointer;
+    }
+    .back-btn:hover, .back-btn:focus {
+      background: linear-gradient(90deg, #2196f3 10%, #b7b872 90%);
+      color: #20311a;
+      transform: scale(1.04);
+      box-shadow: 0 8px 32px #b7b87244;
+      text-decoration: none;
+    }
+    @keyframes fadeInCard {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
     }
     @media (max-width: 700px) {
-  body { font-size: 1.22em; }
-  h1 { font-size: 2.1em; }
-  h2 { font-size: 1.5em; }
-  h3 { font-size: 1.18em; }
-  .about-text,
-  .info-note,
-  .feature-card,
-  .category-box,
-  .recipe-card {
-    font-size: 1.15em;
-    padding: 20px 4vw;
-  }
-  .feature-title,
-  .category-title,
-  .added-heading {
-    font-size: 1.18em;
-  }
-  .back-btn,
-  button,
-  .top-x-btn {
-    font-size: 1.15em;
-    padding: 16px 8vw;
-  }
-  input,
-  textarea,
-  #searchBox {
-    font-size: 1.12em;
-    padding: 14px 4vw;
+      body { font-size: 1.22em; }
+      h1 { font-size: 2.1em; }
+      .tip-card { font-size: 1.15em; padding: 20px 4vw; }
+      .tip-title { font-size: 1.18em; }
+      .back-btn, .top-x-btn { font-size: 1.15em; padding: 16px 8vw; }
+      .tips-grid { grid-template-columns: 1fr; }
+    }
+    .menu-toggle {
+  display: block;
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 1001;
+  background: #2196f3;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 2em;
+  box-shadow: 0 2px 12px #2196f344;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.menu-toggle:active,
+.menu-toggle:focus {
+  background: #b7b872;
+  color: #2196f3;
+}
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 80vw;
+  max-width: 320px;
+  height: 100vh;
+  background: #7ad6d6;
+  box-shadow: -2px 0 16px #2196f344;
+  z-index: 1000;
+  padding: 48px 24px 24px 24px;
+  flex-direction: column;
+  gap: 18px;
+  border-radius: 0 0 0 32px;
+  animation: slideIn 0.3s;
+}
+.mobile-menu a {
+  display: block;
+  color: #2196f3;
+  font-size: 1.18em;
+  text-decoration: none;
+  margin-bottom: 18px;
+  font-family: 'Georgia', serif;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+.mobile-menu a:hover {
+  color: #388e3c;
+  background: #b7b872;
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+@keyframes slideIn {
+  from { right: -100vw; opacity: 0; }
+  to { right: 0; opacity: 1; }
+}
+@media (min-width: 701px) {
+  .menu-toggle {
+    display: none;
   }
 }
   </style>
 </head>
 <body>
-  <div class="container">
-            <button class="top-x-btn" onclick="window.location.href='tips-tricks.html'" 
-  style="position:fixed;top:18px;right:24px;background:#0b0336;color:#a59bd4;border:none;border-radius:50%;width:38px;height:38px;font-size:1.8em;font-weight:bold;cursor:pointer;box-shadow:0 2px 8px #0005;display:flex;align-items:center;justify-content:center;transition:background 0.2s;z-index:100;">&times;</button>  
-    <h1>Kitchen Safety Tips</h1>
-    <p>Stay safe in the kitchen with these tips, organized by category:</p>
-    <div class="safety-category-list">
-      <div class="safety-category-box">
-        <div class="safety-category-title">Burn & Heat Safety</div>
-        <div class="safety-category-desc">Avoid burns and heat-related accidents.</div>
-        <ul>
-          <li>Use oven mitts to prevent burns.</li>
-          <li>Keep pot and pan handles turned in to avoid knocking them off the stove.</li>
-          <li>Let hot pans cool before washing to prevent steam burns.</li>
-          <li>If children are cooking, make sure they are supervised at all times.</li>
-        </ul>
-      </div>
-      <div class="safety-category-box">
-        <div class="safety-category-title">Knife Safety</div>
-        <div class="safety-category-desc">Handle knives with care.</div>
-        <ul>
-          <li>Store knives safely and children how to use them without causing any danger.</li>
-          <li>Use a sharp knife for safer, easier chopping.</li>
-          <li>Always cut away from your body and use a stable cutting board.</li>
-          <li>If you’re not a pro with the knife, make sure to cut slowly and carefully.<li>
-        </ul>
-      </div>
-      <div class="safety-category-box">
-        <div class="safety-category-title">Food Safety</div>
-        <div class="safety-category-desc">Keep your food safe to eat.</div>
-        <ul>
-          <li>Keep raw meat and seafood separate from other foods.</li>
-          <li>Wash hands and surfaces often to prevent cross-contamination.</li>
-          <li>Cook foods to safe temperatures using a thermometer.</li>
-          <li>Refrigerate leftovers promptly to prevent spoilage.</li>
-          <li>Use clean utensils and cutting boards to avoid cross-contamination.</li>
-        </ul>
-      </div>
-      <div class="safety-category-box">
-        <div class="safety-category-title">General Kitchen Safety</div>
-        <div class="safety-category-desc">Tips for a safe cooking environment.</div>
-        <ul>
-          <li>Clean spills immediately to prevent slips and falls.</li>
-          <li>Keep electrical cords away from water.</li>
-          <li>Use a step stool for reaching high shelves.</li>
-          <li>Never leave cooking food unattended.</li>
-          <li>Keep a fire extinguisher nearby and know how to use it.</li>
-          <li>Have a first aid kit accessible in case of emergencies.</li>
-          <li>Keep the kitchen tidy and free of clutter.</li>
-          <li>Wear an apron to protect your clothing.</li>
-          <li>Store heavy items on lower shelves to avoid injuries.</li>
-          <li>After cooking, turn off all appliances and clean up spills and utensils.</li>
-        </ul>
+  <nav class="mobile-nav" aria-label="Mobile Navigation">
+  <button id="menuToggle" aria-label="Open menu" class="menu-toggle">&#9776;</button>
+  <div id="mobileMenu" class="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="food-recipes.html">Food & Recipes</a>
+    <a href="recipe-book.html">Recipe Book</a>
+    <a href="tips-tricks.html">Tips & Tricks</a>
+    <a href="about-chef.html">About</a>
+  </div>
+</nav>
+  <button class="top-x-btn" onclick="window.location.href='tips-tricks.html'" aria-label="Close Kitchen Safety Tips">&times;</button>
+  <div class="main-wrapper">
+    <div class="title-section">
+      <h1>Kitchen Safety Tips</h1>
+      <div class="divider"></div>
+      <div class="subtitle">
+        Stay safe in the kitchen with these essential safety tips, organized by category:
       </div>
     </div>
-    <a href="tips-tricks.html" class="back-btn">← Back</a>
+    <div class="tips-grid" id="safetyTipsGrid">
+      <!-- Cards will be rendered by JS for animation -->
+    </div>
+    <a href="tips-tricks.html" class="back-btn" aria-label="Back to Tips & Tricks">← Back</a>
   </div>
+  <script>
+    const safetyCategories = [
+      {
+        title: "Knife Safety",
+        desc: "Handle knives with care to avoid injury.",
+        tips: [
+          "Always use a sharp knife—dull knives are more dangerous.",
+          "Cut away from your body and keep fingers clear.",
+          "Use a stable cutting board and non-slip mat.",
+          "Store knives safely and out of reach of children."
+        ]
+      },
+      {
+        title: "Fire & Heat Safety",
+        desc: "Prevent burns and kitchen fires.",
+        tips: [
+          "Keep flammable items away from stovetops.",
+          "Never leave cooking unattended.",
+          "Use oven mitts when handling hot pans.",
+          "Know where your fire extinguisher is and how to use it."
+        ]
+      },
+      {
+        title: "Food Safety",
+        desc: "Keep food safe from contamination.",
+        tips: [
+          "Wash hands before and after handling food.",
+          "Keep raw meat, poultry, and seafood separate from other foods.",
+          "Cook foods to safe internal temperatures.",
+          "Refrigerate leftovers promptly."
+        ]
+      },
+      {
+        title: "General Kitchen Safety",
+        desc: "Stay alert and organized.",
+        tips: [
+          "Clean spills immediately to prevent slips.",
+          "Keep floors and walkways clear.",
+          "Unplug appliances when not in use.",
+          "Keep children and pets out of the kitchen while cooking."
+        ]
+      }
+    ];
+
+    // Render cards with animated entry
+    function renderSafetyTips() {
+      const grid = document.getElementById('safetyTipsGrid');
+      grid.innerHTML = safetyCategories.map(cat => `
+        <div class="tip-card">
+          <div class="tip-title">${cat.title}</div>
+          <div class="tip-desc">${cat.desc}</div>
+          <ul>
+            ${cat.tips.map(tip => `<li>${tip}</li>`).join('')}
+          </ul>
+        </div>
+      `).join('');
+      setTimeout(() => {
+        document.querySelectorAll('.tip-card').forEach((card, i) => {
+          setTimeout(() => card.classList.add('visible'), 100 * i);
+        });
+      }, 100);
+    }
+    renderSafetyTips();
+    const menuToggle = document.getElementById('menuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+let menuOpen = false;
+menuToggle.addEventListener('click', function() {
+  menuOpen = !menuOpen;
+  mobileMenu.style.display = menuOpen ? 'flex' : 'none';
+  menuToggle.setAttribute('aria-label', menuOpen ? 'Close menu' : 'Open menu');
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+});
+mobileMenu.addEventListener('click', function(e) {
+  if (e.target.tagName === 'A') {
+    mobileMenu.style.display = 'none';
+    menuOpen = false;
+    document.body.style.overflow = '';
+  }
+});
+window.addEventListener('click', function(e) {
+  if (menuOpen && !mobileMenu.contains(e.target) && e.target !== menuToggle) {
+    mobileMenu.style.display = 'none';
+    menuOpen = false;
+    document.body.style.overflow = '';
+  }
+});
+  </script>
 </body>
 </html>

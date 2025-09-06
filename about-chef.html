@@ -3,63 +3,106 @@
 <head>
   <meta charset="UTF-8">
   <title>About Chef's Favourite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+     html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
     body {
+      min-height: 100vh;
+      min-width: 100vw;
+      width: 100vw;
+      height: 100vh;
       font-family: 'Georgia', 'Segoe UI', Arial, sans-serif;
       background: linear-gradient(135deg, #e8f5e9 0%, #a5d6a7 100%);
-      margin: 0;
       color: #222;
+      overflow-x: hidden;
     }
     .container {
-      max-width: 740px;
-      margin: 48px auto;
-      background: #f7fff7;
-      border-radius: 36px;
-      box-shadow: 0 12px 40px #a5d6a7aa, 0 1.5px 0 #fffde7 inset;
-      padding: 64px 44px 48px 44px;
+      min-height: 100vh;
+      min-width: 100vw;
+      width: 100vw;
+      max-width: none;
+      margin: 0;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
       text-align: center;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
     }
-    .container::before {
-      content: "";
-      position: absolute;
-      top: -60px; left: -60px;
-      width: 200px; height: 200px;
-      background: radial-gradient(circle, #a5d6a7 60%, #388e3c 100%);
-      opacity: 0.18;
+    .top-x-btn {
+      position: fixed;
+      top: 18px;
+      right: 24px;
+      background: #388e3c;
+      color: #fffde7;
+      border: none;
       border-radius: 50%;
-      z-index: 0;
+      width: 44px;
+      height: 44px;
+      font-size: 2em;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #388e3c44;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      z-index: 100;
     }
-    .container::after {
-      content: "";
-      position: absolute;
-      bottom: -60px; right: -60px;
-      width: 200px; height: 200px;
-      background: radial-gradient(circle, #388e3c 60%, #e8f5e9 100%);
-      opacity: 0.13;
-      border-radius: 50%;
-      z-index: 0;
+    .top-x-btn:hover {
+      background: #a5d6a7;
+      color: #388e3c;
     }
     h1 {
       color: #388e3c;
-      margin-bottom: 18px;
+      margin-bottom: 10px;
       font-size: 2.7em;
       font-family: 'Georgia', serif;
       letter-spacing: 2px;
       text-shadow: 0 2px 12px #a5d6a744;
-      position: relative;
-      z-index: 1;
+      margin-top: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      animation: fadeIn 1s;
+    }
+    .chef-emoji {
+      font-size: 1.3em;
+      margin-right: 6px;
+      vertical-align: middle;
+      filter: drop-shadow(0 2px 8px #a5d6a744);
+      animation: iconBounce 1.2s;
+    }
+    @keyframes iconBounce {
+      0% { transform: scale(1);}
+      30% { transform: scale(1.3) rotate(-10deg);}
+      50% { transform: scale(1.1) rotate(10deg);}
+      70% { transform: scale(1.2);}
+      100% { transform: scale(1);}
     }
     .divider {
       width: 90px;
       height: 7px;
-      background: linear-gradient(90deg,#a5d6a7,#388e3c);
+      background: linear-gradient(90deg,#a5d6a7,#388e3c,#8bc34a);
       border-radius: 3px;
       margin: 18px auto 32px auto;
       opacity: 0.8;
       position: relative;
       z-index: 1;
+      animation: fadeIn 1.2s;
     }
     .about-text {
       font-size: 1.18em;
@@ -76,6 +119,13 @@
       position: relative;
       z-index: 1;
       border: 2px solid #a5d6a7;
+      animation: fadeIn 1.3s;
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+    }
+    .about-text.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
     .about-text b {
       color: #1e6d13;
@@ -96,6 +146,13 @@
       position: relative;
       z-index: 1;
       font-style: italic;
+      animation: fadeIn 1.4s;
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+    }
+    .info-note.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
     .features-list {
       display: flex;
@@ -106,6 +163,13 @@
       margin-top: 10px;
       position: relative;
       z-index: 1;
+      animation: fadeIn 1.5s;
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+    }
+    .features-list.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
     .feature-card {
       background: linear-gradient(120deg,#e8f5e9 80%, #c8e6c9 100%);
@@ -119,6 +183,21 @@
       position: relative;
       transition: box-shadow 0.2s, transform 0.2s;
       font-size: 1.08em;
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+      animation: fadeInCard 0.7s;
+    }
+    .feature-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInCard {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
     }
     .feature-card:hover {
       box-shadow: 0 8px 32px #388e3c44;
@@ -131,112 +210,563 @@
       font-size: 1.13em;
       margin-bottom: 8px;
       letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
     .feature-icon {
       font-size: 1.6em;
       margin-right: 8px;
       vertical-align: middle;
+      display: inline-block;
+      animation: iconBounce 1.2s;
     }
-    .back-btn {
-      display: block;
+    .progress-bar {
+      width: 100%;
+      max-width: 400px;
+      height: 6px;
+      background: #c8e6c9;
+      border-radius: 4px;
+      margin: 0 auto 18px auto;
+      overflow: hidden;
+      position: relative;
+      display: none;
+    }
+    .progress-bar-inner {
+      height: 100%;
+      width: 0;
+      background: #388e3c;
+      border-radius: 4px;
+      transition: width 0.4s;
+    }
+    .fancy-back-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       margin: 44px auto 0 auto;
-      background: #a5d6a7;
-      color: #388e3c;
+      background: linear-gradient(90deg, #c8e6c9 10%, #388e3c 90%);
+      color: #fffde7;
       border: none;
-      border-radius: 12px;
-      padding: 14px 32px;
+      border-radius: 24px;
+      padding: 16px 36px;
       font-weight: bold;
-      cursor: pointer;
-      font-size: 1.12em;
-      box-shadow: 0 2px 8px #a5d6a744;
-      transition: background 0.2s, transform 0.2s;
+      font-size: 1.18em;
+      box-shadow: 0 4px 18px #388e3c44;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
       text-decoration: none;
       text-align: center;
       width: fit-content;
+      letter-spacing: 1px;
       position: relative;
-      z-index: 1;
+      overflow: hidden;
     }
-    .back-btn:hover {
+    .fancy-back-btn:hover, .fancy-back-btn:focus {
+      background: linear-gradient(90deg, #388e3c 10%, #c8e6c9 90%);
+      color: #fff;
+      transform: scale(1.04);
+      box-shadow: 0 8px 32px #388e3c44;
+      text-decoration: none;
+    }
+    /* Mobile menu styles */
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 1001;
+      background: #c8e6c9;
+      color: #388e3c;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 2em;
+      box-shadow: 0 2px 12px #a5d6a744;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .menu-toggle:active,
+    .menu-toggle:focus {
       background: #388e3c;
       color: #fff;
-      transform: scale(1.05);
     }
-@media (max-width: 700px) {
-  body { font-size: 1.22em; }
-  h1 { font-size: 2.1em; }
-  h2 { font-size: 1.5em; }
-  h3 { font-size: 1.18em; }
-  .about-text,
-  .info-note,
-  .feature-card,
-  .category-box,
-  .recipe-card {
-    font-size: 1.15em;
-    padding: 20px 4vw;
-  }
-  .feature-title,
-  .category-title,
-  .added-heading {
-    font-size: 1.18em;
-  }
-  .back-btn,
-  button,
-  .top-x-btn {
-    font-size: 1.15em;
-    padding: 16px 8vw;
-  }
-  input,
-  textarea,
-  #searchBox {
-    font-size: 1.12em;
-    padding: 14px 4vw;
-  }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 80vw;
+      max-width: 320px;
+      height: 100vh;
+      background: #e8f5e9;
+      box-shadow: -2px 0 16px #388e3c44;
+      z-index: 1000;
+      padding: 48px 24px 24px 24px;
+      flex-direction: column;
+      gap: 18px;
+      border-radius: 0 0 0 32px;
+      animation: slideIn 0.3s;
+    }
+    .mobile-menu a {
+      display: block;
+      color: #388e3c;
+      font-size: 1.18em;
+      text-decoration: none;
+      margin-bottom: 18px;
+      font-family: 'Georgia', serif;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover {
+      color: #fff;
+      background: #388e3c;
+      border-radius: 8px;
+      padding: 4px 8px;
+    }
+    @keyframes slideIn {
+      from { right: -100vw; opacity: 0; }
+      to { right: 0; opacity: 1; }
+    }
+    @media (max-width: 700px) {
+      body { font-size: 1.22em; }
+      h1 { font-size: 2.1em; }
+      .about-text,
+      .info-note,
+      .feature-card {
+        font-size: 1.15em;
+        padding: 20px 4vw;
+      }
+      .feature-title {
+        font-size: 1.18em;
+      }
+      .fancy-back-btn, .top-x-btn {
+        font-size: 1.15em;
+        padding: 16px 8vw;
+      }
+    }
+    /* Additions for new sections */
+    .bio-section, .changelog-section, .quick-links, .faq-section, .feedback-section {
+      max-width: 600px;
+      margin: 32px auto;
+      background: linear-gradient(90deg,#e8f5e9 80%, #c8e6c9 100%);
+      border-radius: 18px;
+      box-shadow: 0 2px 12px #a5d6a744;
+      padding: 28px 22px;
+      border: 2px solid #a5d6a7;
+      text-align: left;
+      font-size: 1.08em;
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+      animation: fadeInCard 0.7s;
+    }
+    .bio-section.visible, .changelog-section.visible, .quick-links.visible, .faq-section.visible, .feedback-section.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .bio-img {
+      float: left;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      margin-right: 18px;
+      object-fit: cover;
+      box-shadow: 0 2px 8px #388e3c44;
+      border: 2px solid #a5d6a7;
+    }
+    .bio-name {
+      font-size: 1.25em;
+      color: #388e3c;
+      font-weight: bold;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+    .changelog-list {
+      margin: 0;
+      padding-left: 18px;
+      color: #388e3c;
+    }
+    .quick-links-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 10px;
+    }
+    .quick-link-btn {
+      background: linear-gradient(90deg, #c8e6c9 10%, #388e3c 90%);
+      color: #fffde7;
+      border: none;
+      border-radius: 14px;
+      padding: 10px 22px;
+      font-weight: bold;
+      font-size: 1em;
+      box-shadow: 0 2px 8px #388e3c44;
+      transition: background 0.2s, transform 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+      margin-bottom: 8px;
+      margin-top: 8px;
+      display: inline-block;
+    }
+    .quick-link-btn:hover, .quick-link-btn:focus {
+      background: linear-gradient(90deg, #388e3c 10%, #c8e6c9 90%);
+      color: #fff;
+      transform: scale(1.04);
+      text-decoration: none;
+    }
+    .faq-q {
+      font-weight: bold;
+      color: #388e3c;
+      margin-top: 14px;
+      margin-bottom: 4px;
+    }
+    .faq-a {
+      margin-bottom: 10px;
+      color: #526885;
+    }
+    .feedback-list {
+      margin: 0;
+      padding-left: 0;
+      list-style: none;
+    }
+    .feedback-item {
+      background: #f1f8e9;
+      border-radius: 10px;
+      box-shadow: 0 1px 6px #a5d6a744;
+      padding: 12px 18px;
+      margin-bottom: 12px;
+      color: #388e3c;
+      font-style: italic;
+      border-left: 5px solid #a5d6a7;
+    }
+    .feedback-user {
+      font-weight: bold;
+      color: #388e3c;
+      font-style: normal;
+      margin-right: 8px;
+    }
+    /* Dark mode for new sections */
+   /* Replace your dark mode CSS block with this for consistency */
+body.dark-mode {
+  background: linear-gradient(135deg, #263238 0%, #388e3c 100%);
+  color: #fffde7;
+}
+body.dark-mode .container,
+body.dark-mode .about-text,
+body.dark-mode .bio-section,
+body.dark-mode .changelog-section,
+body.dark-mode .quick-links,
+body.dark-mode .faq-section,
+body.dark-mode .feedback-section,
+body.dark-mode .features-list,
+body.dark-mode .feature-card,
+body.dark-mode .divider,
+body.dark-mode .progress-bar,
+body.dark-mode .mobile-menu {
+  background: #263238 !important;
+  color: #fffde7 !important;
+  border-color: #388e3c !important;
+}
+body.dark-mode h1,
+body.dark-mode .feature-title,
+body.dark-mode .about-text,
+body.dark-mode .bio-name,
+body.dark-mode .info-note,
+body.dark-mode .fancy-back-btn,
+body.dark-mode .faq-q,
+body.dark-mode .changelog-list,
+body.dark-mode .quick-link-btn {
+  color: #a5d6a7 !important;
+}
+body.dark-mode .feature-card:hover,
+body.dark-mode .bio-section:hover,
+body.dark-mode .changelog-section:hover,
+body.dark-mode .quick-links:hover,
+body.dark-mode .faq-section:hover,
+body.dark-mode .feedback-section:hover {
+  background: #388e3c !important;
+  color: #fffde7 !important;
+  border-color: #a5d6a7 !important;
+}
+body.dark-mode .fancy-back-btn {
+  background: linear-gradient(90deg, #388e3c 10%, #a5d6a7 90%) !important;
+  color: #fffde7 !important;
+}
+body.dark-mode .fancy-back-btn:hover, body.dark-mode .fancy-back-btn:focus {
+  background: linear-gradient(90deg, #a5d6a7 10%, #388e3c 90%) !important;
+  color: #263238 !important;
+}
+body.dark-mode .quick-link-btn {
+  background: linear-gradient(90deg, #388e3c 10%, #a5d6a7 90%) !important;
+  color: #fffde7 !important;
+}
+body.dark-mode .quick-link-btn:hover, body.dark-mode .quick-link-btn:focus {
+  background: linear-gradient(90deg, #a5d6a7 10%, #388e3c 90%) !important;
+  color: #263238 !important;
+}
+body.dark-mode .feedback-item {
+  background: #388e3c !important;
+  color: #fffde7 !important;
+  border-left: 5px solid #a5d6a7 !important;
+}
+.dark-mode-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #a5d6a7;
+  color: #388e3c;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.5em;
+  box-shadow: 0 2px 12px #a5d6a744;
+  cursor: pointer;
+  z-index: 1001;
+  transition: background 0.2s;
+  display: block !important;
+}
+.dark-mode-toggle.active {
+  background: #388e3c;
+  color: #fff;
 }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>About Chef's Favourite</h1>
+  <!-- Mobile menu toggle -->
+  <nav class="mobile-nav" aria-label="Mobile Navigation">
+    <button id="menuToggle" aria-label="Open menu" class="menu-toggle">&#9776;</button>
+    <div id="mobileMenu" class="mobile-menu">
+      <a href="index.html">Home</a>
+      <a href="food-recipes.html">Food & Recipes</a>
+      <a href="recipe-book.html">Recipe Book</a>
+      <a href="tips-tricks.html">Tips & Tricks</a>
+      <a href="about-chef.html">About</a>
+    </div>
+  </nav>
+  <div class="container" aria-label="About Chef's Favourite">
+    <button class="top-x-btn" onclick="window.location.href='index.html'" aria-label="Close About Page">&times;</button>
+    <h1><span class="chef-emoji" aria-hidden="true">&#129385;</span>About Chef's Favourite</h1>
     <div class="divider"></div>
-    <div class="about-text">
+    <div class="progress-bar" id="progressBar">
+      <div class="progress-bar-inner" id="progressBarInner"></div>
+    </div>
+    <div class="bio-section" id="bioSection" tabindex="0">
+  <div class="bio-name">About the New Version App</div>
+  <div>
+    <b>Chef's Favourite</b> is a modern, private recipe and kitchen wisdom platform built for home cooks and food lovers.<br><br>
+    The app lets you save, organize, and search your favorite recipes and tips, all stored securely in your browser.<br><br>
+    Designed with accessibility, mobile support, and a beautiful green-themed interface, Chef's Favourite makes cooking and learning easy and enjoyable for everyone.<br><br>
+    <b>Fun fact:</b> Chef's Favourite was inspired by the idea that every cook deserves a personal, private cookbook—no account needed!
+  </div>
+</div>
+    <div class="about-text" id="aboutText" tabindex="0">
       <b>Chef's Favourite</b> is a private recipe platform designed for home cooks and food lovers.<br><br>
-      Here, you can discover new dishes, save your own creations, and explore helpful kitchen wisdom—all in your own personal space.<br><br>
-      Every feature is made for your convenience: add recipes, organize tips, and build your own digital cookbook. Your experience is unique and tailored just for you.<br><br>
+      Discover new dishes, save your own creations, and explore helpful kitchen wisdom—all in your own personal space.<br><br>
+      <b>What's new?</b> The latest version brings a full-page responsive layout, animated entries, mobile menu toggle, dark mode, accessibility improvements, progress bars, green-themed design, and a fancy back button.<br><br>
+      Every feature is made for your convenience: add recipes, organize tips, and build your own digital cookbook. Your experience is unique and tailored just for you. It is also accessible on mobile devices.<br><br>
       Want to keep track of your favorite recipes or kitchen tricks? Visit the <b>Recipe Book</b> or <b>Tips & Tricks</b> page and start building your private collection!
     </div>
-    <div class="features-list">
-      <div class="feature-card">
-        <span class="feature-icon">&#x1F372;</span>
-        <span class="feature-title">Personal Recipe Book</span>
-        <div>Save, edit, and organize your favorite recipes. Your collection is private and only visible to you.</div>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">&#x1F9C0;</span>
-        <span class="feature-title">Tips & Tricks</span>
-        <div>Access categorized kitchen wisdom and add your own tips for easy reference.</div>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">&#x1F4DD;</span>
-        <span class="feature-title">Smart Search</span>
-        <div>Quickly find recipes or tips by title, ingredient, or category using the built-in search bar in the recipe book.</div>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">&#x1F4BE;</span>
-        <span class="feature-title">Private Storage</span>
-        <div>Your recipes and tips are saved only in your browser. No one else can view or edit your collection.</div>
-      </div>
-      <div class="feature-card">
-        <span class="feature-icon">&#x2728;</span>
-        <span class="feature-title">Updates</span>
-        <div>Stay tuned for new features and improvements for our users! Updates are coming soon.</div>
-      </div>
-    <div class="feature-card">
-      <span class="feature-icon">&#x1F4A1;</span>
-      <span class="feature-title">Why Private?</span>
-      <div>Privacy is our top priority. Your recipes and tips are saved only in your browser and are not shared with anyone else for security reasons.</div>
+    <div class="changelog-section" id="changelogSection" tabindex="0">
+      <b>Changelog</b>
+      <ul class="changelog-list">
+        <li><b>v2.0</b> – Added dark mode, animated entry, FAQ, feedback, and chef's bio (Sep 2025)</li>
+        <li><b>v1.5</b> – Mobile menu toggle, progress bar, accessibility improvements</li>
+        <li><b>v1.0</b> – Initial release: Recipe Book, Tips & Tricks, full-page layout</li>
+      </ul>
     </div>
+    <div class="quick-links visible" id="quickLinks" tabindex="0">
+      <b>Quick Links</b>
+      <div class="quick-links-list">
+        <a href="food-recipes.html" class="quick-link-btn" aria-label="Go to Food Recipes">🍲 Food Recipes</a>
+        <a href="recipe-book.html" class="quick-link-btn" aria-label="Go to Recipe Book">📖 Recipe Book</a>
+        <a href="tips-tricks.html" class="quick-link-btn" aria-label="Go to Tips & Tricks">💡 Tips & Tricks</a>
+        <a href="tips-green.html" class="quick-link-btn" aria-label="Go to Green Living Tips">🌿 Green Living</a>
+      </div>
     </div>
-    <a href="index.html" class="back-btn">← Back</a>
+    <div class="faq-section" id="faqSection" tabindex="0">
+      <b>FAQ</b>
+      <div class="faq-q">Is my data private?</div>
+      <div class="faq-a">Yes! All recipes and tips are stored only in your browser and are never shared.</div>
+      <div class="faq-q">Can I use Chef's Favourite on my phone?</div>
+      <div class="faq-a">Absolutely. The site is fully responsive and works great on mobile devices.</div>
+      <div class="faq-q">How do I add my own tips?</div>
+      <div class="faq-a">Go to the Tips & Tricks page and use the "Add Your Own" feature.</div>
+      <div class="faq-q">How do I enable dark mode?</div>
+      <div class="faq-a">Click the moon icon at the bottom right of the page to toggle dark mode on or off.</div>
+    </div>
+    <div class="feedback-section" id="feedbackSection" tabindex="0">
+      <b>Some Feedback from our Users</b>
+      <ul class="feedback-list">
+        <li class="feedback-item"><span class="feedback-user">Maria:</span> “I love how easy it is to save my favorite recipes. The dark mode is a lifesaver at night!”</li>
+        <li class="feedback-item"><span class="feedback-user">Sam:</span> “The tips section helped me improve my cooking skills. Great job!”</li>
+        <li class="feedback-item"><span class="feedback-user">Priya:</span> “Mobile navigation is smooth and the design is beautiful. Highly recommend!”</li>
+        <li class="feedback-item"><span class="feedback-user">Liam:</span> “The progress bar and animations make the app feel modern and engaging.”</li>
+        <li class="feedback-item"><span class="feedback-user">Aisha:</span> “I appreciate the focus on privacy. Knowing my recipes are safe is important to me.”</li>
+      </ul>
+    </div>
+    <div class="info-note" id="infoNote" tabindex="0">
+      <b>Accessibility:</b> All pages are keyboard navigable and support screen readers. Use Tab/Shift+Tab to move between sections and Enter to activate links or buttons.
+    </div>
+    <div class="features-list" id="featuresList" aria-label="Platform Features">
+      <!-- Features will be rendered by JS -->
+    </div>
+    <a href="index.html" class="fancy-back-btn" aria-label="Back to main page">
+      <span style="font-size:1.3em;vertical-align:middle;">&#8592;</span>
+      <span style="margin-left:8px;vertical-align:middle;">Back to Main Page</span>
+    </a>
+    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">&#9790;</button>
   </div>
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let menuOpen = false;
+    menuToggle.addEventListener('click', function() {
+      menuOpen = !menuOpen;
+      mobileMenu.style.display = menuOpen ? 'flex' : 'none';
+      menuToggle.setAttribute('aria-label', menuOpen ? 'Close menu' : 'Open menu');
+      document.body.style.overflow = menuOpen ? 'hidden' : '';
+    });
+    mobileMenu.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') {
+        mobileMenu.style.display = 'none';
+        menuOpen = false;
+        document.body.style.overflow = '';
+      }
+    });
+    window.addEventListener('click', function(e) {
+      if (menuOpen && !mobileMenu.contains(e.target) && e.target !== menuToggle) {
+        mobileMenu.style.display = 'none';
+        menuOpen = false;
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Progress bar animation
+    const progressBar = document.getElementById('progressBar');
+    const progressBarInner = document.getElementById('progressBarInner');
+    progressBar.style.display = 'block';
+    progressBarInner.style.width = '0';
+    setTimeout(() => { progressBarInner.style.width = '80%'; }, 50);
+
+    // Animated entry for sections
+    setTimeout(() => {
+      document.getElementById('bioSection').classList.add('visible');
+      document.getElementById('aboutText').classList.add('visible');
+      document.getElementById('changelogSection').classList.add('visible');
+      document.getElementById('quickLinks').classList.add('visible');
+      document.getElementById('faqSection').classList.add('visible');
+      document.getElementById('feedbackSection').classList.add('visible');
+      document.getElementById('infoNote').classList.add('visible');
+      document.getElementById('featuresList').classList.add('visible');
+      progressBarInner.style.width = '100%';
+      setTimeout(() => { progressBar.style.display = 'none'; }, 400);
+    }, 600);
+
+    // Features data
+    const features = [
+      {
+        icon: "🍲",
+        title: "Personal Recipe Book",
+        desc: "Save, edit, and organize your favorite recipes. Your collection is private and only visible to you."
+      },
+      {
+        icon: "🧀",
+        title: "Tips & Tricks",
+        desc: "Access categorized kitchen wisdom and add your own tips for easy reference."
+      },
+      {
+        icon: "🔎",
+        title: "Smart Search",
+        desc: "Quickly find recipes or tips by title, ingredient, or category using the built-in search bar."
+      },
+      {
+        icon: "💾",
+        title: "Private Storage",
+        desc: "Your recipes and tips are saved only in your browser. No one else can view or edit your collection."
+      },
+      {
+        icon: "🌙",
+        title: "Dark Mode",
+        desc: "Toggle dark mode for comfortable viewing day or night."
+      },
+      {
+        icon: "📱",
+        title: "Mobile Friendly",
+        desc: "Enjoy a fully responsive layout and mobile menu toggle for easy navigation."
+      },
+      {
+        icon: "⏳",
+        title: "Progress Bar",
+        desc: "See loading progress when switching sections or filtering."
+      },
+      {
+        icon: "✨",
+        title: "Animated Entry",
+        desc: "Sections and features animate in for a modern, engaging experience."
+      },
+      {
+        icon: "🦾",
+        title: "Accessibility",
+        desc: "Keyboard navigation and screen reader support for all users."
+      },
+      {
+        icon: "🔙",
+        title: "Fancy Back Button",
+        desc: "Stylish, animated back button for easy navigation."
+      },
+      {
+        icon: "📝",
+        title: "Add Your Own",
+        desc: "Submit your own recipes and tips to build your personal cookbook."
+      },
+      {
+        icon: "⭐",
+        title: "Favorites",
+        desc: "Mark recipes and tips as favorites for quick access."
+      }
+    ];
+
+    // Render features with animated entry
+    const featuresList = document.getElementById('featuresList');
+    featuresList.innerHTML = features.map((f, i) => `
+      <div class="feature-card" tabindex="0" aria-label="${f.title}">
+        <span class="feature-title"><span class="feature-icon" aria-hidden="true">${f.icon}</span>${f.title}</span>
+        <div>${f.desc}</div>
+      </div>
+    `).join('');
+    setTimeout(() => {
+      document.querySelectorAll('.feature-card').forEach((card, i) => {
+        setTimeout(() => card.classList.add('visible'), 80 * i);
+      });
+    }, 800);
+
+    // Accessibility: keyboard navigation for feature cards
+    document.addEventListener('keydown', function(e) {
+      if (document.activeElement.classList.contains('feature-card')) {
+        if (e.key === 'ArrowRight') {
+          let next = document.activeElement.nextElementSibling;
+          if (next && next.classList.contains('feature-card')) next.focus();
+        }
+        if (e.key === 'ArrowLeft') {
+          let prev = document.activeElement.previousElementSibling;
+          if (prev && prev.classList.contains('feature-card')) prev.focus();
+        }
+      }
+    });
+
+    // Dark mode toggle
+  const darkModeToggle = document.getElementById('darkModeToggle');
+darkModeToggle.addEventListener('click', function() {
+  document.body.classList.toggle('dark-mode');
+  darkModeToggle.classList.toggle('active');
+  localStorage.setItem('darkModeAboutChef', document.body.classList.contains('dark-mode'));
+});
+// Load dark mode preference
+if (localStorage.getItem('darkModeAboutChef') === 'true') {
+  document.body.classList.add('dark-mode');
+  darkModeToggle.classList.add('active');
+}
+  </script>
 </body>
 </html>

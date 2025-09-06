@@ -3,83 +3,172 @@
 <head>
   <meta charset="UTF-8">
   <title>Seafood Recipes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
+    html, body {
+      height: 100%;
+      width: 100%;
       margin: 0;
-      color: #222;
-      background: url('https://metro.com/product_images/uploaded_images/istock-520490716.jpg') no-repeat center center fixed;
-      background-size: cover;
+      padding: 0;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+    body {
+      font-family: 'Georgia', 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      min-width: 100vw;
+      background: linear-gradient(135deg, #4e5d52 0%, #a8c3b6 60%, #2e4633 100%);
+      color: #e6f2ed;
+      transition: background 0.3s, color 0.3s;
     }
     .container {
-      max-width: 900px;
-      margin: 40px auto;
-      background: rgba(110, 103, 103, 0.95);
-      border-radius: 18px;
-      box-shadow: 0 4px 24px #33323144;
-      padding: 32px 24px;
+      min-height: 100vh;
+      min-width: 100vw;
+      width: 100vw;
+      max-width: none;
+      margin: 0;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
       text-align: center;
       position: relative;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
     }
     .top-x-btn {
-      position: absolute;
+      position: fixed;
       top: 18px;
-      right: 24px;
-      background: #f4ff61;
-      color: #fff;
+      left: 200px;
+      background: #388e3c;
+      color: #e6f2ed;
       border: none;
       border-radius: 50%;
-      width: 38px;
-      height: 38px;
-      font-size: 1.8em;
+      width: 44px;
+      height: 44px;
+      font-size: 2em;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 2px 8px #0005;
+      box-shadow: 0 2px 8px #388e3c44;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: background 0.2s;
-      z-index: 10;
+      z-index: 101;
     }
     .top-x-btn:hover {
-      background: #d5d815;
+      background: #a8c3b6;
+      color: #4e5d52;
+    }
+    @media (max-width: 900px) {
+      .top-x-btn {
+        left: 18px;
+      }
     }
     h1 {
-      color: #ddd3d3;
-      margin-bottom: 24px;
-      font-size: 2em;
+      color: #a8c3b6;
+      margin-bottom: 10px;
+      font-size: 2.3em;
+      font-family: 'Georgia', serif;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 12px #2e463344;
+      margin-top: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      animation: fadeIn 1s;
+    }
+    .divider {
+      width: 80px;
+      height: 6px;
+      background: linear-gradient(90deg,#4e5d52,#a8c3b6,#2e4633);
+      border-radius: 3px;
+      margin: 18px auto 32px auto;
+      opacity: 0.8;
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 1.2s;
+    }
+    .subtitle {
+      font-size: 1.15em;
+      color: #e6f2ed;
+      margin-bottom: 18px;
+      font-style: italic;
+      background: #4e5d52;
+      border-radius: 12px;
+      padding: 10px 24px;
+      box-shadow: 0 2px 8px #2e463344;
+      display: inline-block;
+      animation: fadeIn 1.3s;
+      font-family: 'Georgia', serif;
     }
     .recipes-list {
       display: flex;
       flex-direction: column;
       gap: 32px;
       margin-bottom: 24px;
+      width: 100%;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .recipe-card {
-      background: #f1d5d979;
-      border-radius: 12px;
-      box-shadow: 0 1px 8px #ffb34722;
-      padding: 18px;
-      width: 100%;
-      box-sizing: border-box;
+      background: linear-gradient(90deg,#4e5d52 80%, #a8c3b6 100%);
+      border-radius: 18px;
+      box-shadow: 0 2px 12px #2e463344;
+      padding: 32px 24px;
       text-align: left;
-      margin-bottom: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      position: relative;
+      margin: 0 auto;
+      display: block;
+      opacity: 0;
+      transform: translateY(30px) scale(0.98);
+      animation: fadeInCard 0.7s;
+      border: 2px solid #a8c3b6;
+      font-family: 'Georgia', serif;
+    }
+    .recipe-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInCard {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .recipe-card:hover {
+      box-shadow: 0 8px 32px #2e463344;
+      transform: scale(1.03);
+      background: linear-gradient(90deg,#4e5d52 80%, #101310 100%);
+      border-color: #f1f1ef;
+      color: #e6f2ed;
+    }
+    .recipe-card:hover .recipe-title,
+    .recipe-card:hover .recipe-ingredients,
+    .recipe-card:hover .recipe-instructions {
+      color: #e6f2ed;
     }
     .recipe-title {
       font-size: x-large;
-      color: #faea09e8;
+      color: #121312;
       margin-bottom: 8px;
       font-weight: bold;
       text-align: center;
       width: 100%;
+      letter-spacing: 1px;
+      font-family: 'Georgia', serif;
     }
     .recipe-ingredients, .recipe-instructions {
       margin-bottom: 8px;
       width: 100%;
-      color:#d0e60df8;
+      color: #0c0c0c;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
       font-size: large;
     }
@@ -97,45 +186,58 @@
       max-width: 22%;
       min-width: 160px;
       text-align: center;
+      font-family: 'Georgia', serif;
     }
     .meal-preview img {
       width: 100%;
       max-width: 180px;
       border-radius: 10px;
-      box-shadow: 0 2px 12px #ffb34733;
+      box-shadow: 0 2px 12px #2e463344;
       margin-bottom: 4px;
       height: 120px;
       object-fit: cover;
       cursor: pointer;
       transition: box-shadow 0.2s;
+      background: #e6f2ed;
+      padding: 2px;
     }
     .meal-preview img:hover {
-      box-shadow: 0 4px 24px #ffb34766;
+      box-shadow: 0 4px 24px #2e463366;
     }
     .meal-caption {
       font-size: 0.98em;
-      color: #021731;
+      color: #a8c3b6;
       font-style: italic;
       margin-bottom: 4px;
+      font-family: 'Georgia', serif;
     }
     .back-btn {
-      display: inline-block;
-      margin: 24px auto 0 auto;
-      background: #ffe082;
-      color: #ff6f61;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 32px auto 0 auto;
+      background: linear-gradient(90deg, #a8c3b6 10%, #2e4633 90%);
+      color: #e6f2ed;
       border: none;
-      border-radius: 8px;
-      padding: 10px 22px;
+      border-radius: 18px;
+      padding: 12px 28px;
       font-weight: bold;
-      cursor: pointer;
-      font-size: 1em;
-      box-shadow: 0 2px 8px #ffb34733;
-      transition: background 0.2s;
+      font-size: 1.08em;
+      box-shadow: 0 2px 8px #2e463344;
+      transition: background 0.2s, transform 0.2s;
       text-decoration: none;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
     }
-    .back-btn:hover {
-      background: #ffb347;
-      color: #fff;
+    .back-btn:hover, .back-btn:focus {
+      background: linear-gradient(90deg, #2e4633 10%, #a8c3b6 90%);
+      color: #e6f2ed;
+      transform: scale(1.04);
+      box-shadow: 0 8px 32px #2e463344;
+      text-decoration: none;
     }
     /* Modal styles */
     .modal {
@@ -147,7 +249,7 @@
       width: 100vw;
       height: 100vh;
       overflow: auto;
-      background: rgba(0,0,0,0.85);
+      background: rgba(34, 44, 38, 0.85);
       align-items: center;
       justify-content: center;
     }
@@ -159,6 +261,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      background: #4e5d52;
+      border-radius: 16px;
+      padding: 16px;
+      font-family: 'Georgia', serif;
     }
     .modal-img {
       max-width: 90vw;
@@ -166,22 +272,23 @@
       border-radius: 16px;
       box-shadow: 0 4px 32px #000a;
       margin-bottom: 12px;
-      background: #fff;
+      background: #e6f2ed;
       padding: 8px;
     }
     .modal-caption {
-      color: #fffde7;
+      color: #a8c3b6;
       font-size: 1.1em;
       font-style: italic;
       text-align: center;
       margin-bottom: 8px;
+      font-family: 'Georgia', serif;
     }
     .close-btn {
       position: absolute;
       top: 12px;
       right: 18px;
-      background: #ff6f61;
-      color: #fff;
+      background: #2e4633;
+      color: #e6f2ed;
       border: none;
       border-radius: 50%;
       width: 38px;
@@ -189,240 +296,439 @@
       font-size: 1.8em;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 2px 8px #0005;
+      box-shadow: 0 2px 8px #2e463344;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: background 0.2s;
       z-index: 2;
+      font-family: 'Georgia', serif;
     }
     .close-btn:hover {
-      background: #d84315;
+      background: #a8c3b6;
+      color: #2e4633;
     }
-   @media (max-width: 700px) {
-  body { font-size: 1.22em; }
-  h1 { font-size: 2.1em; }
-  h2 { font-size: 1.5em; }
-  h3 { font-size: 1.18em; }
-  .about-text,
-  .info-note,
-  .feature-card,
-  .category-box,
-  .recipe-card {
-    font-size: 1.15em;
-    padding: 20px 4vw;
-  }
-  .feature-title,
-  .category-title,
-  .added-heading {
-    font-size: 1.18em;
-  }
-  .back-btn,
-  button,
-  .top-x-btn {
-    font-size: 1.15em;
-    padding: 16px 8vw;
-  }
-  input,
-  textarea,
-  #searchBox {
-    font-size: 1.12em;
-    padding: 14px 4vw;
-  }
-}
+    /* Mobile menu styles */
+    .menu-toggle {
+      display: block;
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 1001;
+      background: #a8c3b6;
+      color: #2e4633;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 2em;
+      box-shadow: 0 2px 12px #2e463344;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: 'Georgia', serif;
+    }
+    .menu-toggle:active,
+    .menu-toggle:focus {
+      background: #388e3c;
+      color: #e6f2ed;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 80vw;
+      max-width: 320px;
+      height: 100vh;
+      background: #4e5d52;
+      box-shadow: -2px 0 16px #2e463344;
+      z-index: 1000;
+      padding: 48px 24px 24px 24px;
+      flex-direction: column;
+      gap: 18px;
+      border-radius: 0 0 0 32px;
+      animation: slideIn 0.3s;
+      font-family: 'Georgia', serif;
+    }
+    .mobile-menu a {
+      display: block;
+      color: #a8c3b6;
+      font-size: 1.18em;
+      text-decoration: none;
+      margin-bottom: 18px;
+      font-family: 'Georgia', serif;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover {
+      color: #e6f2ed;
+      background: #388e3c;
+      border-radius: 8px;
+      padding: 4px 8px;
+    }
+    .menu-link.active {
+      background: #388e3c !important;
+      color: #e6f2ed !important;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    @keyframes slideIn {
+      from { right: -100vw; opacity: 0; }
+      to { right: 0; opacity: 1; }
+    }
+    /* Desktop sidebar styles */
+    .desktop-sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 180px;
+      height: 100vh;
+      background: #4e5d52;
+      box-shadow: 2px 0 16px #2e463344;
+      z-index: 100;
+      padding: 48px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: 'Georgia', serif;
+    }
+    .sidebar-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+    .sidebar-link {
+      display: block;
+      color: #a8c3b6;
+      font-size: 1.12em;
+      text-decoration: none;
+      padding: 12px 24px;
+      font-family: 'Georgia', serif;
+      font-weight: bold;
+      transition: color 0.2s, background 0.2s;
+      border-radius: 8px;
+      margin-bottom: 4px;
+    }
+    .sidebar-link:hover, .sidebar-link:focus {
+      background: #101310;
+      color: #e6f2ed;
+    }
+    .sidebar-link.active {
+      background: #0f1110;
+      color: #e6f2ed;
+      font-weight: bold;
+    }
+    @media (max-width: 900px) {
+      .desktop-sidebar {
+        display: none;
+      }
+      .container {
+        margin-left: 0 !important;
+      }
+    }
+    .container {
+      margin-left: 180px;
+    }
+    .dark-mode-toggle {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #2c2c2c;
+      color: #a8c3b6;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 1.5em;
+      box-shadow: 0 2px 12px #2e463344;
+      cursor: pointer;
+      z-index: 1001;
+      transition: background 0.2s, color 0.2s;
+      display: block !important;
+      font-family: 'Georgia', serif;
+    }
+    .dark-mode-toggle.active {
+      background: #a8c3b6;
+      color: #4e5d52;
+    }
+    .dark-mode-toggle:hover,
+    .dark-mode-toggle:focus {
+      background: #696d6a;
+      color: #e6f2ed;
+    }
+    /* Dark mode styles */
+    body.dark-mode {
+      background: linear-gradient(135deg, #222a25 0%, #4e5d52 100%);
+      color: #e6f2ed;
+    }
+    body.dark-mode .container,
+    body.dark-mode .recipe-card,
+    body.dark-mode .subtitle,
+    body.dark-mode .divider,
+    body.dark-mode .mobile-menu,
+    body.dark-mode .desktop-sidebar {
+      background: linear-gradient(135deg, #4e5d52 0%, #01270b 100%) !important;
+      color: #e6f2ed !important;
+      border-color: #4e5d52 !important;
+    }
+    body.dark-mode h1,
+    body.dark-mode .recipe-title,
+    body.dark-mode .recipe-ingredients,
+    body.dark-mode .recipe-instructions,
+    body.dark-mode .meal-caption,
+    body.dark-mode .back-btn,
+    body.dark-mode .sidebar-link {
+      color: #498d0a !important;
+    }
+    body.dark-mode .recipe-card:hover {
+      background: #3a413a !important;
+      color: #e6f2ed !important;
+      border-color: #4e5d52 !important;
+    }
+    body.dark-mode .back-btn {
+      background: linear-gradient(90deg, #4e5d52 10%, #101312 90%) !important;
+      color: #e6f2ed !important;
+    }
+    body.dark-mode .back-btn:hover, body.dark-mode .back-btn:focus {
+      background: linear-gradient(90deg, #111111 10%, #4e5d52 90%) !important;
+      color: #222a25 !important;
+    }
+    body.dark-mode .meal-preview img {
+      background: #222a25 !important;
+    }
+    body.dark-mode .modal-content {
+      background: #222a25 !important;
+    }
+    body.dark-mode .close-btn {
+      background: #4e5d52 !important;
+      color: #e6f2ed !important;
+    }
+    body.dark-mode .close-btn:hover {
+      background: #a8c3b6 !important;
+      color: #121312 !important;
+    }
+    body.dark-mode .sidebar-link.active,
+    body.dark-mode .sidebar-link:hover,
+    body.dark-mode .sidebar-link:focus {
+      background: #1f201f !important;
+      color: #e6f2ed !important;
+    }
+    @media (max-width: 700px) {
+      body { font-size: 1.22em; }
+      h1 { font-size: 2.1em; }
+      .recipe-card { font-size: 1.15em; padding: 20px 4vw; }
+      .recipe-title { font-size: 1.18em; }
+      .back-btn, .top-x-btn { font-size: 1.15em; padding: 16px 8vw; }
+    }
   </style>
 </head>
 <body>
+  <!-- Desktop sidebar for categories -->
+  <nav class="desktop-sidebar" aria-label="Recipe Categories">
+    <ul class="sidebar-list">
+      <li><a href="food-recipes.html" class="sidebar-link" data-page="food-recipes.html">Food Sections</a></li>
+      <li><a href="seafood-recipes.html" class="sidebar-link" data-page="seafood-recipes.html">Seafood</a></li>
+      <li><a href="vegetable-recipes.html" class="sidebar-link" data-page="vegetable-recipes.html">Vegetables</a></li>
+      <li><a href="snack-recipes.html" class="sidebar-link" data-page="snack-recipes.html">Snacks</a></li>
+      <li><a href="poultry-recipes.html" class="sidebar-link" data-page="poultry-recipes.html">Poultry</a></li>
+      <li><a href="steak-recipes.html" class="sidebar-link" data-page="steak-recipes.html">Beef</a></li>
+      <li><a href="plant-based-recipes.html" class="sidebar-link" data-page="plant-based-recipes.html">Plant-Based</a></li>
+      <li><a href="cake-recipes.html" class="sidebar-link" data-page="cake-recipes.html">Cakes</a></li>
+      <li><a href="jelly-recipes.html" class="sidebar-link" data-page="jelly-recipes.html">Jelly</a></li>
+      <li><a href="fruit-recipes.html" class="sidebar-link" data-page="fruit-recipes.html">Fruits</a></li>
+      <li><a href="sweet-recipes.html" class="sidebar-link" data-page="sweet-recipes.html">Sweet-food</a></li>
+    </ul>
+  </nav>
+  <!-- Mobile menu toggle -->
+  <nav class="mobile-nav" aria-label="Mobile Navigation">
+    <button id="menuToggle" aria-label="Open menu" class="menu-toggle">&#9776;</button>
+    <div id="mobileMenu" class="mobile-menu">
+      <a href="food-recipes.html" class="menu-link" data-page="food-recipes.html">Food Sections</a>
+      <a href="seafood-recipes.html" class="menu-link" data-page="seafood-recipes.html">Seafood</a>
+      <a href="vegetable-recipes.html" class="menu-link" data-page="vegetable-recipes.html">Vegetables</a>
+      <a href="snack-recipes.html" class="menu-link" data-page="snack-recipes.html">Snacks</a>
+      <a href="poultry-recipes.html" class="menu-link" data-page="poultry-recipes.html">Poultry</a>
+      <a href="steak-recipes.html" class="menu-link" data-page="steak-recipes.html">Beef</a>
+      <a href="plant-based-recipes.html" class="menu-link" data-page="plant-based-recipes.html">Plant-Based</a>
+      <a href="cake-recipes.html" class="menu-link" data-page="cake-recipes.html">Cakes</a>
+      <a href="jelly-recipes.html" class="menu-link" data-page="jelly-recipes.html">Jelly</a>
+      <a href="fruit-recipes.html" class="menu-link" data-page="fruit-recipes.html">Fruits</a>
+      <a href="sweet-recipes.html" class="menu-link" data-page="sweet-recipes.html">Sweet-food</a>
+    </div>
+  </nav>
+  <!-- X button after sidebar, always visible -->
+  <button class="top-x-btn" onclick="window.location.href='food-recipes.html'" aria-label="Close Seafood Recipes">&times;</button>
   <div class="container">
-    <button class="top-x-btn" onclick="window.location.href='food-recipes.html'">&times;</button>
     <h1>Seafood Recipes</h1>
-        <div><em>Click on the images for a bigger view</em></div>
-    <div class="recipes-list">
-      <!-- Grilled Salmon -->
-      <div class="recipe-card">
-        <div class="recipe-title">Grilled Salmon</div>
-        <div class="recipe-ingredients"><b>Ingredients:</b> Salmon fillets, olive oil, lemon, salt, pepper, dill</div>
-        <div class="recipe-instructions"><b>Instructions:</b> Brush salmon with olive oil, season with salt, pepper, and dill. Grill for 5-7 minutes per side. Squeeze lemon before serving.</div>
-        <div class="meal-previews">
-          <div class="meal-preview">
-            <img src="https://www.thecookierookie.com/wp-content/uploads/2023/05/featured-grilled-salmon-recipe.jpg" alt="Grilled Salmon 1" onclick="showModal(this)">
-            <div class="meal-caption">Your meal will look like this after</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://www.cookingclassy.com/wp-content/uploads/2018/05/grilled-lemon-herb-salmon-7.jpg" alt="Grilled Salmon 2" onclick="showModal(this)">
-            <div class="meal-caption">Another serving idea</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://www.feastingathome.com/wp-content/uploads/2017/06/Grilled-Salmon-Tzatziki-Bowl-104.jpg" alt="Grilled Salmon 3" onclick="showModal(this)">
-            <div class="meal-caption">Try with veggies</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://ux2cms.imgix.net/images/grilled-salmon-and-asparagus-skewers.jpg?w=725&auto=compress,format&blend=https://ux2cms.imgix.net/system-images/gray-overlay-large.png?bs=inherit&balph=0&bm=normal" alt="Grilled Salmon 4" onclick="showModal(this)">
-            <div class="meal-caption">Skewers bring appetite</div>
-          </div>
-        </div>
-      </div>
-      <!-- Garlic Shrimp -->
-      <div class="recipe-card">
-        <div class="recipe-title">Garlic Shrimp</div>
-        <div class="recipe-ingredients"><b>Ingredients:</b> Shrimp, garlic, butter, parsley, lemon, salt</div>
-        <div class="recipe-instructions"><b>Instructions:</b> Sauté garlic in butter, add shrimp and cook until pink. Sprinkle parsley and squeeze lemon before serving.</div>
-        <div class="meal-previews">
-          <div class="meal-preview">
-            <img src="https://panlasangpinoy.com/wp-content/uploads/2009/03/garlic-butter-shrimp-1.jpg" alt="Garlic Shrimp 1" onclick="showModal(this)">
-            <div class="meal-caption">Your meal will look like this after</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://cookingwithwineblog.com/wp-content/uploads/2021/06/Spicy-Ginger-Garlic-Shrimp-Skewers-Featured-1-500x375.jpg" alt="Garlic Shrimp 3" onclick="showModal(this)">
-            <div class="meal-caption">Shrimp skewers look good</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://www.budgetbytes.com/wp-content/uploads/2021/06/Lemon-Garlic-Shrimp-and-RIce-plate-close.jpg" alt="Garlic Shrimp 2" onclick="showModal(this)">
-            <div class="meal-caption">Serve with rice</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://img.sndimg.com/food/image/upload/q_92,fl_progressive,w_1200,c_scale/v1/img/recipes/42/45/54/pic04FLiF.jpg" alt="Garlic Shrimp 3" onclick="showModal(this)">
-            <div class="meal-caption">Add fresh herbs</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://whatsgabycooking.com/wp-content/uploads/2023/04/WGC-__-Hawaiian-Garlic-Shrimp-2-1200x800-1.jpg" alt="Garlic Shrimp 4" onclick="showModal(this)">
-            <div class="meal-caption">Great appetizer</div>
-          </div>
-        </div>
-      </div>
-      <!-- Fish Tacos -->
-      <div class="recipe-card">
-        <div class="recipe-title">Fish Tacos</div>
-        <div class="recipe-ingredients"><b>Ingredients:</b> White fish fillets, taco shells, cabbage, lime, cilantro, sour cream, chili powder, salt</div>
-        <div class="recipe-instructions"><b>Instructions:</b> Season fish with chili powder and salt, grill or pan-fry until cooked. Fill taco shells with fish, cabbage, cilantro, and a squeeze of lime. Top with sour cream.</div>
-        <div class="meal-previews">
-          <div class="meal-preview">
-            <img src="https://www.seriouseats.com/thmb/y3Qf-ciu-nzLgYeJzK4xWoabibQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/SEA-M7011302_crunchy_fish_tacos6556-JenCausey-f8285ed3d8674b25bf16d027034fc41b.jpg" alt="Fish Tacos 1" onclick="showModal(this)">
-            <div class="meal-caption">Your meal will look like this after</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://marleyspoon.com/media/recipes/78467/main_photos/large/crispy_fish_tacos-0e4071bf4ac3a3b8d1104a4c64108449.jpeg" alt="Fish Tacos 2" onclick="showModal(this)">
-            <div class="meal-caption">Try with salsa</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://www.dinneratthezoo.com/wp-content/uploads/2016/06/fish-tacos-5-480x270.jpg" alt="Fish Tacos 3" onclick="showModal(this)">
-            <div class="meal-caption">Add avocado</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://food.theplainjane.com/wp-content/uploads/2016/03/el-taco-riendo-ensenada-plain-fish-taco.jpg" alt="Fish Tacos 3" onclick="showModal(this)">
-            <div class="meal-caption">Plain fish tacos are also delish.</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://www.foodandwine.com/thmb/8GTutX3bt_s__nurCmEP_zis9cM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Beer-Battered-Fish-Tacos-FT-RECIPE0522-ce3d88a65d68413784cf524dc5784115.jpg" alt="Fish Tacos 4" onclick="showModal(this)">
-            <div class="meal-caption">Perfect for lunch</div>
-          </div>
-        </div>
-      </div>
-      <!-- Seafood Paella -->
-      <div class="recipe-card">
-        <div class="recipe-title">Seafood Paella</div>
-        <div class="recipe-ingredients"><b>Ingredients:</b> Rice, shrimp, mussels, squid, bell pepper, tomato, onion, garlic, saffron, olive oil, chicken broth</div>
-        <div class="recipe-instructions"><b>Instructions:</b> Sauté onion, garlic, and bell pepper in olive oil. Add rice and saffron, stir. Add broth and tomatoes, simmer. Add seafood and cook until rice is tender and seafood is done.</div>
-        <div class="meal-previews">
-          <div class="meal-preview">
-            <img src="https://images.getrecipekit.com/20240822143125-paella-recipe.png?aspect_ratio=16:9&quality=90&" alt="Seafood Paella 1" onclick="showModal(this)">
-            <div class="meal-caption">Your meal will look like this after</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://png.pngtree.com/thumb_back/fh260/background/20250423/pngtree-traditional-spanish-seafood-paella-with-shrimp-mussels-and-fresh-herbs-served-image_17203062.jpg" alt="Seafood Paella 2" onclick="showModal(this)">
-            <div class="meal-caption">Colorful presentation</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://i.ytimg.com/vi/fR2cNFQXClY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAwNImJnE2AMzmENrtTtf0chdIAEw" alt="Seafood Paella 3" onclick="showModal(this)">
-            <div class="meal-caption">Add lemon wedges</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://images.food52.com/fTHhYClazMTFH-qCOAyuGkLPacU=/c0551e15-f2ab-42e3-a45d-1dbc3a377793--2019-0423_perez-family-paella_3x2_julia-gartland_0988.jpeg" alt="Seafood Paella 4" onclick="showModal(this)">
-            <div class="meal-caption">Serve family style</div>
-          </div>
-        </div>
-      </div>
-      <!-- Crab Cakes -->
-      <div class="recipe-card">
-        <div class="recipe-title">Crab Cakes</div>
-        <div class="recipe-ingredients"><b>Ingredients:</b> Crab meat, breadcrumbs, egg, mayonnaise, Dijon mustard, parsley, lemon juice, salt, pepper</div>
-        <div class="recipe-instructions"><b>Instructions:</b> Mix crab meat with breadcrumbs, egg, mayo, mustard, parsley, lemon juice, salt, and pepper. Form into cakes and pan-fry until golden brown.</div>
-        <div class="meal-previews">
-          <div class="meal-preview">
-            <img src="https://oatseveryday.com/wp-content/uploads/2017/06/Crab_Cakes_With_Lemon_Aioli_recipe.jpg" alt="Crab Cakes 1" onclick="showModal(this)">
-            <div class="meal-caption">Your meal will look like this after</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://jacosbayfrontbarandgrille.restaurantengine.com/files/2015/05/Crab_Cake_Salad-525x320.jpg" alt="Crab Cakes 2" onclick="showModal(this)">
-            <div class="meal-caption">Serve with salad</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://mysaucerecipes.com/wp-content/uploads/2022/08/Crab-Cake-Sauce-5-1024x684.jpg" alt="Crab Cakes 3" onclick="showModal(this)">
-            <div class="meal-caption">Add dipping sauce</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://anolon.com/cdn/shop/articles/c92b8f570f76490d7d4c9818c9c350ad_1024x1024.jpg?v=1573253097" alt="Crab Cakes 4" onclick="showModal(this)">
-            <div class="meal-caption">Great for parties</div>
-          </div>
-        </div>
-      </div>
-      <div class="recipe-card">
-        <div class="recipe-title">Fish Balls</div>
-        <div class="recipe-ingredients"><b>Ingredients:</b> Fish fillets, breadcrumbs, egg, garlic, parsley, salt, pepper</div>
-        <div class="recipe-instructions"><b>Instructions:</b> Blend fish fillets with breadcrumbs, egg, garlic, parsley, salt, and pepper. Form into balls and deep-fry until golden brown.</div>
-        <div class="meal-previews">
-          <div class="meal-preview">
-            <img src="https://i.ytimg.com/vi/2Fi2tZiq0T0/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLC0IWiDcB6EmKMKTMF_J0T2f2emsg" alt="Fish Balls 1" onclick="showModal(this)">
-            <div class="meal-caption">Your meal will look like this after</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://www.deliciousmagazine.co.uk/wp-content/uploads/2018/07/883412-1-eng-GB_thai-prawn-balls-623x500.jpg" alt="Fish Balls 2" onclick="showModal(this)">
-            <div class="meal-caption">Serve with salad</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://img.sndimg.com/food/image/upload/v1/img/recipes/34/37/12/picY2InP4.jpg" alt="Fish Balls 3" onclick="showModal(this)">
-            <div class="meal-caption">Spicy fish balls</div>
-          </div>
-        </div>
-      </div>      <!-- Steamed Mussels -->
-      <div class="recipe-card">
-        <div class="recipe-title">Steamed Mussels</div>
-        <div class="recipe-ingredients"><b>Ingredients:</b> Mussels, white wine, garlic, parsley, butter, lemon</div>
-        <div class="recipe-instructions"><b>Instructions:</b> Sauté garlic in butter, add mussels and white wine. Cover and steam until mussels open. Sprinkle with parsley and serve with lemon.</div>
-        <div class="meal-previews">
-          <div class="meal-preview">
-            <img src="https://www.healthyseasonalrecipes.com/wp-content/uploads/2023/01/simple-steamed-mussels-with-garlic-sq-041-640x480.jpg" alt="Steamed Mussels 1" onclick="showModal(this)">
-            <div class="meal-caption">Your meal will look like this after</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://crowdcow-images.imgix.net/https%3A%2F%2Fcrowdcow-images.imgix.net%2Fhttps%253A%252F%252Fimages.ctfassets.net%252Fjigso8mmhmq2%252F5MbAROxJG2Ghui9cfxWIff%252F30d939598b0c25af339178a80298d24f%252FMussels2-edited.jpg%3Fixlib%3Drails-2.1.4%26fit%3Dcrop%26auto%3Dcompress%26w%3D1900%26cs%3Dsrgb%26s%3D559eb284dcac138acec8c3c114dd682c?ixlib=rails-2.1.4&alt=Steamed%20Mussels%20with%20White%20Wine%20and%20Garlic&auto=compress%2Cformat&cs=srgb&w=500&fit=min&s=bc446ef7ffff2ce65015be91480cbc68" alt="Steamed Mussels 2" onclick="showModal(this)">
-            <div class="meal-caption">Serve with bread</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://popmenucloud.com/cdn-cgi/image/width%3D1200%2Cheight%3D1200%2Cfit%3Dscale-down%2Cformat%3Dauto%2Cquality%3D60/qtijgfvp/e3c14563-1606-425a-a08e-f960c6d7c661.JPG" alt="Steamed Mussels 3" onclick="showModal(this)">
-            <div class="meal-caption">Add fresh herbs</div>
-          </div>
-          <div class="meal-preview">
-            <img src="https://therecipecritic.com/wp-content/uploads/2021/11/howtocookmussels-500x375.jpg" alt="Steamed Mussels 4" onclick="showModal(this)">
-            <div class="meal-caption">Perfect starter</div>
-          </div>
-        </div>
-      </div>
+    <div class="divider"></div>
+    <div class="subtitle">
+      Click on the images for a bigger view. Enjoy animated entries, dark mode, and mobile navigation!
+    </div>
+    <div class="recipes-list" id="recipesList">
+      <!-- Recipe cards will be rendered by JS -->
     </div>
     <div>
       <em>Have a favorite seafood recipe? Share it in the <a href="recipe-book.html">Recipe Book</a>!</em>
     </div>
-    <a href="food-recipes.html" class="back-btn">← Back</a>
+    <a href="food-recipes.html" class="back-btn" aria-label="Back to Food Recipes">← Back</a>
+    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">&#9790;</button>
   </div>
   <!-- Modal for full image -->
   <div id="imgModal" class="modal" onclick="closeModal(event)">
     <div class="modal-content">
-      <button class="close-btn" onclick="closeModal(event)">&times;</button>
+      <button class="close-btn" onclick="closeModal(event)" aria-label="Close image">&times;</button>
       <img id="modalImg" class="modal-img" src="" alt="Full Meal">
       <div id="modalCaption" class="modal-caption"></div>
     </div>
   </div>
   <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let menuOpen = false;
+    menuToggle.addEventListener('click', function() {
+      menuOpen = !menuOpen;
+      mobileMenu.style.display = menuOpen ? 'flex' : 'none';
+      menuToggle.setAttribute('aria-label', menuOpen ? 'Close menu' : 'Open menu');
+      document.body.style.overflow = menuOpen ? 'hidden' : '';
+    });
+    mobileMenu.addEventListener('click', function(e) {
+      if (e.target.tagName === 'A') {
+        mobileMenu.style.display = 'none';
+        menuOpen = false;
+        document.body.style.overflow = '';
+      }
+    });
+    window.addEventListener('click', function(e) {
+      if (menuOpen && !mobileMenu.contains(e.target) && e.target !== menuToggle) {
+        mobileMenu.style.display = 'none';
+        menuOpen = false;
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    darkModeToggle.addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+      darkModeToggle.classList.toggle('active');
+      localStorage.setItem('darkModeSeafood', document.body.classList.contains('dark-mode'));
+    });
+    if (localStorage.getItem('darkModeSeafood') === 'true') {
+      document.body.classList.add('dark-mode');
+      darkModeToggle.classList.add('active');
+    }
+
+    // Recipes data
+    const recipes = [
+      {
+        title: "Grilled Salmon",
+        ingredients: "Salmon fillets, olive oil, lemon, salt, pepper, dill",
+        instructions: "Brush salmon with olive oil, season with salt, pepper, and dill. Grill for 5-7 minutes per side. Squeeze lemon before serving.",
+        images: [
+          {src:"https://www.thecookierookie.com/wp-content/uploads/2023/05/featured-grilled-salmon-recipe.jpg",caption:"Your meal will look like this after"},
+          {src:"https://www.cookingclassy.com/wp-content/uploads/2018/05/grilled-lemon-herb-salmon-7.jpg",caption:"Another serving idea"},
+          {src:"https://www.feastingathome.com/wp-content/uploads/2017/06/Grilled-Salmon-Tzatziki-Bowl-104.jpg",caption:"Try with veggies"},
+          {src:"https://ux2cms.imgix.net/images/grilled-salmon-and-asparagus-skewers.jpg?w=725&auto=compress,format&blend=https://ux2cms.imgix.net/system-images/gray-overlay-large.png?bs=inherit&balph=0&bm=normal",caption:"Skewers bring appetite"}
+        ]
+      },
+      {
+        title: "Garlic Shrimp",
+        ingredients: "Shrimp, garlic, butter, parsley, lemon, salt",
+        instructions: "Sauté garlic in butter, add shrimp and cook until pink. Sprinkle parsley and squeeze lemon before serving.",
+        images: [
+          {src:"https://panlasangpinoy.com/wp-content/uploads/2009/03/garlic-butter-shrimp-1.jpg",caption:"Your meal will look like this after"},
+          {src:"https://cookingwithwineblog.com/wp-content/uploads/2021/06/Spicy-Ginger-Garlic-Shrimp-Skewers-Featured-1-500x375.jpg",caption:"Shrimp skewers look good"},
+          {src:"https://www.budgetbytes.com/wp-content/uploads/2021/06/Lemon-Garlic-Shrimp-and-RIce-plate-close.jpg",caption:"Serve with rice"},
+          {src:"https://img.sndimg.com/food/image/upload/q_92,fl_progressive,w_1200,c_scale/v1/img/recipes/42/45/54/pic04FLiF.jpg",caption:"Add fresh herbs"},
+          {src:"https://whatsgabycooking.com/wp-content/uploads/2023/04/WGC-__-Hawaiian-Garlic-Shrimp-2-1200x800-1.jpg",caption:"Great appetizer"}
+        ]
+      },
+      {
+        title: "Fish Tacos",
+        ingredients: "White fish fillets, taco shells, cabbage, lime, cilantro, sour cream, chili powder, salt",
+        instructions: "Season fish with chili powder and salt, grill or pan-fry until cooked. Fill taco shells with fish, cabbage, cilantro, and a squeeze of lime. Top with sour cream.",
+        images: [
+          {src:"https://www.seriouseats.com/thmb/y3Qf-ciu-nzLgYeJzK4xWoabibQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/SEA-M7011302_crunchy_fish_tacos6556-JenCausey-f8285ed3d8674b25bf16d027034fc41b.jpg",caption:"Your meal will look like this after"},
+          {src:"https://marleyspoon.com/media/recipes/78467/main_photos/large/crispy_fish_tacos-0e4071bf4ac3a3b8d1104a4c64108449.jpeg",caption:"Try with salsa"},
+          {src:"https://www.dinneratthezoo.com/wp-content/uploads/2016/06/fish-tacos-5-480x270.jpg",caption:"Add avocado"},
+          {src:"https://food.theplainjane.com/wp-content/uploads/2016/03/el-taco-riendo-ensenada-plain-fish-taco.jpg",caption:"Plain fish tacos are also delish."},
+          {src:"https://www.foodandwine.com/thmb/8GTutX3bt_s__nurCmEP_zis9cM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Beer-Battered-Fish-Tacos-FT-RECIPE0522-ce3d88a65d68413784cf524dc5784115.jpg",caption:"Perfect for lunch"}
+        ]
+      },
+      {
+        title: "Seafood Paella",
+        ingredients: "Rice, shrimp, mussels, squid, bell pepper, tomato, onion, garlic, saffron, olive oil, chicken broth",
+        instructions: "Sauté onion, garlic, and bell pepper in olive oil. Add rice and saffron, stir. Add broth and tomatoes, simmer. Add seafood and cook until rice is tender and seafood is done.",
+        images: [
+          {src:"https://images.getrecipekit.com/20240822143125-paella-recipe.png?aspect_ratio=16:9&quality=90&",caption:"Your meal will look like this after"},
+          {src:"https://png.pngtree.com/thumb_back/fh260/background/20250423/pngtree-traditional-spanish-seafood-paella-with-shrimp-mussels-and-fresh-herbs-served-image_17203062.jpg",caption:"Colorful presentation"},
+          {src:"https://i.ytimg.com/vi/fR2cNFQXClY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAwNImJnE2AMzmENrtTtf0chdIAEw",caption:"Add lemon wedges"},
+          {src:"https://images.food52.com/fTHhYClazMTFH-qCOAyuGkLPacU=/c0551e15-f2ab-42e3-a45d-1dbc3a377793--2019-0423_perez-family-paella_3x2_julia-gartland_0988.jpeg",caption:"Serve family style"}
+        ]
+      },
+      {
+        title: "Crab Cakes",
+        ingredients: "Crab meat, breadcrumbs, egg, mayonnaise, Dijon mustard, parsley, lemon juice, salt, pepper",
+        instructions: "Mix crab meat with breadcrumbs, egg, mayo, mustard, parsley, lemon juice, salt, and pepper. Form into cakes and pan-fry until golden brown.",
+        images: [
+          {src:"https://oatseveryday.com/wp-content/uploads/2017/06/Crab_Cakes_With_Lemon_Aioli_recipe.jpg",caption:"Your meal will look like this after"},
+          {src:"https://jacosbayfrontbarandgrille.restaurantengine.com/files/2015/05/Crab_Cake_Salad-525x320.jpg",caption:"Serve with salad"},
+          {src:"https://mysaucerecipes.com/wp-content/uploads/2022/08/Crab-Cake-Sauce-5-1024x684.jpg",caption:"Add dipping sauce"},
+          {src:"https://anolon.com/cdn/shop/articles/c92b8f570f76490d7d4c9818c9c350ad_1024x1024.jpg?v=1573253097",caption:"Great for parties"}
+        ]
+      },
+      {
+        title: "Fish Balls",
+        ingredients: "Fish fillets, breadcrumbs, egg, garlic, parsley, salt, pepper",
+        instructions: "Blend fish fillets with breadcrumbs, egg, garlic, parsley, salt, and pepper. Form into balls and deep-fry until golden brown.",
+        images: [
+          {src:"https://i.ytimg.com/vi/2Fi2tZiq0T0/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLC0IWiDcB6EmKMKTMF_J0T2f2emsg",caption:"Your meal will look like this after"},
+          {src:"https://www.deliciousmagazine.co.uk/wp-content/uploads/2018/07/883412-1-eng-GB_thai-prawn-balls-623x500.jpg",caption:"Serve with salad"},
+          {src:"https://img.sndimg.com/food/image/upload/v1/img/recipes/34/37/12/picY2InP4.jpg",caption:"Spicy fish balls"}
+        ]
+      },
+      {
+        title: "Steamed Mussels",
+        ingredients: "Mussels, white wine, garlic, parsley, butter, lemon",
+        instructions: "Sauté garlic in butter, add mussels and white wine. Cover and steam until mussels open. Sprinkle with parsley and serve with lemon.",
+        images: [
+          {src:"https://www.healthyseasonalrecipes.com/wp-content/uploads/2023/01/simple-steamed-mussels-with-garlic-sq-041-640x480.jpg",caption:"Your meal will look like this after"},
+          {src:"https://crowdcow-images.imgix.net/https%3A%2F%2Fcrowdcow-images.imgix.net%2Fhttps%253A%252F%252Fimages.ctfassets.net%252Fjigso8mmhmq2%252F5MbAROxJG2Ghui9cfxWIff%252F30d939598b0c25af339178a80298d24f%252FMussels2-edited.jpg%3Fixlib%3Drails-2.1.4%26fit%3Dcrop%26auto%3Dcompress%26w%3D1900%26cs%3Dsrgb%26s%3D559eb284dcac138acec8c3c114dd682c?ixlib=rails-2.1.4&alt=Steamed%20Mussels%20with%20White%20Wine%20and%20Garlic&auto=compress%2Cformat&cs=srgb&w=500&fit=min&s=bc446ef7ffff2ce65015be91480cbc68",caption:"Serve with bread"},
+          {src:"https://popmenucloud.com/cdn-cgi/image/width%3D1200%2Cheight%3D1200%2Cfit%3Dscale-down%2Cformat%3Dauto%2Cquality%3D60/qtijgfvp/e3c14563-1606-425a-a08e-f960c6d7c661.JPG",caption:"Add fresh herbs"},
+          {src:"https://therecipecritic.com/wp-content/uploads/2021/11/howtocookmussels-500x375.jpg",caption:"Perfect starter"}
+        ]
+      }
+    ];
+
+    // Render recipes with animated entry
+    function renderRecipes() {
+      const recipesList = document.getElementById('recipesList');
+      recipesList.innerHTML = recipes.map(recipe => `
+        <div class="recipe-card">
+          <div class="recipe-title">${recipe.title}</div>
+          <div class="recipe-ingredients"><b>Ingredients:</b> ${recipe.ingredients}</div>
+          <div class="recipe-instructions"><b>Instructions:</b> ${recipe.instructions}</div>
+          <div class="meal-previews">
+            ${recipe.images.map(img => `
+              <div class="meal-preview">
+                <img src="${img.src}" alt="${recipe.title}" onclick="showModal(this)">
+                <div class="meal-caption">${img.caption}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+      setTimeout(() => {
+        document.querySelectorAll('.recipe-card').forEach((card, i) => {
+          setTimeout(() => card.classList.add('visible'), 100 * i);
+        });
+      }, 100);
+    }
+    renderRecipes();
+
+    // Modal logic
     function showModal(img) {
       var modal = document.getElementById('imgModal');
       var modalImg = document.getElementById('modalImg');
@@ -433,19 +739,33 @@
       document.body.style.overflow = 'hidden';
     }
     function closeModal(event) {
-      // Only close if clicking the X or outside the modal-content
       if (event.target.classList.contains('close-btn') || event.target.id === 'imgModal') {
         document.getElementById('imgModal').style.display = 'none';
         document.body.style.overflow = '';
       }
     }
-    // Optional: close modal with ESC key
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         document.getElementById('imgModal').style.display = 'none';
         document.body.style.overflow = '';
       }
     });
+    // Highlight the current page in the desktop sidebar
+ document.querySelectorAll('.sidebar-link').forEach(link => {
+  const page = link.getAttribute('data-page').toLowerCase();
+  const path = window.location.pathname.toLowerCase();
+  if (path.split('/').pop() === page) {
+    link.classList.add('active');
+  }
+});
+    // Highlight the current page in the mobile menu
+  document.querySelectorAll('.menu-link').forEach(link => {
+  const page = link.getAttribute('data-page').toLowerCase();
+  const path = window.location.pathname.toLowerCase();
+  if (path.split('/').pop() === page) {
+    link.classList.add('active');
+  }
+});
   </script>
 </body>
 </html>
